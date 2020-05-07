@@ -36,3 +36,21 @@ function check_access($role_id, $menu_id)
     return "checked='checked'";
   }
 }
+
+function change_label($checked)
+{
+  if ($checked == "checked='checked'") {
+    return 'Access';
+  } else {
+    return 'Forbidden';
+  }
+}
+
+function check_user_level($role_id)
+{
+  $ci = get_instance();
+  $result = $ci->db->get_where('user_role', ['id' => $role_id])->row_array();
+  if ($result['id'] == $role_id) {
+    return $result['role'];
+  }
+}

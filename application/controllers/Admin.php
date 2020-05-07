@@ -3,6 +3,8 @@
 class Admin extends CI_Controller
 {
 
+  private $dataSingleUser;
+
   /**
    * kelebihan menggunakan cara seperti ini
    * ketika nama table suatu saat berubah maka
@@ -18,6 +20,7 @@ class Admin extends CI_Controller
     parent::__construct();
     is_logged_in();
     $this->load->model('Admin_model', 'admin');
+    $this->dataSingleUser = $this->admin->getUserByEmail($this->tableUser, $this->session->userdata('email'));
   }
 
   public function index()
@@ -48,7 +51,7 @@ class Admin extends CI_Controller
 
   public function roleAccess($id)
   {
-    $data['title'] = 'Role Access';
+    $data['title'] = 'Role';
     $data['user'] = $this->admin->getUserByEmail($this->tableUser, $this->session->userdata('email'));
 
     $data['role'] = $this->admin->getRoleById($this->tableUserRole, $id);
@@ -82,5 +85,19 @@ class Admin extends CI_Controller
     }
 
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Access Changed!</div>');
+  }
+
+  public function userAccess()
+  {
+    $data['title'] = 'User Access';
+    $data['user'] = $this->dataSingleUser;
+
+    $data['allUser'] = $this->admin->getAllUser($this->tableUser);
+
+    $this->load->view('templates/header', $data);
+    $this->load->view('templates/sidebar', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('admin/user_access', $data);
+    $this->load->view('templates/footer');
   }
 }

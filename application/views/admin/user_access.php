@@ -2,34 +2,29 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-4 text-gray-800"><?= $title; ?> Access</h1>
+  <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
   <div class="row">
     <div class="col-lg-6">
 
       <?= $this->session->flashdata('message'); ?>
 
-      <h4>Role : <?= $role['role']; ?></h4>
-
       <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Menu</th>
-            <th scope="col">Access</th>
+            <th scope="col">Username</th>
+            <th scope="col">Level</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
           <?php $i = 1; ?>
-          <?php foreach ($menu as $m) : ?>
+          <?php foreach ($allUser as $u) : ?>
             <tr>
               <th scope="row"><?= $i; ?></th>
-              <td><?= $m['menu']; ?></td>
-              <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" <?= check_access($role['id'], $m['id']); ?> data-role="<?= $role['id']; ?>" data-menu="<?= $m['id']; ?>">
-                </div>
-              </td>
+              <td><?= $u['email']; ?></td>
+              <td><?= check_user_level($u['role_id']); ?></td>
             </tr>
             <?php $i++; ?>
           <?php endforeach; ?>

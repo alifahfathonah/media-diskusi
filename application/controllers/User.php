@@ -3,6 +3,8 @@
 class User extends CI_Controller
 {
 
+  private $dataSingleUser;
+
   private $tableUser = 'user';
 
   public function __construct()
@@ -10,12 +12,13 @@ class User extends CI_Controller
     parent::__construct();
     is_logged_in();
     $this->load->model('User_model', 'user');
+    $this->dataSingleUser = $this->user->getUserByEmail($this->tableUser, $this->session->userdata('email'));
   }
 
   public function index()
   {
     $data['title'] = 'My Profile';
-    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $data['user'] = $this->dataSingleUser;
 
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar', $data);
@@ -27,7 +30,7 @@ class User extends CI_Controller
   public function edit()
   {
     $data['title'] = 'Edit Profile';
-    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $data['user'] = $this->dataSingleUser;
 
     $this->form_validation->set_rules('name', 'Full Name', 'required|trim');
     if ($this->form_validation->run() == false) {
@@ -77,7 +80,7 @@ class User extends CI_Controller
   public function ubahPassword()
   {
     $data['title'] = 'Ubah Password';
-    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $data['user'] = $this->dataSingleUser;
 
     $this->form_validation->set_rules('current_password', 'Password Sekarang', 'required|trim');
     $this->form_validation->set_rules('new_password1', 'Password Baru', 'required|trim|min_length[8]|matches[new_password2]');
