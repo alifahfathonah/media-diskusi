@@ -42,11 +42,40 @@ class Admin extends CI_Controller
 
     $data['role'] = $this->admin->getAllRole($this->tableUserRole);
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
-    $this->load->view('admin/role', $data);
-    $this->load->view('templates/footer');
+    $this->form_validation->set_rules('role', 'Role', 'required|trim', [
+      'required' => 'Role harus diisi.'
+    ]);
+    if ($this->form_validation->run() == false) {
+      $this->load->view('templates/header', $data);
+      $this->load->view('templates/sidebar', $data);
+      $this->load->view('templates/topbar', $data);
+      $this->load->view('admin/role', $data);
+      $this->load->view('templates/footer');
+    } else {
+      $data = [
+        'role' => htmlspecialchars($this->input->post('role', true))
+      ];
+      $this->admin->tambahRole($this->tableUserRole, $data);
+      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Role berhasil ditambahkan!</div>');
+      redirect('admin/role');
+    }
+  }
+
+  public function getUbahRole()
+  {
+    echo json_encode($this->admin->getRoleById($this->tableUserRole, $this->input->post('id')));
+  }
+
+  public function ubahRole()
+  {
+    $data = [
+      'id' => $this->input->post('id', true),
+      'role' => htmlspecialchars($this->input->post('role', true))
+    ];
+
+    $this->admin->ubahRole($this->tableUserRole, $data);
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Role berhasil diubah!</div>');
+    redirect('admin/role');
   }
 
   public function roleAccess($id)
@@ -93,6 +122,7 @@ class Admin extends CI_Controller
     $data['user'] = $this->dataSingleUser;
 
     $data['allUser'] = $this->admin->getAllUser($this->tableUser);
+    $data['role'] = $this->admin->getAllRole($this->tableUserRole);
 
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar', $data);

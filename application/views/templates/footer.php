@@ -48,8 +48,9 @@
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/js/sb-admin-2.min.js'); ?>"></script>
 
-<!-- update delete role access -->
+<!-- update & delete role access -->
 <script src="<?= base_url('assets/js/admin/role.js'); ?>"></script>
+<script src="<?= base_url('assets/js/admin/ubahRole.js'); ?>"></script>
 
 </body>
 

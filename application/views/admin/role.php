@@ -35,9 +35,9 @@
               <th scope="row"><?= $i; ?></th>
               <td><?= $r['role']; ?></td>
               <td>
-                <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning"><i class="fas fa-universal-access"></i> access</a>
-                <a href="" class="badge badge-success" data-toggle="modal" data-target="#editRoleModal"><i class="fas fa-edit"></i> edit</a>
-                <a href="" class="badge badge-danger"><i class="fas fa-trash"></i> delete</a>
+                <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning modalTambahRole"><i class="fas fa-universal-access"></i> access</a>
+                <a href="<?= base_url('admin/editrole/') . $r['id']; ?>" class="badge badge-success modalUbahRole" data-id="<?= $r['id']; ?>" data-toggle="modal" data-target="#newRoleModal"><i class="fas fa-edit"></i> edit</a>
+                <a href="<?= base_url('admin/hapusrole/') . $r['id']; ?>" class="badge badge-danger"><i class="fas fa-trash"></i> delete</a>
               </td>
             </tr>
             <?php $i++; ?>

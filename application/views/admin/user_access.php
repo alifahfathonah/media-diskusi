@@ -25,6 +25,9 @@
               <th scope="row"><?= $i; ?></th>
               <td><?= $u['email']; ?></td>
               <td><?= check_user_level($u['role_id']); ?></td>
+              <td>
+                <a href="" class="badge badge-success" data-toggle="modal" data-target="#ubahUserAccess"><i class="fas fa-pencil-ruler"></i> Ubah Access</a>
+              </td>
             </tr>
             <?php $i++; ?>
           <?php endforeach; ?>
