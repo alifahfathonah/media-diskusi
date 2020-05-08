@@ -22,9 +22,9 @@ class Auth extends CI_Controller
     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
     $this->form_validation->set_rules('password', 'Password', 'required|trim');
     if ($this->form_validation->run() == false) {
-      $this->load->view('templates/auth_header', $data);
-      $this->load->view('auth/login');
-      $this->load->view('templates/auth_footer');
+      $this->load->view('templates/login_header', $data);
+      $this->load->view('auth/index');
+      $this->load->view('templates/login_footer');
     } else {
       $this->login();
     }
@@ -86,9 +86,9 @@ class Auth extends CI_Controller
     ]);
     $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
     if ($this->form_validation->run() == false) {
-      $this->load->view('templates/auth/auth_header', $data);
+      $this->load->view('templates/auth_header', $data);
       $this->load->view('auth/registration');
-      $this->load->view('templates/auth/auth_footer');
+      $this->load->view('templates/auth_footer');
     } else {
       $data = [
         'name' => htmlspecialchars($this->input->post('name', true)),
