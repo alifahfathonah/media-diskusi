@@ -52,6 +52,12 @@
 <script src="<?= base_url('assets/js/admin/role.js'); ?>"></script>
 <script src="<?= base_url('assets/js/admin/ubahRole.js'); ?>"></script>
 
+<!-- source sweetalert -->
+<script src="<?= base_url('assets/js/sweetalert/sweetalert.js'); ?>"></script>
+
+<!-- my-sweet-alert -->
+<script src="<?= base_url('assets/js/sweet-alert.js'); ?>"></script>
+
 </body>
 
 </html>

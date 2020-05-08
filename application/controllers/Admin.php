@@ -78,6 +78,13 @@ class Admin extends CI_Controller
     redirect('admin/role');
   }
 
+  public function hapusRole($id)
+  {
+    $this->admin->hapusRole($this->tableUserRole, $id);
+    $this->session->set_flashdata('message', 'Dihapus');
+    redirect('admin/role');
+  }
+
   public function roleAccess($id)
   {
     $data['title'] = 'Role';

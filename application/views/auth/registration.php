@@ -37,11 +37,11 @@
 
         <!-- error form alert -->
         <?php if (form_error('password1')) { ?>
-          <div class="alert alert-secondary text-center" role="alert"><?= form_error('password1'); ?></div>
+          <div class="alert alert-danger text-center" role="alert"><?= form_error('password1'); ?></div>
         <?php } else if (form_error('name')) { ?>
-          <div class="alert alert-secondary text-center" role="alert"><?= form_error('name'); ?></div>
+          <div class="alert alert-danger text-center" role="alert"><?= form_error('name'); ?></div>
         <?php } else if (form_error('email')) { ?>
-          <div class="alert alert-secondary text-center" role="alert"><?= form_error('email'); ?></div>
+          <div class="alert alert-danger text-center" role="alert"><?= form_error('email'); ?></div>
         <?php } ?>
 
         <div class="container-login100-form-btn">

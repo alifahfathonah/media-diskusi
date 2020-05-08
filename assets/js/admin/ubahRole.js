@@ -4,13 +4,13 @@
 $(function () {
 	$(".modalTambahRole").on("click", function () {
 		$("#newRoleModalLabel").html("Tambah Role");
-		$(".modal-footer button[type=submit]").html("Tambah");
+		// $(".modal-footer button[type=submit]").html("Tambah");
 		$("#formTambahRole input[type=text]").val("");
 	});
 
-	$(".modalUbahRole").on("click", function () {
+	$("#modalUbahRole").on("click", function () {
 		$("#newRoleModalLabel").html("Ubah Role");
-		$(".modal-footer button[type=submit]").html("Ubah");
+		// $(".modal-footer button[type=submit]").html("Ubah");
 
 		const id = $(this).data("id");
 		const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
@@ -18,7 +18,7 @@ $(function () {
 		const methodGetRole = "getubahrole";
 		const methodUbahRole = "ubahrole";
 
-		$("#formTambahRole").attr(
+		$("#formUbahRole").attr(
 			"action",
 			`${baseUrl}${controller}/${methodUbahRole}`
 		);

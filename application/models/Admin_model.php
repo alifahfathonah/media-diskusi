@@ -37,4 +37,9 @@ class Admin_model extends CI_Model
   {
     $this->db->update($table, $data, ['id' => $data['id']]);
   }
+
+  public function hapusRole($table, $id)
+  {
+    $this->db->delete($table, ['id' => $id]);
+  }
 }
