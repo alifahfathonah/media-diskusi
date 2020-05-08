@@ -17,13 +17,13 @@ class Auth extends CI_Controller
       redirect('user');
     }
 
-    $data['title'] = 'Login';
+    $data['title'] = 'Login | Media Diskusi';
 
     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
     $this->form_validation->set_rules('password', 'Password', 'required|trim');
     if ($this->form_validation->run() == false) {
       $this->load->view('templates/login_header', $data);
-      $this->load->view('auth/index');
+      $this->load->view('auth/login');
       $this->load->view('templates/login_footer');
     } else {
       $this->login();
@@ -70,14 +70,15 @@ class Auth extends CI_Controller
       redirect('user');
     }
 
-    $data['title'] = 'Registration';
+    $data['title'] = 'Registration | Media Diskusi';
 
     $this->form_validation->set_rules('name', 'Name', 'required|trim', [
       'required' => 'Nama harus diisi!'
     ]);
     $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
+      'required' => 'Email harus diisi!',
       'is_unique' => 'Email sudah digunakan!',
-      'required' => 'Email harus diisi!'
+      'valid_email' => 'Email harus valid!'
     ]);
     $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[8]|matches[password2]', [
       'matches' => 'Password tidak sama!',
@@ -86,14 +87,14 @@ class Auth extends CI_Controller
     ]);
     $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
     if ($this->form_validation->run() == false) {
-      $this->load->view('templates/auth_header', $data);
+      $this->load->view('templates/login_header', $data);
       $this->load->view('auth/registration');
-      $this->load->view('templates/auth_footer');
+      $this->load->view('templates/login_footer');
     } else {
       $data = [
         'name' => htmlspecialchars($this->input->post('name', true)),
         'email' => htmlspecialchars($this->input->post('email', true)),
-        'image' => 'default.jpg',
+        'image' => 'default.png',
         'password' => htmlspecialchars(password_hash($this->input->post('password1', true), PASSWORD_DEFAULT)),
         'role_id' => 2,
         'is_active' => 1,
