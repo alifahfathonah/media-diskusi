@@ -10,6 +10,8 @@
 					Log In With Your STIKI's Email
 				</span>
 
+				<?= $this->session->flashdata('message'); ?>
+
 				<div class="dropdown validate-input" data-validate="Choose username">
 					<select name="" id="" class="form-control">
 						<option value=""> User Categories </option>
@@ -20,7 +22,7 @@
 				</div>
 
 				<div class="wrap-input100 validate-input mt-4" data-validate="Enter email">
-					<input class="input100" type="text" name="email" id="password" placeholder="Email">
+					<input class="input100" type="text" name="email" id="password" placeholder="Email" value="<?= set_value('email'); ?>">
 					<span class="focus-input100" data-placeholder="&#xf207;"></span>
 				</div>
 
@@ -43,7 +45,7 @@
 				</div>
 
 				<div class="text-center mt-3">
-					<a class="small txt1" href="forgot-password.html">Forgot Password?</a>
+					<a class="small txt1" href="#">Forgot Password?</a>
 				</div>
 				<div class="text-center">
 					<a class="small txt1" href="<?= base_url('auth/registration'); ?>">Create an Account!</a>
