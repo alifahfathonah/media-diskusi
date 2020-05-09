@@ -26,7 +26,12 @@
               <td><?= $u['email']; ?></td>
               <td><?= check_user_level($u['role_id']); ?></td>
               <td>
-                <a href="" class="badge badge-success" data-toggle="modal" data-target="#ubahUserAccess"><i class="fas fa-pencil-ruler"></i> Ubah Access</a>
+                <select name="roleId" id="role" class="form-control">
+                  <option value="">Pilih Level</option>
+                  <?php foreach ($role as $r) : ?>
+                    <option value="" class="change-user-access" data-userid="<?= $u['id']; ?>" data-roleid="<?= $r['id']; ?>"><?= $r['role']; ?></option>
+                  <?php endforeach; ?>
+                </select>
               </td>
             </tr>
             <?php $i++; ?>

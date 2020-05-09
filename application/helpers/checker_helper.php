@@ -37,15 +37,6 @@ function check_access($role_id, $menu_id)
   }
 }
 
-function change_label($checked)
-{
-  if ($checked == "checked='checked'") {
-    return 'Access';
-  } else {
-    return 'Forbidden';
-  }
-}
-
 function check_user_level($role_id)
 {
   $ci = get_instance();

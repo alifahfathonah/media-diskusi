@@ -2,29 +2,20 @@
  * untuk modal ubah role pada menu admin
  */
 $(function () {
-	$(".modalTambahRole").on("click", function () {
-		$("#newRoleModalLabel").html("Tambah Role");
-		// $(".modal-footer button[type=submit]").html("Tambah");
-		$("#formTambahRole input[type=text]").val("");
-	});
-
-	$("#modalUbahRole").on("click", function () {
-		$("#newRoleModalLabel").html("Ubah Role");
-		// $(".modal-footer button[type=submit]").html("Ubah");
-
+	// fungsi untuk mengubah nama role
+	$(".tampilModalUbahRole").on("click", function () {
 		const id = $(this).data("id");
-		const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
-		const controller = "admin";
-		const methodGetRole = "getubahrole";
-		const methodUbahRole = "ubahrole";
 
-		$("#formUbahRole").attr(
-			"action",
-			`${baseUrl}${controller}/${methodUbahRole}`
-		);
+		console.log(id);
+
+		const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
+		const controllerMethodGetRole = "admin/getubahrole";
+		const controllerMethodUbahRole = "admin/ubahrole";
+
+		$("#formUbahRole").attr("action", `${baseUrl}${controllerMethodUbahRole}`);
 
 		$.ajax({
-			url: `${baseUrl}${controller}/${methodGetRole}`,
+			url: `${baseUrl}${controllerMethodGetRole}`,
 			data: {
 				id: id,
 			},
@@ -34,6 +25,15 @@ $(function () {
 				$("#role").val(data.role);
 				$("#id").val(data.id);
 			},
+			error: function (xhr, status, error) {
+				let errorMessage = xhr.status + " : " + xhr.statusText;
+				console.log("Error : " + errorMessage);
+			},
 		});
+	});
+
+	// fungsi untuk mengubah user role access
+	$(".change-user-access").on("click", function () {
+		const id = $(this).data("id");
 	});
 });

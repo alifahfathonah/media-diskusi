@@ -42,4 +42,9 @@ class Admin_model extends CI_Model
   {
     $this->db->delete($table, ['id' => $id]);
   }
+
+  public function ubahUserRole($table, $user_id, $role_id)
+  {
+    $this->db->update($table, ['role_id' => $role_id], ['id' => $user_id]);
+  }
 }

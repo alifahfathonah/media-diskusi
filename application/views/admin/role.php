@@ -11,7 +11,6 @@
       <?= form_error('menu', '<div class="alert alert-danger text-center" role="alert">', '</div>'); ?>
 
       <!-- Flash Message -->
-      <?= $this->session->flashdata('message'); ?>
       <div class="flash-message-role" data-message="<?= $this->session->flashdata('message'); ?>"></div>
 
       <!-- Button Tambah -->
@@ -38,7 +37,7 @@
               <td><?= $r['role']; ?></td>
               <td>
                 <a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning"><i class="fas fa-universal-access"></i> access</a>
-                <a href="<?= base_url('admin/editrole/') . $r['id']; ?>" class="badge badge-success modalUbahRole" id="modalUbahRole" data-id="<?= $r['id']; ?>" data-toggle="modal" data-target="#ubahRoleModal"><i class="fas fa-edit"></i> edit</a>
+                <a href="<?= base_url('admin/ubahrole/') . $r['id']; ?>" class="badge badge-success tampilModalUbahRole" id="tampilModalUbahRole" data-id="<?= $r['id']; ?>" data-toggle="modal" data-target="#ubahRoleModal"><i class="fas fa-edit"></i> edit</a>
                 <a href="<?= base_url('admin/hapusrole/') . $r['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fas fa-trash"></i> delete</a>
               </td>
             </tr>
