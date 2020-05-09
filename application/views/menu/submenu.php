@@ -48,8 +48,8 @@
               <td><?= $sm['icon']; ?></td>
               <td><?= $sm['is_active']; ?></td>
               <td>
-                <a href="" class="badge badge-primary">edit</a>
-                <a href="" class="badge badge-danger">delete</a>
+                <a href="" class="badge badge-success tampilModalUbahSubmenu" id="tampilModalUbahSubmenu" data-id="<?= $sm['id']; ?>" data-toggle="modal" data-target="#modalUbahSubmenu"><i class="fas fa-edit"></i> edit</a>
+                <a href="<?= base_url('menu/hapussubmenu/') . $sm['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fas fa-trash"></i> delete</a>
               </td>
             </tr>
             <?php $i++; ?>
@@ -67,4 +67,4 @@
 <!-- End of Main Content -->
 
 <!-- Modal Tambah Menu -->
-<?php require 'modal_tambah.php'; ?>
+<?php require 'modal.php'; ?>

@@ -1,3 +1,6 @@
+// variabel global yang akan diakses semua fungsi didalamnya.
+const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
+
 /**
  * untuk mengubah access menu pada role access
  */
@@ -6,7 +9,6 @@ function changeAccessMenu() {
 		const menuId = $(this).data("menu");
 		const roleId = $(this).data("role");
 
-		const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
 		const controllerMethodChange = "admin/changeroleaccess";
 		const controllerMethodRole = "admin/roleaccess";
 
@@ -36,7 +38,6 @@ function changeUserAccess() {
 		console.log(userId);
 		console.log(roleId);
 
-		const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
 		const controllerMethodChange = "admin/changeuseraccess";
 		const controllerMethodUserAccess = "admin/useraccess";
 
@@ -53,6 +54,7 @@ function changeUserAccess() {
 		});
 	});
 }
+
 changeUserAccess();
 
 /**

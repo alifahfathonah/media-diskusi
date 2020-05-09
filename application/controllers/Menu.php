@@ -4,6 +4,7 @@ class Menu extends CI_Controller
 {
 
   private $tableSubMenu = 'user_sub_menu';
+  private $tableMenu = 'user_menu';
 
   public function __construct()
   {
@@ -65,5 +66,62 @@ class Menu extends CI_Controller
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu berhasil ditambahkan!</div>');
       redirect('menu/submenu');
     }
+  }
+
+  public function getUbahMenu()
+  {
+    echo json_encode($this->menu->getMenuById($this->tableMenu, $this->input->post('id')));
+  }
+
+  public function ubahMenu()
+  {
+    $data = [
+      'id' => $this->input->post('id'),
+      'menu' => htmlspecialchars($this->input->post('menu', true))
+    ];
+
+    $this->menu->ubahMenu($this->tableMenu, $data);
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu berhasil diubah!</div>');
+    redirect('menu');
+  }
+
+  public function getUbahSubMenu()
+  {
+    echo json_encode($this->menu->getSubMenuById($this->tableSubMenu, $this->input->post('id')));
+  }
+
+  public function ubahSubMenu()
+  {
+    $data = [
+      'id' => $this->input->post('idUbah'),
+      'title' => htmlspecialchars($this->input->post('titleUbah', true)),
+      'menu_id' => htmlspecialchars($this->input->post('menuIdUbah', true)),
+      'url' => htmlspecialchars($this->input->post('urlUbah', true)),
+      'icon' => htmlspecialchars($this->input->post('iconUbah', true)),
+      'is_active' => htmlspecialchars($this->input->post('is_activeUbah', true))
+    ];
+    $this->menu->ubahSubMenu($this->tableSubMenu, $data);
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Sub menu berhasil diubah!</div>');
+    redirect('menu/submenu');
+  }
+
+  /**
+   * fungsi untuk hapus menu
+   */
+  public function hapus($id)
+  {
+    $this->menu->hapusMenu($this->tableMenu, $id);
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu berhasil dihapus!</div>');
+    redirect('menu');
+  }
+
+  /**
+   * fungsi untuk hapus submenu
+   */
+  public function hapusSubMenu($id)
+  {
+    $this->menu->hapusSubMenu($this->tableSubMenu, $id);
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Submenu berhasil dihapus!</div>');
+    redirect('menu/submenu');
   }
 }

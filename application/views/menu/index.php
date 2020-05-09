@@ -35,8 +35,8 @@
               <th scope="row"><?= $i; ?></th>
               <td><?= $m['menu']; ?></td>
               <td>
-                <a href="" class="badge badge-primary">edit</a>
-                <a href="" class="badge badge-danger">delete</a>
+                <a href="<?= base_url('menu/ubah/') . $m['id']; ?>" class="badge badge-success tampilModalUbahMenu" id="tampilModalUbahMenu" data-id="<?= $m['id'] ?>" data-toggle="modal" data-target="#ubahMenuModal"><i class="fas fa-edit"></i> edit</a>
+                <a href="<?= base_url('menu/hapus/') . $m['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fas fa-trash"></i> delete</a>
               </td>
             </tr>
             <?php $i++; ?>
@@ -54,4 +54,4 @@
 <!-- End of Main Content -->
 
 <!-- Modal Tambah Menu -->
-<?php require 'modal_tambah.php'; ?>
+<?php require 'modal.php'; ?>

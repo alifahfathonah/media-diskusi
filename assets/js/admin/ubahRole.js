@@ -6,8 +6,6 @@ $(function () {
 	$(".tampilModalUbahRole").on("click", function () {
 		const id = $(this).data("id");
 
-		console.log(id);
-
 		const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
 		const controllerMethodGetRole = "admin/getubahrole";
 		const controllerMethodUbahRole = "admin/ubahrole";
@@ -30,10 +28,5 @@ $(function () {
 				console.log("Error : " + errorMessage);
 			},
 		});
-	});
-
-	// fungsi untuk mengubah user role access
-	$(".change-user-access").on("click", function () {
-		const id = $(this).data("id");
 	});
 });
