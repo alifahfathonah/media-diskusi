@@ -3,6 +3,7 @@
 class Menu extends CI_Controller
 {
 
+  private $tableUser = 'user';
   private $tableSubMenu = 'user_sub_menu';
   private $tableMenu = 'user_menu';
 
@@ -16,11 +17,33 @@ class Menu extends CI_Controller
   public function index()
   {
     $data['title'] = 'Menu Management';
-    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $data['user'] = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
 
-    $data['menu'] = $this->db->get('user_menu')->result_array();
+    // ambil keyword search
+    if ($this->input->post('keyword_menu')) {
+      $data['keyword_menu'] = $this->input->post('keyword_menu');
+      $this->session->set_userdata('keyword_menu', $data['keyword_menu']);
+    } else {
+      $data['keyword_menu'] = $this->session->userdata('keyword_menu');
+    }
 
-    $this->form_validation->set_rules('menu', 'Menu', 'required|trim', [
+    // config  pagination
+    $config['base_url'] = base_url('menu/index');
+    $this->db->like('menu', $data['keyword_menu']);
+    $this->db->from($this->tableMenu);
+    $config['total_rows'] = $this->db->count_all_results();
+    $config['per_page'] = 5;
+
+    // initialization
+    $this->pagination->initialize($config);
+
+    // start pagination from
+    $data['start'] = $this->uri->segment(3);
+    $data['total_rows'] = $config['total_rows'];
+
+    $data['menu'] = $this->menu->getMenu($this->tableMenu, $config['per_page'], $data['start'], $data['keyword_menu']);
+
+    $this->form_validation->set_rules('menuTambah', 'Menu', 'required|trim', [
       'required' => 'Menu harus diisi!'
     ]);
     if ($this->form_validation->run() == false) {
@@ -30,7 +53,11 @@ class Menu extends CI_Controller
       $this->load->view('menu/index', $data);
       $this->load->view('templates/footer');
     } else {
-      $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
+      $data = [
+        'id' => null,
+        'menu' => htmlspecialchars($this->input->post('menuTambah', true))
+      ];
+      $this->menu->tambahMenu($this->tableMenu, $data);
       $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Menu berhasil ditambahkan!</div>');
       redirect('menu');
     }
@@ -41,8 +68,37 @@ class Menu extends CI_Controller
     $data['title'] = 'Submenu Management';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-    $data['subMenu'] = $this->menu->getSubMenu();
-    $data['menu'] = $this->db->get('user_menu')->result_array();
+    // ambil keyword search
+    if ($this->input->post('keyword_submenu')) {
+      $data['keyword_submenu'] = $this->input->post('keyword_submenu');
+      $this->session->set_userdata('keyword_submenu', $data['keyword_submenu']);
+    } else {
+      $data['keyword_submenu'] = $this->session->userdata('keyword_submenu');
+    }
+
+    // config  pagination
+    $config['base_url'] = base_url('menu/submenu/index');
+    $this->db->like('title', $data['keyword_submenu']);
+    $this->db->from($this->tableSubMenu);
+    $config['total_rows'] = $this->db->count_all_results();
+    $config['per_page'] = 5;
+
+    // initialization
+    $this->pagination->initialize($config);
+
+    // start pagination from
+    $data['start'] = $this->uri->segment(4);
+    $data['total_rows'] = $config['total_rows'];
+
+    /**
+     * digunakan pada halaman utama submenu untuk table data submenu
+     */
+    $data['subMenu'] = $this->menu->getSubMenuJoinMenu($this->tableSubMenu, $config['per_page'], $data['start'], $data['keyword_submenu']);
+
+    /**
+     * digunakan pada modal edit submenu
+     */
+    $data['menu'] = $this->db->get($this->tableMenu)->result_array();
 
     $this->form_validation->set_rules('title', 'Title', 'required|trim');
     $this->form_validation->set_rules('menu_id', 'Menu', 'required|trim');
@@ -76,8 +132,8 @@ class Menu extends CI_Controller
   public function ubahMenu()
   {
     $data = [
-      'id' => $this->input->post('id'),
-      'menu' => htmlspecialchars($this->input->post('menu', true))
+      'id' => $this->input->post('idUbahMenu'),
+      'menu' => htmlspecialchars($this->input->post('menuUbahMenu', true))
     ];
 
     $this->menu->ubahMenu($this->tableMenu, $data);
@@ -123,5 +179,17 @@ class Menu extends CI_Controller
     $this->menu->hapusSubMenu($this->tableSubMenu, $id);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Submenu berhasil dihapus!</div>');
     redirect('menu/submenu');
+  }
+
+  public function resetCariSubMenu()
+  {
+    $this->session->unset_userdata('keyword_submenu');
+    redirect('menu/submenu');
+  }
+
+  public function resetCariMenu()
+  {
+    $this->session->unset_userdata('keyword_menu');
+    redirect('menu');
   }
 }

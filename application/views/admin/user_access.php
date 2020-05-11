@@ -9,7 +9,7 @@
 
       <?= $this->session->flashdata('message'); ?>
 
-      <table class="table table-hover">
+      <table class="table table-hover table-sm">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -26,7 +26,7 @@
               <td><?= $u['email']; ?></td>
               <td><?= check_user_level($u['role_id']); ?></td>
               <td>
-                <select name="roleId" id="role" class="form-control">
+                <select name="roleId" id="role" class="form-control form-control-sm">
                   <option value="">Pilih Level</option>
                   <?php foreach ($role as $r) : ?>
                     <option value="" class="change-user-access" data-userid="<?= $u['id']; ?>" data-roleid="<?= $r['id']; ?>"><?= $r['role']; ?></option>

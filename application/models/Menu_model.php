@@ -11,7 +11,28 @@ class Menu_model extends CI_Model
     return $this->db->query($query)->result_array();
   }
 
+  public function getSubMenuJoinMenu($table, $limit, $start, $keyword = null)
+  {
+    if ($keyword) {
+      $this->db->like('title', $keyword);
+    }
+    return $this->db->get($table, $limit, $start)->result_array();
+  }
+
+  public function getMenu($table, $limit, $start, $keyword = null)
+  {
+    if ($keyword) {
+      $this->db->like('menu', $keyword);
+    }
+    return $this->db->get($table, $limit, $start)->result_array();
+  }
+
   public function tambahSubMenu($table, $data)
+  {
+    $this->db->insert($table, $data);
+  }
+
+  public function tambahMenu($table, $data)
   {
     $this->db->insert($table, $data);
   }
@@ -44,5 +65,10 @@ class Menu_model extends CI_Model
   public function ubahSubMenu($table, $data)
   {
     $this->db->update($table, $data, ['id' => $data['id']]);
+  }
+
+  public function jumlahSubMenu($table)
+  {
+    return $this->db->get($table)->num_rows();
   }
 }

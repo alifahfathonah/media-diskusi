@@ -52,11 +52,10 @@
 <script src="<?= base_url('assets/js/sweetalert/sweetalert.js'); ?>"></script>
 
 <!-- role access admin -->
-<script src="<?= base_url('assets/js/admin/ubahRole.js'); ?>"></script>
 <script src="<?= base_url('assets/js/admin/role.js'); ?>"></script>
 
 <!-- menu admin -->
-<script src="<?= base_url('assets/js/menu/menu.js'); ?>"></script>
+<script src="<?= base_url('assets/js/admin/menu.js'); ?>"></script>
 
 <!-- my-sweet-alert -->
 <script src="<?= base_url('assets/js/sweet-alert.js'); ?>"></script>

@@ -21,7 +21,7 @@
         <span class="text text-white">Tambah Role</span>
       </a>
 
-      <table class="table table-hover">
+      <table class="table table-hover table-sm">
         <thead>
           <tr>
             <th scope="col">#</th>

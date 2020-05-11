@@ -11,7 +11,8 @@
       <form action="<?= base_url('admin/role'); ?>" method="POST" id="formTambahRole">
         <div class="modal-body">
           <div class="form-group">
-            <input type="text" name="role" class="form-control" placeholder="Nama Role" autofocus>
+            <input type="text" name="roleTambah" id="roleTambah" class="form-control" placeholder="Nama Role" autofocus>
+            <small class="form-text text-danger" id="pesanErrorRoleTambah"></small>
           </div>
         </div>
         <div class="modal-footer">
@@ -35,9 +36,10 @@
       </div>
       <form action="<?= base_url('admin/ubahrole'); ?>" method="POST" id="formUbahRole">
         <div class="modal-body">
-          <input type="hidden" name="id" id="id">
+          <input type="hidden" name="idUbah" id="idUbah">
           <div class="form-group">
-            <input type="text" id="role" name="role" class="form-control" placeholder="Nama Role" autofocus>
+            <input type="text" id="roleUbah" name="roleUbah" class="form-control" placeholder="Nama Role" autofocus>
+            <small class="form-text text-danger" id="pesanErrorRoleUbah"></small>
           </div>
         </div>
         <div class="modal-footer">

@@ -38,11 +38,11 @@ class Admin extends CI_Controller
   public function role()
   {
     $data['title'] = 'Role';
-    $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    $data['user'] = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
 
     $data['role'] = $this->admin->getAllRole($this->tableUserRole);
 
-    $this->form_validation->set_rules('role', 'Role', 'required|trim', [
+    $this->form_validation->set_rules('roleTambah', 'Role', 'required|trim', [
       'required' => 'Role harus diisi.'
     ]);
     if ($this->form_validation->run() == false) {
@@ -53,7 +53,7 @@ class Admin extends CI_Controller
       $this->load->view('templates/footer');
     } else {
       $data = [
-        'role' => htmlspecialchars($this->input->post('role', true))
+        'role' => htmlspecialchars($this->input->post('roleTambah', true))
       ];
       $this->admin->tambahRole($this->tableUserRole, $data);
       $this->session->set_flashdata('message', 'Ditambahkan');
@@ -69,8 +69,8 @@ class Admin extends CI_Controller
   public function ubahRole()
   {
     $data = [
-      'id' => $this->input->post('id', true),
-      'role' => htmlspecialchars($this->input->post('role', true))
+      'id' => $this->input->post('idUbah', true),
+      'role' => htmlspecialchars($this->input->post('roleUbah', true))
     ];
 
     $this->admin->ubahRole($this->tableUserRole, $data);

@@ -45,3 +45,9 @@ function check_user_level($role_id)
     return $result['role'];
   }
 }
+
+function get_menu_by_id($id)
+{
+  $ci = get_instance();
+  return $ci->db->get_where('user_menu', ['id' => $id])->row_array()['menu'];
+}
