@@ -51,11 +51,14 @@
 <!-- source sweetalert -->
 <script src="<?= base_url('assets/js/sweetalert/sweetalert.js'); ?>"></script>
 
-<!-- role access admin -->
+<!-- 
+  role -> admin 
+  menu -> admin
+  group -> dosen
+-->
 <script src="<?= base_url('assets/js/admin/role.js'); ?>"></script>
-
-<!-- menu admin -->
 <script src="<?= base_url('assets/js/admin/menu.js'); ?>"></script>
+<script src="<?= base_url('assets/js/admin/group.js'); ?>"></script>
 
 <!-- my-sweet-alert -->
 <script src="<?= base_url('assets/js/sweet-alert.js'); ?>"></script>
