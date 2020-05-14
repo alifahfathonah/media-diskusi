@@ -15,6 +15,7 @@
 ```
 1. file role.js & menu.js sewaktu-waktu akan berubah seiring project dikerjakan dan diupdate
 2. sangat baik jika dijalankan pada browser Firefox Web Browser
+3. base url pada file javascript sesuaikan seperti base url pada file config.php pada poin 2 diatas
 ```
 
 ### Login
