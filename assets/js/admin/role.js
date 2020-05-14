@@ -104,7 +104,7 @@ $(function () {
 	 * fungsi untuk validasi form tambah role
 	 */
 	$("#formTambahRole").on("submit", function (e) {
-		const isValid = true;
+		let isValid = true;
 
 		let role = $("#roleTambah").val();
 

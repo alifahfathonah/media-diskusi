@@ -3,7 +3,7 @@ $(document).ready(function () {
 	 * fungsi untuk validasi form tambah group
 	 */
 	$("#formTambahGroup").on("submit", function (e) {
-		const isValid = true;
+		let isValid = true;
 
 		let namaGroup = $("#namaGroupTambah").val();
 		let deskripsiGroup = $("#deskripsiGroupTambah").val();

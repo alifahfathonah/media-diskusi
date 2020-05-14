@@ -38,4 +38,17 @@ class Group extends CI_Controller
       redirect('group');
     }
   }
+
+  public function ubahGroup($id)
+  {
+    var_dump($id);
+    die;
+  }
+
+  public function hapusGroup($id)
+  {
+    $this->group->hapusGroup($this->tableGroup, $id);
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Group berhasil dihapus!</div>');
+    redirect('group');
+  }
 }

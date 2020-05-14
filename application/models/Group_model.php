@@ -12,4 +12,9 @@ class Group_model extends CI_Model
   {
     $this->db->insert($table, $data);
   }
+
+  public function hapusGroup($table, $id)
+  {
+    $this->db->delete($table, ['id' => $id]);
+  }
 }
