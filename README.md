@@ -16,3 +16,10 @@
 1. file role.js & menu.js sewaktu-waktu akan berubah seiring project dikerjakan dan diupdate
 2. sangat baik jika dijalankan pada browser Firefox Web Browser
 ```
+
+### Login
+
+```
+Username : admin@gmail.com
+Password : 12345678
+```
