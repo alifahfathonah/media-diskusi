@@ -8,11 +8,20 @@ $(document).ready(function () {
 		let namaGroup = $("#namaGroupTambah").val();
 		let deskripsiGroup = $("#deskripsiGroupTambah").val();
 
-		if (namaGroup == "" || deskripsiGroup == "") {
+		if (namaGroup == "") {
 			e.preventDefault();
 			$("#pesanErrorNamaGroupTambah").html("Nama group harus diisi!");
+			isValid = false;
+		} else {
+			$("#pesanErrorNamaGroupTambah").html("");
+		}
+
+		if (deskripsiGroup == "") {
+			e.preventDefault();
 			$("#pesanErrorDeskripsiGroupTambah").html("Deskripsi group harus diisi!");
 			isValid = false;
+		} else {
+			$("#pesanErrorDeskripsiGroupTambah").html("");
 		}
 
 		return isValid;

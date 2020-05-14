@@ -2,6 +2,7 @@
  * untuk modal ubah role pada menu admin
  */
 $(function () {
+	// sesuaikan dengan base url pada config/config.php dari codeigniter
 	const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
 
 	// fungsi untuk mengubah nama role
@@ -103,23 +104,37 @@ $(function () {
 	 * fungsi untuk validasi form tambah role
 	 */
 	$("#formTambahRole").on("submit", function (e) {
+		const isValid = true;
+
 		let role = $("#roleTambah").val();
+
 		if (role == "") {
 			e.preventDefault();
 			$("#pesanErrorRoleTambah").html("Nama Role harus diisi!");
-			return false;
+			isValid = false;
+		} else {
+			$("#pesanErrorRoleTambah").html("");
 		}
+
+		return isValid;
 	});
 
 	/**
 	 * fungsi untuk validasi form ubah role
 	 */
 	$("#formUbahRole").on("submit", function (e) {
+		let isValid = true;
+
 		let role = $("#roleUbah").val();
+
 		if (role == "") {
 			e.preventDefault();
 			$("#pesanErrorRoleUbah").html("Nama Role harus diisi!");
-			return false;
+			isValid = false;
+		} else {
+			$("#pesanErrorRoleUbah").html("");
 		}
+
+		return isValid;
 	});
 });
