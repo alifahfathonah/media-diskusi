@@ -1,6 +1,13 @@
+/**
+ * jika ingin melakukan import & export pada browser maka gunakan
+ * typ="module" pada tag script pada file html
+ * catatan : lakukan itu pada semua file yang memiliki syntax import & export.
+ */
+import Config from "./config.js";
+
 $(function () {
 	// variabel global yang akan diakses semua fungsi didalamnya
-	const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
+	const baseUrl = Config;
 	/**
 	 * fungsi untuk ubah menu pada menu management
 	 */

@@ -56,7 +56,7 @@
               <td><?= $g['group_name']; ?></td>
               <td><?= $g['group_desc']; ?></td>
               <td>
-                <a href="<?= base_url('group/ubahgroup/') . $g['id']; ?>" class="badge badge-success tampilModalUbahMenu" id="tampilModalUbahMenu" data-id="<?= $g['id'] ?>" data-toggle="modal" data-target="#ubahMenuModal"><i class="fas fa-edit"></i> edit</a>
+                <a href="<?= base_url('group/ubahgroup/') . $g['id']; ?>" class="badge badge-success tampilModalUbahGroup" id="tampilModalUbahGroup" data-id="<?= $g['id'] ?>" data-toggle="modal" data-target="#ubahGroupModal"><i class="fas fa-edit"></i> edit</a>
                 <a href="<?= base_url('group/hapusgroup/') . $g['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fas fa-trash"></i> delete</a>
               </td>
             </tr>
@@ -82,5 +82,5 @@
 </div>
 <!-- End of Main Content -->
 
-<!-- Modal Tambah Menu -->
+<!-- Modal Tambah Group -->
 <?php require 'modal.php'; ?>

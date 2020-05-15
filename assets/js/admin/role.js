@@ -1,9 +1,16 @@
 /**
+ * jika ingin melakukan import & export pada browser maka gunakan
+ * typ="module" pada tag script pada file html
+ * catatan : lakukan itu pada semua file yang memiliki syntax import & export.
+ */
+import Config from "./config.js";
+
+/**
  * untuk modal ubah role pada menu admin
  */
 $(function () {
 	// sesuaikan dengan base url pada config/config.php dari codeigniter
-	const baseUrl = "http://localhost/kuliah/pkl/media-diskusi/";
+	const baseUrl = Config;
 
 	// fungsi untuk mengubah nama role
 	$(".tampilModalUbahRole").on("click", function () {

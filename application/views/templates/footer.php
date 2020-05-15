@@ -55,10 +55,15 @@
   role -> admin 
   menu -> admin
   group -> dosen
+  config -> semua file yang menggunakan base url
+
+  type="module" : berguna untuk menjalakan syntax import & export pada file
+  jika tidak menggunakan type="module" maka file tidak dapat diexport dan import
 -->
-<script src="<?= base_url('assets/js/admin/role.js'); ?>"></script>
-<script src="<?= base_url('assets/js/admin/menu.js'); ?>"></script>
-<script src="<?= base_url('assets/js/admin/group.js'); ?>"></script>
+<script type="module" src="<?= base_url('assets/js/admin/role.js'); ?>"></script>
+<script type="module" src="<?= base_url('assets/js/admin/menu.js'); ?>"></script>
+<script type="module" src="<?= base_url('assets/js/admin/group.js'); ?>"></script>
+<script type="module" src="<?= base_url('assets/js/admin/config.js'); ?>"></script>
 
 <!-- my-sweet-alert -->
 <script src="<?= base_url('assets/js/sweet-alert.js'); ?>"></script>
