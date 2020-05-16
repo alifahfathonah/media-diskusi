@@ -1,60 +1,63 @@
-<!-- Modal Tambah Group -->
-<div class="modal fade" id="newGroupModal" tabindex="-1" role="dialog" aria-labelledby="newGroupModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="newGroupModalLabel">Tambah Group</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="<?= base_url('group'); ?>" method="POST" id="formTambahGroup">
-        <div class="modal-body">
-          <div class="form-group">
-            <input type="text" class="form-control" id="namaGroupTambah" name="namaGroupTambah" placeholder="Nama group">
-            <small class="form-text text-danger" id="pesanErrorNamaGroupTambah"></small>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="deskripsiGroupTambah" name="deskripsiGroupTambah" placeholder="Deskripti group">
-            <small class="form-text text-danger" id="pesanErrorDeskripsiGroupTambah"></small>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-download"></i> Tambah</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<!-- modal tambah group -->
+<modal v-if="modalTambah" @close="clearAll()">
 
-<!-- Modal Ubah Group -->
-<div class="modal fade" id="ubahGroupModal" tabindex="-1" role="dialog" aria-labelledby="ubahGroupModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ubahGroupModalLabel">Ubah Group</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <h3 slot="head">Tambah Group</h3>
+
+  <div slot="body" class="row">
+    <div class="col-md">
+      <div class="form-group">
+        <label>Nama Group</label>
+        <input type="text" class="form-control" :class="{'is-invalid': formValidate.group_name}" name="group_name" v-model="groupBaru.group_name">
+
+        <div class="has-text-danger text-danger" v-html="formValidate.group_name"> </div>
       </div>
-      <form action="<?= base_url('group/ubahgroup'); ?>" method="POST" id="formUbahGroup">
-        <div class="modal-body">
-          <input type="hidden" name="idGroupUbah" id="idGroupUbah">
-          <div class="form-group">
-            <input type="text" class="form-control" id="namaGroupUbah" name="namaGroupUbah" placeholder="Nama group">
-            <small class="form-text text-danger" id="pesanErrorNamaGroupUbah"></small>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="deskripsiGroupUbah" name="deskripsiGroupUbah" placeholder="Deskripti group">
-            <small class="form-text text-danger" id="pesanErrorDeskripsiGroupUbah"></small>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-download"></i> Ubah</button>
-        </div>
-      </form>
+      <div class="form-group">
+        <label>Deskripsi</label>
+        <textarea cols="35" rows="5" :class="{'is-invalid': formValidate.group_desc}" name="group_desc" v-model="groupBaru.group_desc" class="form-control"></textarea>
+        <div class="has-text-danger text-danger" v-html="formValidate.group_desc"> </div>
+      </div>
     </div>
   </div>
-</div>
+  <div slot="foot">
+    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" @click="clearAll()">Close</button>
+    <button class="btn btn-sm btn-light" @click="tambahGroup"><i class="fas fa-download"></i> Tambah</button>
+  </div>
+
+</modal>
+
+<!-- modal ubah group -->
+<modal v-if="modalUbah" @close="clearAll()">
+
+  <h3 slot="head">Ubah Group</h3>
+
+  <div slot="body" class="row">
+    <div class="col-md">
+      <div class="form-group">
+        <label>Nama Group</label>
+        <input type="text" class="form-control" :class="{'is-invalid': formValidate.group_name}" name="group_name" v-model="groupData.group_name">
+
+        <div class="has-text-danger text-danger" v-html="formValidate.group_name"> </div>
+      </div>
+      <div class="form-group">
+        <label>Deskripsi</label>
+        <textarea cols="35" rows="5" :class="{'is-invalid': formValidate.group_desc}" name="group_desc" v-model="groupData.group_desc" class="form-control"></textarea>
+        <div class="has-text-danger text-danger" v-html="formValidate.group_desc"> </div>
+      </div>
+    </div>
+  </div>
+  <div slot="foot">
+    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" @click="clearAll()">Close</button>
+    <button class="btn btn-sm btn-light" @click="ubahGroup"><i class="fas fa-download"></i> Ubah</button>
+  </div>
+
+</modal>
+
+<!-- modal hapus group -->
+<modal v-if="modalHapus" @close="clearAll()">
+  <h3 slot="head">Hapus</h3>
+  <div slot="body" class="text-center">Apakah anda yakin? Data ini akan dihapus!</div>
+  <div slot="foot">
+    <button class="btn btn-danger" @click="modalHapus = false">Cancel</button>
+    <button class="btn btn-light" @click="modalHapus = false; hapusGroup()">Delete</button>
+  </div>
+</modal>

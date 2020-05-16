@@ -1,47 +1,36 @@
 <!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="container-fluid" id="group">
 
   <!-- Page Heading -->
   <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
 
   <div class="row">
-    <div class="col-lg-12">
-      <?= $this->session->flashdata('message'); ?>
-    </div>
-  </div>
 
-  <div class="row mb-3">
+    <transition enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutRight">
+      <div class="notification is-success text-center px-5 top-middle alert alert-success" role="alert" v-if="successMSG" @click="successMSG = false">{{successMSG}}</div>
+    </transition>
+
     <div class="col-lg-8">
       <!-- Button Tambah -->
-      <a href="" class="btn btn-sm btn-primary btn-icon-split" data-toggle="modal" data-target="#newGroupModal">
+      <button class="btn btn-sm btn-primary btn-icon-split" @click="modalTambah= true" data-toggle="modal" data-target="#groupModal">
         <span class="icon text-white-50">
           <i class="fas fa-plus"></i>
         </span>
         <span class="text text-white">Tambah Group</span>
-      </a>
+      </button>
     </div>
     <!-- Button Cari -->
     <div class="col-lg-4 justify-content-end">
-      <form action="<?= base_url('group'); ?>" method="POST">
-        <div class="input-group">
-          <input type="text" class="form-control form-control-sm" id="keyword_group" name="keyword_group" placeholder="Cari group" aria-label="Recipient's username" aria-describedby="button-addon2" autocomplete="off">
-          <div class="input-group-append">
-            <button class="btn btn-primary btn-sm" type="submit" name="cari_group" id="button-addon2"><i class="fas fa-search"></i></button>
-          </div>
-          <div class="input-group-append">
-            <a href="<?= base_url('group/resetcarigroup'); ?>" class="btn btn-sm btn-info"><i class="fas fa-redo fa-sm"></i></a>
-          </div>
-        </div>
-      </form>
+      <div class="input-group">
+        <input type="search" v-model="search.text" @keyup="cariGroup" class="form-control form-control-sm" id="cariGroup" name="cariGroup" placeholder="Cari group" autocomplete="off">
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12 mt-2">
 
       <table class="table table-hover table-sm">
         <thead>
-          <tr>
+          <tr class="bg-dark text-white">
             <th scope="col">#</th>
             <th scope="col">Group</th>
             <th scope="col">Description</th>
@@ -49,38 +38,32 @@
           </tr>
         </thead>
         <tbody>
-          <?php $i = 1;
-          foreach ($group as $g) : ?>
-            <tr>
-              <th scope="row"><?= $i; ?></th>
-              <td><?= $g['group_name']; ?></td>
-              <td><?= $g['group_desc']; ?></td>
-              <td>
-                <a href="<?= base_url('group/ubahgroup/') . $g['id']; ?>" class="badge badge-success tampilModalUbahGroup" id="tampilModalUbahGroup" data-id="<?= $g['id'] ?>" data-toggle="modal" data-target="#ubahGroupModal"><i class="fas fa-edit"></i> edit</a>
-                <a href="<?= base_url('group/hapusgroup/') . $g['id']; ?>" class="badge badge-danger tombol-hapus"><i class="fas fa-trash"></i> delete</a>
-              </td>
-            </tr>
-          <?php $i++;
-          endforeach; ?>
+          <tr v-for="group in groups">
+            <th scope="row">{{ group.id }}</th>
+            <td>{{ group.group_name }}</td>
+            <td>{{ group.group_desc }}</td>
+            <td>
+              <button class="btn btn-success btn-sm" @click="modalUbah = true; pilihGroup(group)" data-toggle="modal" data-target="#groupModal"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-danger btn-sm" @click="modalHapus = true; pilihGroup(group)" data-toggle="modal" data-target="#groupModal"><i class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+          <tr v-if="emptyResult">
+            <td colspan="9" rowspan="4" class="text-center h1">No Record Found</td>
+          </tr>
         </tbody>
-        <!-- <caption>Total Results : <?= $total_rows; ?></caption> -->
       </table>
 
-      <?php if (empty($group)) : ?>
-        <div class="alert alert-danger text-center">Tidak ada data ditemukan!</div>
-      <?php endif; ?>
-
-      <!-- cetak pagination -->
-      <!-- <?= $this->pagination->create_links(); ?> -->
+      <pagination :current_page="currentPage" :row_count_page="rowCountPage" @page-update="pageUpdate" :total_groups="totalGroups" :page_range="pageRange">
+      </pagination>
 
     </div>
   </div>
+
+  <!-- Modal Group -->
+  <?php require 'modal.php'; ?>
 
 </div>
 <!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->
-
-<!-- Modal Tambah Group -->
-<?php require 'modal.php'; ?>

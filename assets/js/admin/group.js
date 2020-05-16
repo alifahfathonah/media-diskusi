@@ -5,87 +5,185 @@
  */
 import Config from "./config.js";
 
-$(document).ready(function () {
-	// base url sesuaikan dengan config dari codeigniter
-	const baseUrl = Config;
+Vue.component("modal", {
+	//modal
+	template: `
+	<!-- Modal -->
+	<transition enter-active-class="animated rollIn" leave-active-class="animated rollOut">
+	<div class="modal fade" id="groupModal" tabindex="-1" role="dialog" aria-labelledby="groupModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header bg-dark text-white">
+				<slot name="head"></slot>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="$emit('close')">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				<slot name="body"></slot>
+				</div>
+				<div class="modal-footer bg-dark text-white">
+				<slot name="foot"></slot>
+				</div>
+			</div>
+		</div>
+	</div>
+</transition>
+`,
+});
 
-	/**
-	 * fungsi untuk validasi form tambah group
-	 */
-	$("#formTambahGroup").on("submit", function (e) {
-		let isValid = true;
+var vue = new Vue({
+	el: "#group",
+	data: {
+		url: Config, // config merupakan variabel berisi base url dari file config.js
+		modalTambah: false,
+		modalUbah: false,
+		modalHapus: false,
+		groups: [],
+		search: { text: "" },
+		emptyResult: false,
+		groupBaru: {
+			group_name: "",
+			group_desc: "",
+		},
+		groupData: {},
+		formValidate: [],
+		successMSG: "",
 
-		let namaGroup = $("#namaGroupTambah").val();
-		let deskripsiGroup = $("#deskripsiGroupTambah").val();
+		// pagination
+		currentPage: 0,
+		rowCountPage: 5,
+		totalGroups: 0,
+		pageRange: 2,
+	},
+	created() {
+		this.tampilSemuaGroup();
+	},
+	methods: {
+		tampilSemuaGroup() {
+			axios.get(this.url + "group/tampilSemuaGroup").then(function (response) {
+				if (response.data.groups == null) {
+					vue.noResult();
+				} else {
+					vue.getData(response.data.groups);
+				}
+			});
+		},
 
-		if (namaGroup == "") {
-			e.preventDefault();
-			$("#pesanErrorNamaGroupTambah").html("Nama group harus diisi!");
-			isValid = false;
-		} else {
-			$("#pesanErrorNamaGroupTambah").html("");
-		}
+		tambahGroup() {
+			var formData = vue.formData(vue.groupBaru);
+			axios
+				.post(this.url + "group/tambahGroup", formData)
+				.then(function (response) {
+					if (response.data.error) {
+						vue.formValidate = response.data.msg;
+					} else {
+						vue.successMSG = response.data.msg;
+						vue.clearAll();
+						vue.clearMSG();
+					}
+				});
+		},
 
-		if (deskripsiGroup == "") {
-			e.preventDefault();
-			$("#pesanErrorDeskripsiGroupTambah").html("Deskripsi group harus diisi!");
-			isValid = false;
-		} else {
-			$("#pesanErrorDeskripsiGroupTambah").html("");
-		}
+		ubahGroup() {
+			var formData = vue.formData(vue.groupData);
+			axios
+				.post(this.url + "group/ubahGroup", formData)
+				.then(function (response) {
+					if (response.data.error) {
+						vue.formValidate = response.data.msg;
+					} else {
+						vue.successMSG = response.data.success;
+						vue.clearAll();
+						vue.clearMSG();
+					}
+				});
+		},
 
-		return isValid;
-	});
+		cariGroup() {
+			var formData = vue.formData(vue.search);
+			axios
+				.post(this.url + "group/cariGroup", formData)
+				.then(function (response) {
+					if (response.data.groups == null) {
+						vue.noResult();
+					} else {
+						vue.getData(response.data.groups);
+					}
+				});
+		},
 
-	/**
-	 * fungsi untuk validasi form ubah group
-	 */
-	$("#formUbahGroup").on("submit", function (e) {
-		let isValid = true;
+		hapusGroup() {
+			var formData = vue.formData(vue.groupData);
+			axios
+				.post(this.url + "group/hapusGroup", formData)
+				.then(function (response) {
+					if (!response.data.error) {
+						vue.successMSG = response.data.success;
+						vue.clearAll();
+						vue.clearMSG();
+					}
+				});
+		},
 
-		let namaGroup = $("#namaGroupUbah").val();
-		let deskripsiGroup = $("#deskripsiGroupUbah").val();
+		formData(obj) {
+			var formData = new FormData();
+			for (var key in obj) {
+				formData.append(key, obj[key]);
+			}
+			return formData;
+		},
 
-		if (namaGroup == "") {
-			e.preventDefault();
-			$("#pesanErrorNamaGroupUbah").html("Nama group harus diisi!");
-			isValid = false;
-		} else {
-			$("#pesanErrorNamaGroupUbah").html("");
-		}
+		getData(groups) {
+			vue.emptyResult = false;
+			vue.totalGroups = groups.length;
+			vue.groups = groups.slice(
+				vue.currentPage * vue.rowCountPage,
+				vue.currentPage * vue.rowCountPage + vue.rowCountPage
+			); // slice the result for pagination
 
-		if (deskripsiGroup == "") {
-			e.preventDefault();
-			$("#pesanErrorDeskripsiGroupUbah").html("Deskripsi group harus diisi!");
-			isValid = false;
-		} else {
-			$("#pesanErrorDeskripsiGroupUbah").html("");
-		}
+			// if the record is empty, go back a page
+			if (vue.groups.length == 0 && vue.currentPage > 0) {
+				vue.pageUpdate(vue.currentPage - 1);
+				vue.clearAll();
+			}
+		},
 
-		return isValid;
-	});
+		pageUpdate(pageNumber) {
+			vue.currentPage = pageNumber;
+			vue.refresh();
+		},
 
-	$(".tampilModalUbahGroup").on("click", function () {
-		const id = $(this).data("id");
+		clearAll() {
+			vue.groupBaru = {
+				group_name: "",
+				group_desc: "",
+			};
+			vue.formValidate = false;
+			vue.modalTambah = false;
+			vue.modalUbah = false;
+			vue.modalHapus = false;
+			vue.refresh();
+		},
 
-		const controllerMethodGetGroup = "group/getubahgroup";
-		const controllerMethodUbahGroup = "group/ubahgroup";
+		pilihGroup(group) {
+			vue.groupData = group;
+		},
 
-		$("#formUbahGroup").attr(
-			"action",
-			`${baseUrl}${controllerMethodUbahGroup}`
-		);
+		clearMSG() {
+			setTimeout(function () {
+				vue.successMSG = "";
+			}, 3000);
+		},
 
-		$.ajax({
-			url: `${baseUrl}${controllerMethodGetGroup}`,
-			data: { id: id },
-			method: "post",
-			dataType: "json",
-			success: function (data) {
-				$("#namaGroupUbah").val(data.group_name);
-				$("#deskripsiGroupUbah").val(data.group_desc);
-				$("#idGroupUbah").val(data.id);
-			},
-		});
-	});
+		noResult() {
+			vue.emptyResult = true;
+			vue.groups = null;
+			vue.totalGroups = 0;
+		},
+
+		refresh() {
+			vue.search.text ? vue.searchGroup() : vue.tampilSemuaGroup();
+		},
+	},
 });

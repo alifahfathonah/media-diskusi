@@ -18,6 +18,20 @@
   <!-- Custom styles for this template-->
   <link href="<?= base_url('assets/css/sb-admin-2.min.css'); ?>" rel="stylesheet">
 
+  <link rel="stylesheet" href="<?= base_url('assets/css/animate.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
+  <!-- <link rel="stylesheet" href="<?= base_url('assets/css/bulma.min.css'); ?>"> -->
+
+  <!-- VueJS -->
+  <!-- development version, includes helpful console warnings -->
+  <script src="<?= base_url('assets/js/vue/vue.js'); ?>"></script>
+
+  <!-- AXIOS -->
+  <script src="<?= base_url('assets/js/axios/axios.js'); ?>"></script>
+
+  <!-- source sweetalert -->
+  <script src="<?= base_url('assets/js/sweetalert/sweetalert.js'); ?>"></script>
+
 </head>
 
 <body id="page-top">

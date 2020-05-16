@@ -38,6 +38,9 @@
   </div>
 </div>
 
+<!-- pagination -->
+<script src="<?= base_url('assets/js/pagination.js'); ?>"></script>
+
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
 <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
@@ -48,8 +51,8 @@
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url('assets/js/sb-admin-2.min.js'); ?>"></script>
 
-<!-- source sweetalert -->
-<script src="<?= base_url('assets/js/sweetalert/sweetalert.js'); ?>"></script>
+<!-- my-sweet-alert -->
+<script src="<?= base_url('assets/js/my-sweetalert.js'); ?>"></script>
 
 <!-- 
   role -> admin 
@@ -64,9 +67,6 @@
 <script type="module" src="<?= base_url('assets/js/admin/menu.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/group.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/config.js'); ?>"></script>
-
-<!-- my-sweet-alert -->
-<script src="<?= base_url('assets/js/sweet-alert.js'); ?>"></script>
 
 </body>
 

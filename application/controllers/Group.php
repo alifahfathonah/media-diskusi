@@ -9,62 +9,129 @@ class Group extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    is_logged_in();
     $this->load->model('Group_model', 'group');
   }
 
   public function index()
   {
     $data['title'] = 'Group Management';
-    $data['user'] = $this->db->get($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
-    $data['group'] = $this->group->getGroup($this->tableGroup);
+    $data['user'] = $this->group->getUserByEmail($this->tableUser, $this->session->userdata('email'));
 
-    $this->form_validation->set_rules('namaGroupTambah', 'Nama group harus diisi!', 'required|trim');
-    $this->form_validation->set_rules('deskripsiGroupTambah', 'Deskripsi group harus diisi!', 'required|trim');
-    if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar', $data);
-      $this->load->view('templates/topbar', $data);
-      $this->load->view('group/index', $data);
-      $this->load->view('templates/footer');
-    } else {
-      $id_user = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array()['id'];
-      $insert = [
-        'id' => null,
-        'group_name' => htmlspecialchars($this->input->post('namaGroupTambah', true)),
-        'group_desc' => htmlspecialchars($this->input->post('deskripsiGroupTambah', true)),
-        'id_user' => $id_user
-      ];
-      $this->group->tambahGroup($this->tableGroup, $insert);
-      $this->session->set_flashdata('message', '<div class="alert alert-success text-center" role="alert">Group berhasil dibuat!</div>');
-      redirect('group');
-    }
+    $this->load->view('templates/header', $data);
+    $this->load->view('templates/sidebar', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('group/index', $data);
+    $this->load->view('templates/footer');
   }
 
-  public function getUbahGroup()
+  public function tampilSemuaGroup()
   {
-    echo json_encode($this->group->getGroupById($this->tableGroup, $this->input->post('id')));
+    $query = $this->group->getGroup();
+    if ($query) {
+      $result['groups'] = $this->group->getGroup();
+    }
+    echo json_encode($result);
+  }
+
+  public function cariGroup()
+  {
+    $value = $this->input->post('text');
+    $query = $this->group->cariGroup($this->tableGroup, $value);
+    if ($query) {
+      $result['groups'] = $query;
+    }
+
+    echo json_encode($result);
+  }
+
+  public function tambahGroup()
+  {
+    $config = [
+      [
+        'field' => 'group_name',
+        'label' => 'Nama Group',
+        'rules' => 'trim|required'
+      ],
+      [
+        'field' => 'group_desc',
+        'label' => 'Deskripsi Group',
+        'rules' => 'trim|required'
+      ]
+    ];
+
+    $this->form_validation->set_rules($config);
+    if ($this->form_validation->run() == false) {
+      $result['error'] = true;
+      $result['msg'] = [
+        'group_name' => form_error('group_name'),
+        'group_desc' => form_error('group_desc')
+      ];
+    } else {
+      $id_user = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array()['id'];
+      $data = [
+        'id' => null,
+        'group_name' => $this->input->post('group_name'),
+        'group_desc' => $this->input->post('group_desc'),
+        'id_user' => $id_user
+      ];
+      if ($this->group->tambahGroup($this->tableGroup, $data)) {
+        $result['error'] = false;
+        $result['msg'] = 'Group berhasil ditambahkan';
+      }
+    }
+
+    echo json_encode($result);
   }
 
   public function ubahGroup()
   {
-    $id_user = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array()['id'];
-    $data = [
-      'id' => $this->input->post('idGroupUbah'),
-      'group_name' => htmlspecialchars($this->input->post('namaGroupUbah', true)),
-      'group_desc' => htmlspecialchars($this->input->post('deskripsiGroupUbah', true)),
-      'id_user' => $id_user
+    $config = [
+      [
+        'field' => 'group_name',
+        'label' => 'Nama Group',
+        'rules' => 'trim|required'
+      ],
+      [
+        'field' => 'group_desc',
+        'label' => 'Deskripsi Group',
+        'rules' => 'trim|required'
+      ]
     ];
 
-    $this->group->ubahGroup($this->tableGroup, $data);
-    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Group berhasil diubah!</div>');
-    redirect('group');
+    $this->form_validation->set_rules($config);
+    if ($this->form_validation->run() == false) {
+      $result['error'] = true;
+      $result['msg'] = [
+        'group_name' => form_error('group_name'),
+        'group_desc' => form_error('group_desc')
+      ];
+    } else {
+      $id = $this->input->post('id');
+      $data = [
+        'group_name' => $this->input->post('group_name'),
+        'group_desc' => $this->input->post('group_desc'),
+        'id_user' => $this->input->post('id_user')
+      ];
+
+      if ($this->group->ubahGroup($this->tableGroup, $data, $id)) {
+        $result['error'] = false;
+        $result['success'] = 'Group berhasil diubah!';
+      }
+    }
+
+    echo json_encode($result);
   }
 
-  public function hapusGroup($id)
+  public function hapusGroup()
   {
-    $this->group->hapusGroup($this->tableGroup, $id);
-    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Group berhasil dihapus!</div>');
-    redirect('group');
+    $id = $this->input->post('id');
+    if ($this->group->hapusGroup($this->tableGroup, $id)) {
+      $msg['error'] = false;
+      $msg['success'] = 'Group berhasil dihapus!';
+    } else {
+      $msg['error'] = true;
+    }
+
+    echo json_encode($msg);
   }
 }
