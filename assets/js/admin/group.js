@@ -10,8 +10,8 @@ Vue.component("modal", {
 	template: `
 	<!-- Modal -->
 	<transition enter-active-class="animated rollIn" leave-active-class="animated rollOut">
-	<div class="modal fade" id="groupModal" tabindex="-1" role="dialog" aria-labelledby="groupModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+	<div class="modal fade" id="groupModal" tabindex="-1" role="dialog" aria-labelledby="groupModalLabel" aria-hidden="true" id="groupModal">
+		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header bg-dark text-white">
 				<slot name="head"></slot>
@@ -81,6 +81,7 @@ var vue = new Vue({
 						vue.successMSG = response.data.msg;
 						vue.clearAll();
 						vue.clearMSG();
+						vue.hideModal();
 					}
 				});
 		},
@@ -96,6 +97,7 @@ var vue = new Vue({
 						vue.successMSG = response.data.success;
 						vue.clearAll();
 						vue.clearMSG();
+						vue.hideModal();
 					}
 				});
 		},
@@ -122,6 +124,7 @@ var vue = new Vue({
 						vue.successMSG = response.data.success;
 						vue.clearAll();
 						vue.clearMSG();
+						vue.hideModal();
 					}
 				});
 		},
@@ -180,6 +183,18 @@ var vue = new Vue({
 			vue.emptyResult = true;
 			vue.groups = null;
 			vue.totalGroups = 0;
+		},
+
+		hideModal() {
+			if (!vue.modalUbah) {
+				$("#groupModal").modal("hide");
+			}
+			if (!vue.modalHapus) {
+				$("#groupModal").modal("hide");
+			}
+			if (!vue.modalTambah) {
+				$("#groupModal").modal("hide");
+			}
 		},
 
 		refresh() {

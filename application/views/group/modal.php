@@ -55,9 +55,9 @@
 <!-- modal hapus group -->
 <modal v-if="modalHapus" @close="clearAll()">
   <h3 slot="head">Hapus</h3>
-  <div slot="body" class="text-center">Apakah anda yakin? Data ini akan dihapus!</div>
+  <div slot="body" class="text-center h4">Apakah anda yakin? Data ini akan dihapus!</div>
   <div slot="foot">
-    <button class="btn btn-danger" @click="modalHapus = false">Cancel</button>
+    <button class="btn btn-danger" data-dismiss="modal" @click="modalHapus= false">Cancel</button>
     <button class="btn btn-light" @click="modalHapus = false; hapusGroup()">Delete</button>
   </div>
 </modal>
