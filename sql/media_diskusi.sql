@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 14, 2020 at 03:56 PM
+-- Generation Time: May 20, 2020 at 10:21 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -44,11 +44,40 @@ CREATE TABLE `comment` (
 --
 
 CREATE TABLE `grup` (
-  `id` int(11) NOT NULL,
+  `id_grup` int(11) NOT NULL,
   `group_name` varchar(128) DEFAULT NULL,
   `group_desc` mediumtext DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL
+  `id_user` int(11) DEFAULT NULL,
+  `date_created` int(11) DEFAULT NULL,
+  `group_image` varchar(128) DEFAULT NULL,
+  `jumlah_peserta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `grup`
+--
+
+INSERT INTO `grup` (`id_grup`, `group_name`, `group_desc`, `id_user`, `date_created`, `group_image`, `jumlah_peserta`) VALUES
+(2, 'Strategi Algoritma', 'Kelas Strategi Algoritma Semester Ganjil 2020/2022', 1, 1588355892, 'default.png', NULL),
+(3, 'PKL', 'PKL angkatan 2020', 1, 1589870951, 'default.png', NULL),
+(4, 'Test Grup', 'Testing', 1, NULL, 'default.png', NULL),
+(10, 'Testing', 'Testing lagi lagi', 1, 1588355892, 'default.png', NULL),
+(11, 'Test', 'Test', 1, NULL, 'default.png', NULL),
+(12, 'Test', 'Test', 1, NULL, 'default.png', NULL),
+(13, 'Test', 'Test', 1, NULL, 'default.png', NULL),
+(14, 'Coba', 'Coba', 1, NULL, 'default.png', NULL),
+(15, 'coba 1', 'coba 1', 1, NULL, 'default.png', NULL),
+(16, 'coba 2', 'coba 2', 1, 1588355892, 'default.png', NULL),
+(17, 'coba 3', 'coba 3', 1, NULL, 'default.png', NULL),
+(18, 'Coba 4', 'Coba 4', 1, NULL, 'default.png', NULL),
+(19, 'test', 'test', 1, NULL, 'default.png', NULL),
+(27, 'Group Dosen', 'Group Khusus Dosen STIKI', 3, NULL, 'default.png', NULL),
+(29, 'test tanggal', 'test tanggal', 1, NULL, 'default.png', NULL),
+(30, 'Baru', 'baru', 1, NULL, 'default.png', NULL),
+(31, 'Coba tanggal', 'coba tanggal', 1, NULL, 'default.png', NULL),
+(32, 'Grup Khusus Pegawai PPTIK', 'Grup ini khusus untuk anggota kantor PPTIK', 3, 1589461398, 'default.png', NULL),
+(33, 'test tambah', 'test tambah baru', 1, 1589871490, 'default.png', NULL),
+(34, 'test feedback', 'test feedback', 1, 1589871523, 'default.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -129,7 +158,19 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
 (1, 'Admin', 'admin@gmail.com', 'default.png', '$2y$10$P7f9ebCvmcjZbmpt.m7ZreJ4QD4PHHCQiAHaIixl7iZNqfoBIsQDm', 1, 1, 1588355892),
 (2, 'Andri Aryanto Doke', '161111014@mhs.stiki.ac.id', 'default.png', '$2y$10$.Vn3NyfHA.kDJeTUJranF.b6k44HonfSTkKdo8k3NMNVfLbjUpsgm', 2, 1, 1588356539),
-(3, 'Andri Aryanto Doke', 'andridoke2@gmail.com', 'Screenshot_from_2020-04-03_03-35-06.png', '$2y$10$Zh4oahMrAMLk65DHIEyRe.pOy0Gs4PX5qqEgj6FXRVsI7ngiwHmjq', 3, 1, 1589461398);
+(3, 'Doke Dacozta', 'andridoke2@gmail.com', 'Screenshot_from_2020-04-03_03-35-06.png', '$2y$10$Zh4oahMrAMLk65DHIEyRe.pOy0Gs4PX5qqEgj6FXRVsI7ngiwHmjq', 3, 1, 1589461398);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_access_grup`
+--
+
+CREATE TABLE `user_access_grup` (
+  `id` int(11) NOT NULL,
+  `grup_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -152,9 +193,12 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (2, 1, 2),
 (3, 2, 2),
 (8, 1, 3),
-(18, 1, 16),
 (20, 3, 2),
-(21, 3, 16);
+(24, 1, 6),
+(25, 3, 6),
+(26, 1, 18),
+(27, 3, 18),
+(28, 2, 18);
 
 -- --------------------------------------------------------
 
@@ -175,11 +219,8 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (1, 'Admin'),
 (2, 'User'),
 (3, 'Menu'),
-(6, 'Puket 1'),
-(7, 'Puket 2'),
-(14, 'Pegawai Kantor'),
-(15, 'Puket 3'),
-(16, 'Group');
+(6, 'Group'),
+(18, 'Diskusi');
 
 -- --------------------------------------------------------
 
@@ -233,7 +274,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
 (6, 1, 'User Access', 'admin/useraccess', 'fas fa-fw fa-universal-access', 1),
 (7, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
-(13, 16, 'Group Management', 'group', 'fas fa-fw fa-layer-group', 1);
+(15, 6, 'Group Management', 'group', 'fas fa-fw fa-layer-group', 1),
+(16, 18, 'Forum Diskusi', 'diskusi', 'fas fa-fw fa-comment', 1);
 
 --
 -- Indexes for dumped tables
@@ -250,7 +292,7 @@ ALTER TABLE `comment`
 -- Indexes for table `grup`
 --
 ALTER TABLE `grup`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_grup`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -285,6 +327,12 @@ ALTER TABLE `share`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_access_grup`
+--
+ALTER TABLE `user_access_grup`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -325,7 +373,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `grup`
 --
 ALTER TABLE `grup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `notif`
@@ -358,16 +406,22 @@ ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `user_access_grup`
+--
+ALTER TABLE `user_access_grup`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -379,7 +433,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables

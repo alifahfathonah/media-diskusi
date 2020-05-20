@@ -4,7 +4,7 @@
   <h3 slot="head">Tambah Group</h3>
 
   <div slot="body" class="row">
-    <div class="col-md">
+    <div class="col-md-8">
       <div class="form-group">
         <label>Nama Group</label>
         <input type="text" class="form-control" :class="{'is-invalid': formValidate.group_name}" name="group_name" v-model="groupBaru.group_name">
@@ -15,6 +15,17 @@
         <label>Deskripsi</label>
         <textarea cols="35" rows="5" :class="{'is-invalid': formValidate.group_desc}" name="group_desc" v-model="groupBaru.group_desc" class="form-control"></textarea>
         <div class="has-text-danger text-danger" v-html="formValidate.group_desc"> </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Icon Group</label>
+        <div>
+          <label for="image" class="justify-content-center">
+            <input type="file" @change="previewFile" name="group_image" style="display:none" id="image">
+            <img :src="avatar" height="200px" width="200px" class="img-thumbnail">
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -31,7 +42,7 @@
   <h3 slot="head">Ubah Group</h3>
 
   <div slot="body" class="row">
-    <div class="col-md">
+    <div class="col-md-8">
       <div class="form-group">
         <label>Nama Group</label>
         <input type="text" class="form-control" :class="{'is-invalid': formValidate.group_name}" name="group_name" v-model="groupData.group_name">
@@ -42,6 +53,17 @@
         <label>Deskripsi</label>
         <textarea cols="35" rows="5" :class="{'is-invalid': formValidate.group_desc}" name="group_desc" v-model="groupData.group_desc" class="form-control"></textarea>
         <div class="has-text-danger text-danger" v-html="formValidate.group_desc"> </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="">Icon Group</label>
+        <div>
+          <label for="image" class="justify-content-center">
+            <input type="file" @change="previewFile" name="group_image" style="display:none" id="image">
+            <img :src="gambarGroup(groupData.group_image)" height="200px" width="200px" class="img-thumbnail">
+          </label>
+        </div>
       </div>
     </div>
   </div>

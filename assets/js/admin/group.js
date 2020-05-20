@@ -11,7 +11,7 @@ Vue.component("modal", {
 	<!-- Modal -->
 	<transition enter-active-class="animated rollIn" leave-active-class="animated rollOut">
 	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="groupModalLabel" aria-hidden="true" id="groupModal">
-		<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
 				<div class="modal-header bg-dark text-white">
 				<slot name="head"></slot>
@@ -45,7 +45,10 @@ var vue = new Vue({
 		groupBaru: {
 			group_name: "",
 			group_desc: "",
+			group_image: "",
 		},
+		avatar: null,
+		selectedFile: null,
 		groupData: {},
 		formValidate: [],
 		successMSG: "",
@@ -137,6 +140,20 @@ var vue = new Vue({
 				});
 		},
 
+		gambarGroup(namaFile) {
+			return this.url + "assets/img/group/" + namaFile;
+		},
+
+		previewFile(e) {
+			this.selectedFile = e.target.files[0];
+			let image = e.target.files[0];
+			let reader = new FileReader();
+			reader.readAsDataURL(image);
+			reader.onload = (e) => {
+				this.avatar = e.target.result;
+			};
+		},
+
 		formData(obj) {
 			var formData = new FormData();
 			for (var key in obj) {
@@ -174,6 +191,8 @@ var vue = new Vue({
 			vue.modalTambah = false;
 			vue.modalUbah = false;
 			vue.modalHapus = false;
+			vue.avatar = null;
+			vue.selectedFile = null;
 			vue.refresh();
 		},
 

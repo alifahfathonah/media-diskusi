@@ -11,7 +11,7 @@
     </transition>
 
     <div class="col-lg-8">
-      <!-- Button Tambah -->
+      <!-- button tambah -->
       <button class="btn btn-sm btn-primary btn-icon-split" @click="modalTambah= true" data-toggle="modal" data-target="#groupModal">
         <span class="icon text-white-50">
           <i class="fas fa-plus"></i>
@@ -19,8 +19,9 @@
         <span class="text text-white">Buat Group</span>
       </button>
     </div>
-    <!-- Button Cari -->
+
     <div class="col-lg-4 justify-content-end">
+      <!-- input cari -->
       <div class="input-group">
         <input type="search" v-model="search.text" @keyup="cariGroup" class="form-control form-control-sm" id="cariGroup" name="cariGroup" placeholder="Cari group" autocomplete="off">
       </div>
@@ -28,28 +29,38 @@
 
     <div class="col-lg-12 mt-2">
 
-      <table class="table table-hover table-sm">
-        <thead>
+      <table class="table table-hover table-sm table-fix">
+        <thead class="text-dark">
           <tr>
             <th scope="col">Group</th>
             <th scope="col">Description</th>
+            <th scope="col">Peserta</th>
             <th scope="col">Manage</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="group in groups">
             <td>
+              <!-- jika diklik menuju halaman grup berisi postingan sesuai grup tersebut -->
               <a href="<?= base_url('menu/'); ?>" style="text-decoration: none !important;">
-                <img src="<?= base_url('assets/img/icons/stiki.png') ?>" alt="" class="img-thumbnail rounded-circle" height="50px" width="50px">
+                <img :src="gambarGroup(group.group_image)" class="img-thumbnail rounded-circle" height="50px" width="50px">
                 <span class="text-dark font-weight-bold">{{ group.group_name }}</span>
                 <br>
                 <small class="text-secondary">Dibuat oleh <span class="text-success">{{ group.name }}</span> {{ timestampConvert(group.date_created) }}</small>
               </a>
             </td>
-            <td>{{ group.group_desc }}</td>
             <td>
-              <div class="dropdown">
-                <button class="btn btn-light dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="<?= base_url('menu'); ?>" class="text-secondary" style="text-decoration: none !important;">
+                <div class="mt-4">{{ group.group_desc }}</div>
+              </a>
+            </td>
+            <td>
+              <!-- jika diklik mengeluarkan modal dengan isi user yang berada pada grup tersebut -->
+              <div class="mt-4">{{ 100 }} <i class="fas fa-users text-warning"></i></div>
+            </td>
+            <td>
+              <div class="dropdown mt-3">
+                <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-ellipsis-h"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -64,6 +75,8 @@
           </tr>
         </tbody>
       </table>
+
+      <hr>
 
       <pagination :current_page="currentPage" :row_count_page="rowCountPage" @page-update="pageUpdate" :total_groups="totalGroups" :page_range="pageRange">
       </pagination>
