@@ -20,7 +20,7 @@
   </div>
   <div slot="foot">
     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" @click="clearAll()">Close</button>
-    <button class="btn btn-sm btn-light" @click="tambahGroup"><i class="fas fa-download"></i> Tambah</button>
+    <button class="btn btn-sm btn-light" @click="tambahGroup"><i class="fas fa-download"></i> Buat</button>
   </div>
 
 </modal>

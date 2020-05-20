@@ -1,6 +1,6 @@
-/**
+/**  ======= PENGINGAT =======
  * jika ingin melakukan import & export pada browser maka gunakan
- * typ="module" pada tag script pada file html
+ * type="module" pada tag script pada file html
  * catatan : lakukan itu pada semua file yang memiliki syntax import & export.
  */
 import Config from "./config.js";
@@ -10,7 +10,7 @@ Vue.component("modal", {
 	template: `
 	<!-- Modal -->
 	<transition enter-active-class="animated rollIn" leave-active-class="animated rollOut">
-	<div class="modal fade" id="groupModal" tabindex="-1" role="dialog" aria-labelledby="groupModalLabel" aria-hidden="true" id="groupModal">
+	<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="groupModalLabel" aria-hidden="true" id="groupModal">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header bg-dark text-white">
@@ -115,6 +115,14 @@ var vue = new Vue({
 				});
 		},
 
+		timestampConvert(timestamp) {
+			let date = new Date(timestamp * 1000);
+			let tahun = date.getFullYear();
+			let bulan = date.getMonth();
+			let tanggal = date.getDate();
+			return moment([tahun, bulan, tanggal]).fromNow();
+		},
+
 		hapusGroup() {
 			var formData = vue.formData(vue.groupData);
 			axios
@@ -198,7 +206,7 @@ var vue = new Vue({
 		},
 
 		refresh() {
-			vue.search.text ? vue.searchGroup() : vue.tampilSemuaGroup();
+			vue.search.text ? vue.cariGroup() : vue.tampilSemuaGroup();
 		},
 	},
 });

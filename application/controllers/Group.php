@@ -26,19 +26,48 @@ class Group extends CI_Controller
 
   public function tampilSemuaGroup()
   {
-    $query = $this->group->getGroup();
-    if ($query) {
-      $result['groups'] = $this->group->getGroup();
+    $role = $this->getRoleName($this->session->userdata('role_id'));
+
+    $idUser = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
+
+    switch ($role) {
+      case 'Administrator': // menampilkan semua group yang ada jika admin
+        $semuaGroup = $this->group->getGroup();
+        if ($semuaGroup) {
+          $result['groups'] = $semuaGroup;
+        }
+        break;
+      default: // menampilkan group berdasarkan pembuat group jika bukan admin
+        $groupDibuat = $this->group->getGroupByIdUser($idUser['id']);
+        if ($groupDibuat) {
+          $result['groups'] = $groupDibuat;
+        }
+        break;
     }
+
     echo json_encode($result);
   }
 
   public function cariGroup()
   {
+    $role = $this->getRoleName($this->session->userdata('role_id'));
+
+    $idUser = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
+
     $value = $this->input->post('text');
-    $query = $this->group->cariGroup($this->tableGroup, $value);
-    if ($query) {
-      $result['groups'] = $query;
+    switch ($role) {
+      case 'Administrator':
+        $semuaGroup = $this->group->cariGroup($value);
+        if ($semuaGroup) {
+          $result['groups'] = $semuaGroup;
+        }
+        break;
+      default:
+        $groupDibuat = $this->group->cariGroupByIdUser($value, $idUser);
+        if ($groupDibuat) {
+          $result['groups'] = $groupDibuat;
+        }
+        break;
     }
 
     echo json_encode($result);
@@ -69,12 +98,13 @@ class Group extends CI_Controller
     } else {
       $id_user = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array()['id'];
       $data = [
-        'id' => null,
+        'id_grup' => null,
         'group_name' => $this->input->post('group_name'),
         'group_desc' => $this->input->post('group_desc'),
-        'id_user' => $id_user
+        'id_user' => $id_user,
+        'date_created' => time()
       ];
-      if ($this->group->tambahGroup($this->tableGroup, $data)) {
+      if ($this->group->tambahGroup($data)) {
         $result['error'] = false;
         $result['msg'] = 'Group berhasil ditambahkan';
       }
@@ -106,11 +136,12 @@ class Group extends CI_Controller
         'group_desc' => form_error('group_desc')
       ];
     } else {
-      $id = $this->input->post('id');
+      $id = $this->input->post('id_grup');
       $data = [
         'group_name' => $this->input->post('group_name'),
         'group_desc' => $this->input->post('group_desc'),
-        'id_user' => $this->input->post('id_user')
+        'id_user' => $this->input->post('id_user'),
+        'date_created' => $this->input->post('date_created')
       ];
 
       if ($this->group->ubahGroup($this->tableGroup, $data, $id)) {
@@ -124,7 +155,7 @@ class Group extends CI_Controller
 
   public function hapusGroup()
   {
-    $id = $this->input->post('id');
+    $id = $this->input->post('id_grup');
     if ($this->group->hapusGroup($this->tableGroup, $id)) {
       $msg['error'] = false;
       $msg['success'] = 'Group berhasil dihapus!';
@@ -133,5 +164,10 @@ class Group extends CI_Controller
     }
 
     echo json_encode($msg);
+  }
+
+  private function getRoleName($roleId)
+  {
+    return $this->group->getRoleName($roleId);
   }
 }

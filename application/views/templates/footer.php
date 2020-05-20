@@ -68,6 +68,9 @@
 <script type="module" src="<?= base_url('assets/js/admin/group.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/config.js'); ?>"></script>
 
+<!-- moment library -->
+<script src="<?= base_url('assets/js/moment/moment.min.js'); ?>"></script>
+
 </body>
 
 </html>

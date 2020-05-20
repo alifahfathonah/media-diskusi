@@ -20,7 +20,6 @@
 
   <link rel="stylesheet" href="<?= base_url('assets/css/animate.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
-  <!-- <link rel="stylesheet" href="<?= base_url('assets/css/bulma.min.css'); ?>"> -->
 
   <!-- VueJS -->
   <!-- development version, includes helpful console warnings -->

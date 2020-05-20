@@ -16,7 +16,7 @@
         <span class="icon text-white-50">
           <i class="fas fa-plus"></i>
         </span>
-        <span class="text text-white">Tambah Group</span>
+        <span class="text text-white">Buat Group</span>
       </button>
     </div>
     <!-- Button Cari -->
@@ -30,25 +30,37 @@
 
       <table class="table table-hover table-sm">
         <thead>
-          <tr class="bg-dark text-white">
-            <th scope="col">#</th>
+          <tr>
             <th scope="col">Group</th>
             <th scope="col">Description</th>
-            <th scope="col">Action</th>
+            <th scope="col">Manage</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="group in groups">
-            <th scope="row">{{ group.id }}</th>
-            <td>{{ group.group_name }}</td>
+            <td>
+              <a href="<?= base_url('menu/'); ?>" style="text-decoration: none !important;">
+                <img src="<?= base_url('assets/img/icons/stiki.png') ?>" alt="" class="img-thumbnail rounded-circle" height="50px" width="50px">
+                <span class="text-dark font-weight-bold">{{ group.group_name }}</span>
+                <br>
+                <small class="text-secondary">Dibuat oleh <span class="text-success">{{ group.name }}</span> {{ timestampConvert(group.date_created) }}</small>
+              </a>
+            </td>
             <td>{{ group.group_desc }}</td>
             <td>
-              <button class="btn btn-success btn-sm" @click="modalUbah = true; pilihGroup(group)" data-toggle="modal" data-target="#groupModal"><i class="fas fa-edit"></i></button>
-              <button class="btn btn-danger btn-sm" @click="modalHapus = true; pilihGroup(group)" data-toggle="modal" data-target="#groupModal"><i class="fas fa-trash"></i></button>
+              <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-h"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <button class="dropdown-item bg-success" @click="modalUbah = true; pilihGroup(group)" data-toggle="modal" data-target="#groupModal"><i class="fas fa-edit"></i> Ubah</button>
+                  <button class="dropdown-item bg-danger" @click="modalHapus = true; pilihGroup(group)" data-toggle="modal" data-target="#groupModal"><i class="fas fa-trash"></i> Hapus</button>
+                </div>
+              </div>
             </td>
           </tr>
           <tr v-if="emptyResult">
-            <td colspan="9" rowspan="4" class="text-center h1">No Record Found</td>
+            <td colspan="9" rowspan="4" class="text-center h1 alert alert-danger">No Record Found</td>
           </tr>
         </tbody>
       </table>
