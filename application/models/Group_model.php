@@ -35,14 +35,14 @@ class Group_model extends CI_Model
     }
   }
 
-  public function cariGroup($value)
+  public function cariGroup($value) // cari group ini digunakan untuk admin
   {
-    $this->db->from($this->tableGroup);
     $this->db->like('group_name', $value);
     $this->db->or_like('group_desc', $value);
     $this->db->or_like('name', $value);
     $this->db->or_like('email', $value);
     $this->db->join($this->tableUser . ' u', 'u.id=' . $this->tableGroup . '.id_user');
+    $this->db->from($this->tableGroup);
     $query = $this->db->get();
     if ($query->num_rows() > 0) {
       return $query->result();
@@ -51,15 +51,16 @@ class Group_model extends CI_Model
     }
   }
 
-  public function cariGroupByIdUser($value, $id)
+  public function cariGroupByIdUser($value, $id) // cari group ini digunakan untuk member selain admin
   {
-    $this->db->from($this->tableGroup);
-    $this->db->like('group_name', $value);
-    $this->db->or_like('group_desc', $value);
-    $this->db->or_like('name', $value);
-    $this->db->or_like('email', $value);
-    $this->db->join($this->tableUser . ' u', 'u.id=' . $this->tableGroup . '.id_user');
-    $query = $this->db->get_where($this->tableGroup, ['id_user' => $id]);
+
+    /**
+     * Syntax SQL yang cocok dalam kasus dibutuhkan -> 
+     * Contoh : select * from grup join user on user.id=grup.id_user where group_desc like '%pptik%' and grup.id_user='3';
+     */
+    $field = ['group_name', 'group_desc', 'name', 'email'];
+    $sql = "SELECT * FROM " . $this->tableGroup . " JOIN " . $this->tableUser . " ON " . $this->tableUser . ".id=" . $this->tableGroup . ".id_user WHERE concat(" . implode(',', $field) . ") LIKE '%" . $value . "%' AND " . $this->tableGroup . ".id_user=" . $id;
+    $query = $this->db->query($sql);
     if ($query->num_rows() > 0) {
       return $query->result();
     } else {

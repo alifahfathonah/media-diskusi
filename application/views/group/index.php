@@ -51,12 +51,12 @@
             </td>
             <td>
               <a href="<?= base_url('menu'); ?>" class="text-secondary" style="text-decoration: none !important;">
-                <div class="mt-4">{{ group.group_desc }}</div>
+                <div class="mt-4 text-dark">{{ group.group_desc }}</div>
               </a>
             </td>
             <td>
               <!-- jika diklik mengeluarkan modal dengan isi user yang berada pada grup tersebut -->
-              <div class="mt-4">{{ 100 }} <i class="fas fa-users text-warning"></i></div>
+              <div class="mt-4 text-dark">{{ group.jumlah_peserta }} <i class="fas fa-users text-warning"></i></div>
             </td>
             <td>
               <div class="dropdown mt-3">

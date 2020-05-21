@@ -53,6 +53,7 @@ class Group extends CI_Controller
     $role = $this->getRoleName($this->session->userdata('role_id'));
 
     $idUser = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
+    $idUser = $idUser['id'];
 
     $value = $this->input->post('text');
     switch ($role) {

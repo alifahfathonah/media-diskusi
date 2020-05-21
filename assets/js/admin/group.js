@@ -64,7 +64,8 @@ var vue = new Vue({
 	},
 	methods: {
 		tampilSemuaGroup() {
-			axios.get(this.url + "group/tampilSemuaGroup").then(function (response) {
+			axios.get(this.url + "group/tampilSemuaGroup").then((response) => {
+				// Arrow function ECMAScript 6
 				if (response.data.groups == null) {
 					vue.noResult();
 				} else {
@@ -75,47 +76,44 @@ var vue = new Vue({
 
 		tambahGroup() {
 			var formData = vue.formData(vue.groupBaru);
-			axios
-				.post(this.url + "group/tambahGroup", formData)
-				.then(function (response) {
-					if (response.data.error) {
-						vue.formValidate = response.data.msg;
-					} else {
-						vue.successMSG = response.data.msg;
-						vue.clearAll();
-						vue.clearMSG();
-						vue.hideModal();
-					}
-				});
+			axios.post(this.url + "group/tambahGroup", formData).then((response) => {
+				// Arrow function ECMAScript 6
+				if (response.data.error) {
+					vue.formValidate = response.data.msg;
+				} else {
+					vue.successMSG = response.data.msg;
+					vue.clearAll();
+					vue.clearMSG();
+					vue.hideModal();
+				}
+			});
 		},
 
 		ubahGroup() {
 			var formData = vue.formData(vue.groupData);
-			axios
-				.post(this.url + "group/ubahGroup", formData)
-				.then(function (response) {
-					if (response.data.error) {
-						vue.formValidate = response.data.msg;
-					} else {
-						vue.successMSG = response.data.success;
-						vue.clearAll();
-						vue.clearMSG();
-						vue.hideModal();
-					}
-				});
+			axios.post(this.url + "group/ubahGroup", formData).then((response) => {
+				// Arrow function ECMAScript 6
+				if (response.data.error) {
+					vue.formValidate = response.data.msg;
+				} else {
+					vue.successMSG = response.data.success;
+					vue.clearAll();
+					vue.clearMSG();
+					vue.hideModal();
+				}
+			});
 		},
 
 		cariGroup() {
 			var formData = vue.formData(vue.search);
-			axios
-				.post(this.url + "group/cariGroup", formData)
-				.then(function (response) {
-					if (response.data.groups == null) {
-						vue.noResult();
-					} else {
-						vue.getData(response.data.groups);
-					}
-				});
+			axios.post(this.url + "group/cariGroup", formData).then((response) => {
+				// Arrow function ECMAScript 6
+				if (response.data.groups == null) {
+					vue.noResult();
+				} else {
+					vue.getData(response.data.groups);
+				}
+			});
 		},
 
 		timestampConvert(timestamp) {
@@ -131,6 +129,7 @@ var vue = new Vue({
 			axios
 				.post(this.url + "group/hapusGroup", formData)
 				.then(function (response) {
+					// function biasa sebelum ECMAScript 6
 					if (!response.data.error) {
 						vue.successMSG = response.data.success;
 						vue.clearAll();
@@ -203,7 +202,7 @@ var vue = new Vue({
 		clearMSG() {
 			setTimeout(function () {
 				vue.successMSG = "";
-			}, 3000);
+			}, 5000);
 		},
 
 		noResult() {
