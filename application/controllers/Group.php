@@ -6,10 +6,13 @@ class Group extends CI_Controller
   private $tableUser = 'user';
   private $tableGroup = 'grup';
 
+  private $singleUser;
+
   public function __construct()
   {
     parent::__construct();
     $this->load->model('Group_model', 'group');
+    $this->singleUser = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
   }
 
   public function index()
@@ -94,17 +97,47 @@ class Group extends CI_Controller
       $result['error'] = true;
       $result['msg'] = [
         'group_name' => form_error('group_name'),
-        'group_desc' => form_error('group_desc')
+        'group_desc' => form_error('group_desc'),
       ];
     } else {
-      $id_user = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array()['id'];
+      $id_user = $this->singleUser['id'];
+
       $data = [
         'id_grup' => null,
         'group_name' => $this->input->post('group_name'),
         'group_desc' => $this->input->post('group_desc'),
         'id_user' => $id_user,
-        'date_created' => time()
+        'date_created' => strtotime('now'), // masih belum sesuai dengan yang diinginkan
+        'jumlah_peserta' => 0
       ];
+
+      $upload_image = $_FILES['group_image']['name'];
+
+      if ($upload_image) {
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
+        $config['max_size'] = '2048';
+        $config['upload_path'] = './assets/img/group/';
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('group_image')) {
+          $old_image = $this->singleUser['group_image'];
+          if ($old_image != null) {
+            if ($old_image != 'default.png') {
+              unlink(FCPATH . 'assets/img/group/' . $old_image);
+            }
+          }
+
+          // jika berhasil upload
+          $new_image = $this->upload->data('file_name');
+          $data['group_image'] = $new_image;
+        } else {
+          echo $this->upload->display_errors();
+        }
+      } else {
+        $data['group_image'] = 'default.png';
+      }
+
       if ($this->group->tambahGroup($data)) {
         $result['error'] = false;
         $result['msg'] = 'Group berhasil ditambahkan';
@@ -142,7 +175,7 @@ class Group extends CI_Controller
         'group_name' => $this->input->post('group_name'),
         'group_desc' => $this->input->post('group_desc'),
         'id_user' => $this->input->post('id_user'),
-        'date_created' => $this->input->post('date_created')
+        'group_image' => 'default.png'
       ];
 
       if ($this->group->ubahGroup($this->tableGroup, $data, $id)) {

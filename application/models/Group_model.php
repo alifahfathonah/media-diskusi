@@ -41,6 +41,7 @@ class Group_model extends CI_Model
     $this->db->or_like('group_desc', $value);
     $this->db->or_like('name', $value);
     $this->db->or_like('email', $value);
+    $this->db->or_like('jumlah_peserta', $value);
     $this->db->join($this->tableUser . ' u', 'u.id=' . $this->tableGroup . '.id_user');
     $this->db->from($this->tableGroup);
     $query = $this->db->get();
@@ -55,10 +56,10 @@ class Group_model extends CI_Model
   {
 
     /**
-     * Syntax SQL yang cocok dalam kasus dibutuhkan -> 
+     * Syntax SQL cocok dalam kasus yang dibutuhkan -> 
      * Contoh : select * from grup join user on user.id=grup.id_user where group_desc like '%pptik%' and grup.id_user='3';
      */
-    $field = ['group_name', 'group_desc', 'name', 'email'];
+    $field = ['group_name', 'group_desc', 'name', 'email', 'jumlah_peserta'];
     $sql = "SELECT * FROM " . $this->tableGroup . " JOIN " . $this->tableUser . " ON " . $this->tableUser . ".id=" . $this->tableGroup . ".id_user WHERE concat(" . implode(',', $field) . ") LIKE '%" . $value . "%' AND " . $this->tableGroup . ".id_user=" . $id;
     $query = $this->db->query($sql);
     if ($query->num_rows() > 0) {

@@ -75,6 +75,7 @@ var vue = new Vue({
 		},
 
 		tambahGroup() {
+			this.groupBaru.group_image = this.selectedFile; // upload gambar
 			var formData = vue.formData(vue.groupBaru);
 			axios.post(this.url + "group/tambahGroup", formData).then((response) => {
 				// Arrow function ECMAScript 6
@@ -116,11 +117,12 @@ var vue = new Vue({
 			});
 		},
 
-		timestampConvert(timestamp) {
-			let date = new Date(timestamp * 1000);
-			let tahun = date.getFullYear();
-			let bulan = date.getMonth();
-			let tanggal = date.getDate();
+		timestampConvert(waktu) {
+			let date = new Date(waktu * 1000).toLocaleDateString();
+			date = date.split("/");
+			let tahun = date[2];
+			let bulan = date[0];
+			let tanggal = date[1];
 			return moment([tahun, bulan, tanggal]).fromNow();
 		},
 
@@ -143,7 +145,7 @@ var vue = new Vue({
 			return this.url + "assets/img/group/" + namaFile;
 		},
 
-		previewFile(e) {
+		previewImage(e) {
 			this.selectedFile = e.target.files[0];
 			let image = e.target.files[0];
 			let reader = new FileReader();
