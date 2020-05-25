@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 20, 2020 at 10:21 AM
+-- Generation Time: May 25, 2020 at 12:19 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -40,6 +40,22 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `forum_diskusi`
+--
+
+CREATE TABLE `forum_diskusi` (
+  `id` int(11) NOT NULL,
+  `text_content` longtext DEFAULT NULL,
+  `image` varchar(128) DEFAULT NULL,
+  `date_post` int(11) DEFAULT NULL,
+  `like_post` int(11) DEFAULT NULL,
+  `delete_post` int(11) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `grup`
 --
 
@@ -58,26 +74,12 @@ CREATE TABLE `grup` (
 --
 
 INSERT INTO `grup` (`id_grup`, `group_name`, `group_desc`, `id_user`, `date_created`, `group_image`, `jumlah_peserta`) VALUES
-(2, 'Strategi Algoritma', 'Kelas Strategi Algoritma Semester Ganjil 2020/2022', 1, 1588355892, 'default.png', NULL),
-(3, 'PKL', 'PKL angkatan 2020', 1, 1589870951, 'default.png', NULL),
-(4, 'Test Grup', 'Testing', 1, NULL, 'default.png', NULL),
-(10, 'Testing', 'Testing lagi lagi', 1, 1588355892, 'default.png', NULL),
-(11, 'Test', 'Test', 1, NULL, 'default.png', NULL),
-(12, 'Test', 'Test', 1, NULL, 'default.png', NULL),
-(13, 'Test', 'Test', 1, NULL, 'default.png', NULL),
-(14, 'Coba', 'Coba', 1, NULL, 'default.png', NULL),
-(15, 'coba 1', 'coba 1', 1, NULL, 'default.png', NULL),
-(16, 'coba 2', 'coba 2', 1, 1588355892, 'default.png', NULL),
-(17, 'coba 3', 'coba 3', 1, NULL, 'default.png', NULL),
-(18, 'Coba 4', 'Coba 4', 1, NULL, 'default.png', NULL),
-(19, 'test', 'test', 1, NULL, 'default.png', NULL),
-(27, 'Group Dosen', 'Group Khusus Dosen STIKI', 3, NULL, 'default.png', NULL),
-(29, 'test tanggal', 'test tanggal', 1, NULL, 'default.png', NULL),
-(30, 'Baru', 'baru', 1, NULL, 'default.png', NULL),
-(31, 'Coba tanggal', 'coba tanggal', 1, NULL, 'default.png', NULL),
-(32, 'Grup Khusus Pegawai PPTIK', 'Grup ini khusus untuk anggota kantor PPTIK', 3, 1589461398, 'default.png', NULL),
-(33, 'test tambah', 'test tambah baru', 1, 1589871490, 'default.png', NULL),
-(34, 'test feedback', 'test feedback', 1, 1589871523, 'default.png', NULL);
+(56, 'Test Gambar Default', 'Test Gambar Default', 1, 1590391123, 'default.png', 0),
+(58, 'Test Upload Gambar', 'Test Upload Gambar', 1, 1590391162, 'tie-690084_1920.jpg', 0),
+(59, 'Test Upload Gambar 2', 'Test Upload Gambar 2', 1, 1590391238, 'Screenshot_from_2020-05-08_23-11-54.png', 0),
+(60, 'Test Upload Gambar 3', 'Test Upload Gambar 3', 1, 1590391319, 'default.png', 0),
+(61, 'Test Upload Gambar 4', 'Test Upload Gambar 4', 1, 1590391369, 'Screenshot_from_2020-05-21_08-53-34.png', 0),
+(62, 'Test Upload 5', 'Test Upload 5', 1, 1590400771, 'quote-3.png', 0);
 
 -- --------------------------------------------------------
 
@@ -101,22 +103,6 @@ CREATE TABLE `pesan` (
   `id` int(11) NOT NULL,
   `text_pesan` longtext DEFAULT NULL,
   `delete_pesan` int(11) DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `post`
---
-
-CREATE TABLE `post` (
-  `id` int(11) NOT NULL,
-  `text_content` longtext DEFAULT NULL,
-  `image` varchar(128) DEFAULT NULL,
-  `date_post` int(11) DEFAULT NULL,
-  `like_post` int(11) DEFAULT NULL,
-  `delete_post` int(11) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -289,6 +275,13 @@ ALTER TABLE `comment`
   ADD KEY `id_post` (`id_post`);
 
 --
+-- Indexes for table `forum_diskusi`
+--
+ALTER TABLE `forum_diskusi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
 -- Indexes for table `grup`
 --
 ALTER TABLE `grup`
@@ -306,13 +299,6 @@ ALTER TABLE `notif`
 -- Indexes for table `pesan`
 --
 ALTER TABLE `pesan`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `post`
---
-ALTER TABLE `post`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
@@ -370,10 +356,16 @@ ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `forum_diskusi`
+--
+ALTER TABLE `forum_diskusi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `grup`
 --
 ALTER TABLE `grup`
-  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `notif`
@@ -385,12 +377,6 @@ ALTER TABLE `notif`
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `post`
---
-ALTER TABLE `post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -443,7 +429,13 @@ ALTER TABLE `user_sub_menu`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`);
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `forum_diskusi` (`id`);
+
+--
+-- Constraints for table `forum_diskusi`
+--
+ALTER TABLE `forum_diskusi`
+  ADD CONSTRAINT `forum_diskusi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `grup`
@@ -464,16 +456,10 @@ ALTER TABLE `pesan`
   ADD CONSTRAINT `pesan_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `post`
---
-ALTER TABLE `post`
-  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
-
---
 -- Constraints for table `share`
 --
 ALTER TABLE `share`
-  ADD CONSTRAINT `share_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id`);
+  ADD CONSTRAINT `share_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `forum_diskusi` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
