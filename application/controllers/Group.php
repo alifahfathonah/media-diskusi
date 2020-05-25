@@ -140,11 +140,11 @@ class Group extends CI_Controller
 
       if ($this->group->tambahGroup($data)) {
         $result['error'] = false;
-        $result['msg'] = 'Group berhasil ditambahkan';
+        $result['success'] = 'ditambahkan!';
       }
     }
 
-    echo json_encode($result);
+    echo json_encode($result); // pesan berhasil ditambahkan tidak muncul
   }
 
   public function ubahGroup()
@@ -180,7 +180,7 @@ class Group extends CI_Controller
 
       if ($this->group->ubahGroup($this->tableGroup, $data, $id)) {
         $result['error'] = false;
-        $result['success'] = 'Group berhasil diubah!';
+        $result['success'] = 'diubah!';
       }
     }
 

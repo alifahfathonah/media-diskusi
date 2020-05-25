@@ -82,7 +82,8 @@ var vue = new Vue({
 				if (response.data.error) {
 					vue.formValidate = response.data.msg;
 				} else {
-					vue.successMSG = response.data.msg;
+					vue.successMSG = response.data.success;
+					console.log(response.data.success); // pesan berhasil ditambahkan tidak muncul
 					vue.clearAll();
 					vue.clearMSG();
 					vue.hideModal();
@@ -227,6 +228,20 @@ var vue = new Vue({
 
 		refresh() {
 			vue.search.text ? vue.cariGroup() : vue.tampilSemuaGroup();
+		},
+
+		sweetalertMSG() {
+			if (this.successMSG) {
+				swal({
+					title: "Data group berhasil",
+					text: this.successMSG,
+					icon: "success",
+				});
+			}
+		},
+
+		route(destination) {
+			return this.url + destination;
 		},
 	},
 });
