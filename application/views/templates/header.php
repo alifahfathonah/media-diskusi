@@ -40,5 +40,8 @@
 
 <body id="page-top">
 
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+  <!-- vue element -->
+  <div id="app">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">

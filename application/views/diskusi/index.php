@@ -17,7 +17,7 @@
           <li class="list-group-item list-group-item-action">
             <div class="row">
               <div class="col-md-4">
-                <a href="<?= base_url('menu/'); ?>" style="text-decoration: none !important;">
+                <a href="<?= base_url('diskusi/forum'); ?>" style="text-decoration: none !important;">
                   <img src="<?= base_url('assets/img/group/default.png'); ?>" class="img-thumbnail rounded-circle" height="50px" width="50px">
                   <span class="text-dark font-weight-bold">Group 1</span>
                   <br>
@@ -25,7 +25,7 @@
                 </a>
               </div>
               <div class="col-md-4">
-                <a href="<?= base_url('menu'); ?>" class="text-secondary" style="text-decoration: none !important;">
+                <a href="<?= base_url('diskusi/forum'); ?>" class="text-secondary" style="text-decoration: none !important;">
                   <div class="mt-4 text-dark">Description Group 1</div>
                 </a>
               </div>

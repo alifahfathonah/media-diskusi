@@ -33,7 +33,7 @@ Vue.component("modal", {
 });
 
 var vue = new Vue({
-	el: "#group",
+	el: "#app",
 	data: {
 		url: Config, // config merupakan variabel berisi base url dari file config.js
 		modalTambah: false,
@@ -83,7 +83,7 @@ var vue = new Vue({
 					vue.formValidate = response.data.msg;
 				} else {
 					vue.successMSG = response.data.success;
-					console.log(response.data.success); // pesan berhasil ditambahkan tidak muncul
+					console.log(response.data); // pesan berhasil ditambahkan tidak muncul
 					vue.clearAll();
 					vue.clearMSG();
 					vue.hideModal();

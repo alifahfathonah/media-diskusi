@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<div class="container-fluid" id="group">
+<div class="container-fluid">
 
   <div class="row">
 
@@ -42,7 +42,7 @@
         <li class="list-group-item list-group-item-action" v-for="group in groups">
           <div class="row">
             <div class="col-md-4">
-              <a :href="route('admin/useraccess')" style="text-decoration: none !important;">
+              <a :href="route('group/profilegroup')" style="text-decoration: none !important;">
                 <img :src="gambarGroup(group.group_image)" class="img-thumbnail rounded-circle" height="50px" width="50px">
                 <span class="text-dark font-weight-bold">{{ group.group_name }}</span>
                 <br>

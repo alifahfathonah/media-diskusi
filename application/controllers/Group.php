@@ -18,7 +18,7 @@ class Group extends CI_Controller
   public function index()
   {
     $data['title'] = 'Group Management';
-    $data['user'] = $this->group->getUserByEmail($this->tableUser, $this->session->userdata('email'));
+    $data['user'] = $this->singleUser;
 
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar', $data);
@@ -26,6 +26,20 @@ class Group extends CI_Controller
     $this->load->view('group/index', $data);
     $this->load->view('templates/footer');
   }
+
+  public function profileGroup()
+  {
+    $data['title'] = 'Group Management';
+    $data['user'] = $this->singleUser;
+
+    $this->load->view('templates/header', $data);
+    $this->load->view('templates/sidebar', $data);
+    $this->load->view('templates/topbar', $data);
+    $this->load->view('group/profile_group', $data);
+    $this->load->view('templates/footer');
+  }
+
+
 
   public function tampilSemuaGroup()
   {
@@ -118,16 +132,9 @@ class Group extends CI_Controller
         $config['max_size'] = '2048';
         $config['upload_path'] = './assets/img/group/';
 
-        $this->load->library('upload', $config);
+        $this->load->library('upload', $config); // bug lihat diconsole ketika lakukan upload untuk tau apa yang salah
 
         if ($this->upload->do_upload('group_image')) {
-          $old_image = $this->singleUser['group_image'];
-          if ($old_image != null) {
-            if ($old_image != 'default.png') {
-              unlink(FCPATH . 'assets/img/group/' . $old_image);
-            }
-          }
-
           // jika berhasil upload
           $new_image = $this->upload->data('file_name');
           $data['group_image'] = $new_image;
