@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 25, 2020 at 12:19 PM
+-- Generation Time: Jun 06, 2020 at 08:07 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -50,7 +50,8 @@ CREATE TABLE `forum_diskusi` (
   `date_post` int(11) DEFAULT NULL,
   `like_post` int(11) DEFAULT NULL,
   `delete_post` int(11) DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL
+  `id_user` int(11) DEFAULT NULL,
+  `id_grup` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -74,12 +75,29 @@ CREATE TABLE `grup` (
 --
 
 INSERT INTO `grup` (`id_grup`, `group_name`, `group_desc`, `id_user`, `date_created`, `group_image`, `jumlah_peserta`) VALUES
-(56, 'Test Gambar Default', 'Test Gambar Default', 1, 1590391123, 'default.png', 0),
 (58, 'Test Upload Gambar', 'Test Upload Gambar', 1, 1590391162, 'tie-690084_1920.jpg', 0),
 (59, 'Test Upload Gambar 2', 'Test Upload Gambar 2', 1, 1590391238, 'Screenshot_from_2020-05-08_23-11-54.png', 0),
-(60, 'Test Upload Gambar 3', 'Test Upload Gambar 3', 1, 1590391319, 'default.png', 0),
-(61, 'Test Upload Gambar 4', 'Test Upload Gambar 4', 1, 1590391369, 'Screenshot_from_2020-05-21_08-53-34.png', 0),
-(62, 'Test Upload 5', 'Test Upload 5', 1, 1590400771, 'quote-3.png', 0);
+(60, 'Dosen Algoritma', 'Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma', 1, 1590391319, 'default.png', 0),
+(61, 'Test Upload Gambar 4', 'Test Upload Gambar 4', 1, 1590391369, 'default.png', 0),
+(62, 'Test Upload 5', 'Test Upload 5', 1, 1590400771, 'quote-3.png', 0),
+(63, 'Testing', 'Testing', 1, 1590405359, 'background.jpg', 0),
+(65, 'Group Baru', 'Group Baru', 1, 1590413950, 'team-4529717_1920.jpg', 0),
+(66, 'New Group', 'New Group', 1, 1590414112, 'restaurant-690975_1920.jpg', 0),
+(67, 'Testing lagi', 'Testing lagi', 1, 1590414414, 'feedback-2990424_1920.jpg', 0),
+(68, 'Debug Group', 'Debug Group', 1, 1590414591, 'facebook.png', 0),
+(69, 'Group Dosen', 'Group ini dibuat oleh user dosen.', 3, 1590414786, 'team-386673_1920.jpg', 0),
+(70, 'Strategi Algoritma', 'Group khusus mata kuliah strategi algoritma', 3, 1590414814, 'restaurant-690975_19201.jpg', 0),
+(71, 'Data Mining', 'Group khusus mata kuliah data mining', 3, 1590415036, 'default.png', 0),
+(72, 'Test Debug', 'Test debug terus sampai bosan', 1, 1590418295, 'whatsapp.png', 0),
+(74, 'Test Debug', 'Udah mulai bosan debug terus tapi error nggak selesai :(', 1, 1590419574, 'startup-593341_1920.jpg', 0),
+(75, 'Test debug lagi', 'Test debug terus', 1, 1590426081, 'whatsapp1.png', 0),
+(76, 'Debug lagi', 'debug lagi, debug lagi,,,, bosan bosan', 1, 1590426226, 'facebook1.png', 0),
+(77, 'Lagi', 'lagi lagi', 1, 1590426341, 'startup-593341_19201.jpg', 0),
+(78, 'Debug lagi', 'lagi debug', 1, 1590426512, 'default.png', 0),
+(79, 'Debug terus', 'terus debug', 1, 1590426567, 'default.png', 0),
+(80, 'lagi lagi debug', 'debug lagi lagi', 1, 1590426631, 'whatsapp2.png', 0),
+(81, 'Percobaan lagi', 'percobaan debug lagi', 1, 1590426933, 'facebook2.png', 0),
+(82, 'Semoga berhasil', 'Semoga berhasil', 1, 1590427143, 'team-4529717_19201.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -261,7 +279,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (6, 1, 'User Access', 'admin/useraccess', 'fas fa-fw fa-universal-access', 1),
 (7, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
 (15, 6, 'Group Management', 'group', 'fas fa-fw fa-layer-group', 1),
-(16, 18, 'Forum Diskusi', 'diskusi', 'fas fa-fw fa-comment', 1);
+(16, 18, 'Group', 'diskusi/group', 'fas fa-fw fa-users', 1),
+(17, 18, 'Forum Diskusi', 'diskusi', 'fas fa-fw fa-comment', 1);
 
 --
 -- Indexes for dumped tables
@@ -279,7 +298,8 @@ ALTER TABLE `comment`
 --
 ALTER TABLE `forum_diskusi`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_grup` (`id_grup`);
 
 --
 -- Indexes for table `grup`
@@ -365,7 +385,7 @@ ALTER TABLE `forum_diskusi`
 -- AUTO_INCREMENT for table `grup`
 --
 ALTER TABLE `grup`
-  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `notif`
@@ -419,7 +439,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
@@ -435,7 +455,8 @@ ALTER TABLE `comment`
 -- Constraints for table `forum_diskusi`
 --
 ALTER TABLE `forum_diskusi`
-  ADD CONSTRAINT `forum_diskusi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `forum_diskusi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `id_grup` FOREIGN KEY (`id_grup`) REFERENCES `grup` (`id_grup`);
 
 --
 -- Constraints for table `grup`

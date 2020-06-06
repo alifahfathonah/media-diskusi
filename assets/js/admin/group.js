@@ -33,7 +33,7 @@ Vue.component("modal", {
 });
 
 var vue = new Vue({
-	el: "#app",
+	el: "#group",
 	data: {
 		url: Config, // config merupakan variabel berisi base url dari file config.js
 		modalTambah: false,
