@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<div class="container-fluid" id="diskusi">
+<div class="container-fluid" id="group_diskusi">
 
   <div class="row justify-content-end">
     <div class="col-md-4">
@@ -19,7 +19,8 @@
         <p class="card-text text-dark"><small>{{ group.group_desc }}</small></p>
         <i class="fas fa-user-edit"></i> Dibuat oleh
         <p class="card-text"><small class="text-muted">Admin 3 mins ago</small></p>
-        <a href="#" class="btn btn-dark btn-sm float-right mb-3">Izin Gabung <i class="fas fa-hands-helping"></i></a>
+        <button class="btn btn-danger btn-sm float-left mb-3" @click="keluarGroup(userData.id, group.id_grup)">Keluar <i class="fas fa-times"></i></button>
+        <button class="btn btn-dark btn-sm float-right mb-3" @click="gabungGroup(userData.id, group.id_grup)">Gabung <i class="fas fa-hands-helping"></i></button>
       </div>
     </div>
     <div v-if="emptyResult" class="col-md-12">

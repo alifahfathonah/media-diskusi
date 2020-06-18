@@ -1,18 +1,17 @@
-/**  ======= PENGINGAT =======
- * jika ingin melakukan import & export pada browser maka gunakan
- * type="module" pada tag script pada file html
- * catatan : lakukan itu pada semua file yang memiliki syntax import & export.
- */
-
-import Config from "./config.js";
+import config from "./config.js";
 
 var vue = new Vue({
 	el: "#diskusi",
 	data: {
-		url: Config,
+		url: config,
 		groupDiskusi: [],
-		search: { cariGroupDiskusi: "" },
+		userData: [],
+		search: { cariDiskusi: "" },
 		emptyResult: false,
+		idUserIdGrup: {
+			id_user: "",
+			id_grup: "",
+		},
 
 		// pagination
 		currentPage: 0,
@@ -20,27 +19,19 @@ var vue = new Vue({
 		totalGroups: 0,
 		pageRange: 2,
 	},
-	created() {
-		this.tampilSemuaGroup();
-	},
-	methods: {
-		tampilSemuaGroup() {
-			axios.get(this.url + "diskusi/tampilSemuaGroup").then((response) => {
-				if (response.data.groupDiskusi == null) {
-					vue.noResult();
-				} else {
-					vue.getData(response.data.groupDiskusi);
-				}
-			});
-		},
 
-		cariGroupDiskusi() {
-			var formData = vue.formData(vue.search);
-			axios.post(this.url + "diskusi/cariGroup", formData).then((response) => {
+	created() {
+		this.tampilSemuaData();
+	},
+
+	methods: {
+		tampilSemuaData() {
+			axios.get(this.url + "diskusi/tampilSemuaData").then((response) => {
 				if (response.data.groupDiskusi == null) {
 					vue.noResult();
 				} else {
 					vue.getData(response.data.groupDiskusi);
+					vue.userData = response.data.userData;
 				}
 			});
 		},
@@ -87,7 +78,7 @@ var vue = new Vue({
 		},
 
 		refresh() {
-			vue.search.text ? vue.cariGroup() : vue.tampilSemuaGroup();
+			vue.search.cariDiskusi ? vue.cari() : vue.tampilSemuaData();
 		},
 	},
 });

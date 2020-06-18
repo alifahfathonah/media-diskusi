@@ -4,6 +4,7 @@ class Diskusi_model extends CI_Model
 {
 
   private $tableGroup = 'grup';
+  private $tableUserAccessGrup = 'user_access_grup';
 
   public function getGroup()
   {
@@ -23,6 +24,38 @@ class Diskusi_model extends CI_Model
     $query = $this->db->get($this->tableGroup);
     if ($query->num_rows() > 0) {
       return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function gabungGroup($idUser, $idGrup)
+  {
+    $params = [
+      'grup_id' => $idGrup,
+      'user_id' => $idUser
+    ];
+
+    $result = $this->db->get_where($this->tableUserAccessGrup, $params);
+    if ($result->num_rows() > 0) {
+      return true;
+    } else {
+      $this->db->insert($this->tableUserAccessGrup, $params);
+    }
+  }
+
+  public function keluarGroup($id_user, $id_grup)
+  {
+    $params = [
+      'grup_id' => $id_grup,
+      'user_id' => $id_user
+    ];
+
+    $result = $this->db->get_where($this->tableUserAccessGrup, $params);
+    if ($result->num_rows() > 0) {
+      if ($this->db->delete($this->tableUserAccessGrup, $params)) {
+        return true;
+      }
     } else {
       return false;
     }

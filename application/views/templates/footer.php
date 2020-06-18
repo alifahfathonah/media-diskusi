@@ -71,6 +71,7 @@
 <script type="module" src="<?= base_url('assets/js/admin/menu.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/group.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/config.js'); ?>"></script>
+<script type="module" src="<?= base_url('assets/js/admin/group_diskusi.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/diskusi.js'); ?>"></script>
 
 <!-- moment library -->
