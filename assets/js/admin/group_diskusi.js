@@ -76,7 +76,7 @@ var vue = new Vue({
 								// "Permintaan anda sudah dikirim, menunggu verifikasi dari pemiliki group!",
 								"Group",
 							text: "Anda berhasil gabung Group!",
-							icon: "warning",
+							icon: "success",
 							button: "OK",
 						});
 					}
