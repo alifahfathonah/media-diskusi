@@ -39,9 +39,13 @@ var vue = new Vue({
 		modalTambah: false,
 		modalUbah: false,
 		modalHapus: false,
+		modalVerifikasi: false,
 		groups: [],
+		users: [],
 		search: { text: "" },
+		verify: { user_id: "", grup_id: "" },
 		emptyResult: false,
+		emptyVerifikasi: false,
 		groupBaru: {
 			group_name: "",
 			group_desc: "",
@@ -116,6 +120,62 @@ var vue = new Vue({
 					vue.getData(response.data.groups);
 				}
 			});
+		},
+
+		getVerifikasi() {
+			let formData = vue.formData(vue.groupData);
+			axios
+				.post(this.url + "group/getVerifikasi", formData)
+				.then((response) => {
+					if (response.data.user == null) {
+						this.noVerifikasiResult();
+					} else {
+						this.celarDataVerifikasi(response.data.user);
+					}
+				});
+		},
+
+		terima(idUser, idGrup) {
+			vue.verify.user_id = idUser;
+			vue.verify.grup_id = idGrup;
+			let formData = vue.formData(vue.verify);
+			axios.post(this.url + "group/terima", formData).then((response) => {
+				if (response.data.result) {
+					swal({
+						title: "Group",
+						text: response.data.pesan,
+						icon: "success",
+						button: "OK",
+					});
+				}
+			});
+		},
+
+		tolak(idUser, idGrup) {
+			vue.verify.user_id = idUser;
+			vue.verify.grup_id = idGrup;
+			let formData = vue.formData(vue.verify);
+			axios.post(this.url + "group/tolak", formData).then((response) => {
+				if (response.data.result) {
+					swal({
+						title: "Group",
+						text: response.data.pesan,
+						icon: "success",
+						button: "OK",
+					});
+				}
+			});
+		},
+
+		celarDataVerifikasi(users) {
+			vue.users = users;
+			vue.emptyVerifikasi = false;
+		},
+
+		noVerifikasiResult() {
+			vue.emptyVerifikasi = true;
+			vue.verify = null;
+			vue.users = null;
 		},
 
 		timestampConvert(waktu) {

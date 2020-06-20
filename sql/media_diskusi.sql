@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2020 at 08:07 PM
+-- Generation Time: Jun 19, 2020 at 11:21 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -173,8 +173,23 @@ INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_a
 CREATE TABLE `user_access_grup` (
   `id` int(11) NOT NULL,
   `grup_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `status` char(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_access_grup`
+--
+
+INSERT INTO `user_access_grup` (`id`, `grup_id`, `user_id`, `status`) VALUES
+(26, 58, 1, 'T'),
+(30, 58, 3, 'T'),
+(31, 58, 2, 'T'),
+(33, 61, 1, 'T'),
+(34, 62, 1, 'T'),
+(35, 63, 1, 'T'),
+(36, 65, 1, 'T'),
+(37, 60, 1, 'T');
 
 -- --------------------------------------------------------
 
@@ -339,7 +354,9 @@ ALTER TABLE `user`
 -- Indexes for table `user_access_grup`
 --
 ALTER TABLE `user_access_grup`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `grup_id` (`grup_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `user_access_menu`
@@ -415,7 +432,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_grup`
 --
 ALTER TABLE `user_access_grup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -481,6 +498,13 @@ ALTER TABLE `pesan`
 --
 ALTER TABLE `share`
   ADD CONSTRAINT `share_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `forum_diskusi` (`id`);
+
+--
+-- Constraints for table `user_access_grup`
+--
+ALTER TABLE `user_access_grup`
+  ADD CONSTRAINT `grup_id` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`id_grup`),
+  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

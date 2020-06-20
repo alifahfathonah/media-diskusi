@@ -59,8 +59,6 @@ var vue = new Vue({
 				.post(this.url + "diskusi/gabungGroup", formData)
 				.then((response) => {
 					if (response.data.status) {
-						// console.log(response.data.data);
-						// alert("anda sudah tergabung menjadi peserta group!");
 						swal({
 							title: "Group",
 							text: "Anda sudah tergabung menjadi peserta group!",
@@ -68,14 +66,11 @@ var vue = new Vue({
 							button: "OK",
 						});
 					} else {
-						// alert(
-						// 	"permintaan anda sudah dikirim! menunggu verifikasi dari pemilik group!"
-						// );
 						swal({
 							title:
 								// "Permintaan anda sudah dikirim, menunggu verifikasi dari pemiliki group!",
 								"Group",
-							text: "Anda berhasil gabung Group!",
+							text: "Permintaan sudah dikirim, tunggu verifikasi!",
 							icon: "success",
 							button: "OK",
 						});

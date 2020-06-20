@@ -40,6 +40,7 @@ class Diskusi_model extends CI_Model
     if ($result->num_rows() > 0) {
       return true;
     } else {
+      $params['status'] = 'T';
       $this->db->insert($this->tableUserAccessGrup, $params);
     }
   }

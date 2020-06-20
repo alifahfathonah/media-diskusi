@@ -21,7 +21,7 @@ var vue = new Vue({
 	},
 
 	created() {
-		this.tampilSemuaData();
+		// this.tampilSemuaData();
 	},
 
 	methods: {

@@ -39,13 +39,59 @@ class Group extends CI_Controller
     $this->load->view('templates/footer');
   }
 
+  public function getVerifikasi()
+  {
+    $id_grup = $this->input->post('id_grup');
+    $data = $this->group->getVerifikasi($id_grup);
+    if ($data) {
+      for ($i = 0; $i < sizeof($data); $i++) {
+        $user[] = $this->group->getUserJoinAccessGrup($data[$i]->user_id, $data[$i]->grup_id, $data[$i]->status);
+      }
+      $result = [
+        'user' => $user
+      ];
+    }
 
+    echo json_encode($result);
+  }
+
+  public function terima()
+  {
+    $user_id = $this->input->post('user_id');
+    $grup_id = $this->input->post('grup_id');
+
+    $terima = $this->group->terima($user_id, $grup_id);
+    if ($terima) {
+      $result = [
+        'result' => true,
+        'pesan' => 'Permintaan berhasil diterima!',
+      ];
+    }
+
+    echo json_encode($result);
+  }
+
+  public function tolak()
+  {
+    $user_id = $this->input->post('user_id');
+    $grup_id = $this->input->post('grup_id');
+
+    $tolak = $this->group->tolak($user_id, $grup_id);
+    if ($tolak) {
+      $result = [
+        'result' => true,
+        'pesan' => 'Tolak permintaan berhasil!'
+      ];
+    }
+
+    echo json_encode($result);
+  }
 
   public function tampilSemuaGroup()
   {
     $role = $this->getRoleName($this->session->userdata('role_id'));
 
-    $idUser = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
+    $idUser = $this->singleUser;
 
     switch ($role) {
       case 'Administrator': // menampilkan semua group yang ada jika admin

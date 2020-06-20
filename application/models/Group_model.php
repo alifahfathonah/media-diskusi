@@ -6,6 +6,7 @@ class Group_model extends CI_Model
   private $tableGroup = 'grup';
   private $tableUser = 'user';
   private $tableRole = 'user_role';
+  private $tableUserAccessGrup = 'user_access_grup';
 
   public function getUserByEmail($table, $email)
   {
@@ -64,6 +65,65 @@ class Group_model extends CI_Model
     $query = $this->db->query($sql);
     if ($query->num_rows() > 0) {
       return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function getVerifikasi($id_grup)
+  {
+    $params = [
+      'grup_id' => $id_grup,
+      'status' => 'T'
+    ];
+    $query = $this->db->get_where($this->tableUserAccessGrup, $params);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function getUserJoinAccessGrup($user_id, $grup_id, $status)
+  {
+    $sql = "SELECT * FROM " . $this->tableUser . " u JOIN " . $this->tableUserAccessGrup . " uag WHERE uag.user_id=u.id='" . $user_id . "' AND grup_id='" . $grup_id . "' AND status='" . $status . "'";
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function terima($user_id, $grup_id)
+  {
+    $data = [
+      'grup_id' => $grup_id,
+      'user_id' => $user_id,
+      'status' => 'Y'
+    ];
+
+    $params = [
+      'grup_id' => $grup_id,
+      'user_id' => $user_id
+    ];
+    $this->db->update($this->tableUserAccessGrup, $data, $params);
+    if ($this->db->affected_rows() > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function tolak($user_id, $grup_id)
+  {
+    $params = [
+      'grup_id' => $grup_id,
+      'user_id' => $user_id
+    ];
+    $this->db->delete($this->tableUserAccessGrup, $params);
+    if ($this->db->affected_rows() > 0) {
+      return true;
     } else {
       return false;
     }

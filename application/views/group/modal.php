@@ -83,3 +83,25 @@
     <button class="btn btn-light" @click="modalHapus = false; hapusGroup()">Delete</button>
   </div>
 </modal>
+
+<!-- modal verifikasi -->
+<modal v-if="modalVerifikasi" @click="clearAll()">
+  <h3 slot="head">Verifikasi</h3>
+  <div slot="body">
+    <div v-for="user in users">
+      <ul class="list-group" v-for="u in user">
+        <li class="list-group-item list-group-item-action my-1">
+          {{ u.name }}
+          <button class="btn btn-success btn-sm float-right ml-3" @click="terima(u.user_id, u.grup_id)">Terima</button>
+          <button class="btn btn-secondary btn-sm float-right" @click="tolak(u.user_id, u.grup_id)">Tolak</button>
+        </li>
+      </ul>
+    </div>
+    <div v-if="emptyVerifikasi">
+      <h4 class="text-center">Tidak ada user baru!</h4>
+    </div>
+  </div>
+  <div slot="foot">
+    <button class="btn btn-danger" data-dismiss="modal" @click="modalVerifikasi = false">Bata</button>
+  </div>
+</modal>

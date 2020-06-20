@@ -64,7 +64,7 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <button class="dropdown-item bg-success" @click="modalUbah = true; pilihGroup(group)" data-toggle="modal" data-target="#groupModal"><i class="fas fa-edit"></i> Ubah</button>
-                  <a href="" class="dropdown-item bg-light"><i class="fas fa-universal-access"></i> Verifikasi</a>
+                  <button class="dropdown-item bg-light" @click="modalVerifikasi = true; pilihGroup(group); getVerifikasi()" data-toggle="modal" data-target="#groupModal"><i class="fas fa-universal-access"></i> Verifikasi</button>
                   <button class="dropdown-item bg-danger" @click="modalHapus = true; pilihGroup(group)" data-toggle="modal" data-target="#groupModal"><i class="fas fa-trash"></i> Hapus</button>
                 </div>
               </div>
