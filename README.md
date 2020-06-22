@@ -12,9 +12,8 @@
 ### Catatan
 
 ```
-1. sangat baik jika dijalankan pada browser Firefox Web Browser.
-2. base url pada file javascript sesuaikan seperti base url pada file config.php pada poin 2 diatas.
-3. poin nomor 4 diatas sangat penting dilakukan agar semua fitur bisa berjalan sebagai mana yang diinginkan.
+1. base url pada file javascript sesuaikan seperti base url pada file config.php pada poin 2 diatas.
+2. poin nomor 4 diatas sangat penting dilakukan agar semua fitur bisa berjalan sebagai mana yang diinginkan.
 ```
 
 ### Login

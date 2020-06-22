@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2020 at 11:21 PM
+-- Generation Time: Jun 22, 2020 at 03:46 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -75,9 +75,9 @@ CREATE TABLE `grup` (
 --
 
 INSERT INTO `grup` (`id_grup`, `group_name`, `group_desc`, `id_user`, `date_created`, `group_image`, `jumlah_peserta`) VALUES
-(58, 'Test Upload Gambar', 'Test Upload Gambar', 1, 1590391162, 'tie-690084_1920.jpg', 0),
-(59, 'Test Upload Gambar 2', 'Test Upload Gambar 2', 1, 1590391238, 'Screenshot_from_2020-05-08_23-11-54.png', 0),
-(60, 'Dosen Algoritma', 'Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma', 1, 1590391319, 'default.png', 0),
+(58, 'Test Upload Gambar', 'Test Upload Gambar', 1, 1590391162, 'tie-690084_1920.jpg', 3),
+(59, 'Test Upload Gambar 2', 'Test Upload Gambar 2', 1, 1590391238, 'Screenshot_from_2020-05-08_23-11-54.png', 1),
+(60, 'Dosen Algoritma', 'Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma', 1, 1590391319, 'default.png', 1),
 (61, 'Test Upload Gambar 4', 'Test Upload Gambar 4', 1, 1590391369, 'default.png', 0),
 (62, 'Test Upload 5', 'Test Upload 5', 1, 1590400771, 'quote-3.png', 0),
 (63, 'Testing', 'Testing', 1, 1590405359, 'background.jpg', 0),
@@ -110,6 +110,14 @@ CREATE TABLE `notif` (
   `text_notif` varchar(128) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notif`
+--
+
+INSERT INTO `notif` (`id`, `text_notif`, `id_user`) VALUES
+(1, 'Test Upload Gambar 2 telah diverifikasi!', 1),
+(2, 'Dosen Algoritma telah diverifikasi!', 1);
 
 -- --------------------------------------------------------
 
@@ -182,14 +190,11 @@ CREATE TABLE `user_access_grup` (
 --
 
 INSERT INTO `user_access_grup` (`id`, `grup_id`, `user_id`, `status`) VALUES
-(26, 58, 1, 'T'),
-(30, 58, 3, 'T'),
-(31, 58, 2, 'T'),
-(33, 61, 1, 'T'),
-(34, 62, 1, 'T'),
-(35, 63, 1, 'T'),
-(36, 65, 1, 'T'),
-(37, 60, 1, 'T');
+(67, 58, 1, 'Y'),
+(68, 58, 3, 'Y'),
+(69, 58, 2, 'Y'),
+(70, 59, 1, 'Y'),
+(71, 60, 1, 'Y');
 
 -- --------------------------------------------------------
 
@@ -408,7 +413,7 @@ ALTER TABLE `grup`
 -- AUTO_INCREMENT for table `notif`
 --
 ALTER TABLE `notif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -432,7 +437,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_grup`
 --
 ALTER TABLE `user_access_grup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`

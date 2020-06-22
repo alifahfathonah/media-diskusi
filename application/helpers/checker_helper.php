@@ -51,3 +51,22 @@ function get_menu_by_id($id)
   $ci = get_instance();
   return $ci->db->get_where('user_menu', ['id' => $id])->row_array()['menu'];
 }
+
+function jumlah_notifikasi($user_id)
+{
+  $ci = get_instance();
+
+  $sql = "SELECT COUNT(text_notif) jumlah FROM notif WHERE id_user='$user_id'";
+  $notif = $ci->db->query($sql)->row_array();
+  $jumlah_notif = $notif['jumlah'];
+  return $jumlah_notif;
+}
+
+function text_notifikasi($user_id)
+{
+  $ci = get_instance();
+
+  $sql = "SELECT * FROM notif WHERE id_user='$user_id' ORDER BY id DESC";
+  $notif = $ci->db->query($sql)->result_array();
+  return $notif;
+}

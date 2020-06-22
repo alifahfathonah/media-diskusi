@@ -61,4 +61,25 @@ class Diskusi_model extends CI_Model
       return false;
     }
   }
+
+  public function getUserGroupAccess($user_id)
+  {
+    /**
+     * Syntax Referensi :
+     * select * from grup g join user_access_grup uag on g.id_grup=uag.grup_id where uag.user_id='1' and uag.status='Y';
+     */
+
+    $params = [
+      'user_id' => $user_id,
+      'status' => 'Y'
+    ];
+
+    $sql = "SELECT * FROM " . $this->tableGroup . " g JOIN " . $this->tableUserAccessGrup . " uag ON g.id_grup=uag.grup_id WHERE uag.user_id='" . $params['user_id'] . "' AND uag.status='" . $params['status'] . "'";
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
 }

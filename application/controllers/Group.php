@@ -43,10 +43,19 @@ class Group extends CI_Controller
   {
     $id_grup = $this->input->post('id_grup');
     $data = $this->group->getVerifikasi($id_grup);
+
+    $length = sizeof($data);
+    $user = null;
+
     if ($data) {
-      for ($i = 0; $i < sizeof($data); $i++) {
-        $user[] = $this->group->getUserJoinAccessGrup($data[$i]->user_id, $data[$i]->grup_id, $data[$i]->status);
+      if ($length == 1) {
+        $user[] = $this->group->getUserJoinAccessGrup($data[0]->user_id, $data[0]->grup_id, $data[0]->status);
+      } else {
+        for ($i = 0; $i < sizeof($data); $i++) {
+          $user[] = $this->group->getUserJoinAccessGrup($data[$i]->user_id, $data[$i]->grup_id, $data[$i]->status);
+        }
       }
+
       $result = [
         'user' => $user
       ];

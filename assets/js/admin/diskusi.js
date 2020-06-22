@@ -15,23 +15,23 @@ var vue = new Vue({
 
 		// pagination
 		currentPage: 0,
-		rowCountPage: 8,
+		rowCountPage: 5,
 		totalGroups: 0,
 		pageRange: 2,
 	},
 
 	created() {
-		// this.tampilSemuaData();
+		this.tampilSemuaData();
 	},
 
 	methods: {
 		tampilSemuaData() {
 			axios.get(this.url + "diskusi/tampilSemuaData").then((response) => {
-				if (response.data.groupDiskusi == null) {
+				if (response.data.data == null) {
 					vue.noResult();
 				} else {
-					vue.getData(response.data.groupDiskusi);
-					vue.userData = response.data.userData;
+					vue.getData(response.data.data);
+					console.log(vue.groupDiskusi);
 				}
 			});
 		},
@@ -51,7 +51,7 @@ var vue = new Vue({
 		},
 
 		formData(obj) {
-			var formData = new FormData();
+			let formData = new FormData();
 			for (var key in obj) {
 				formData.append(key, obj[key]);
 			}
@@ -79,6 +79,10 @@ var vue = new Vue({
 
 		refresh() {
 			vue.search.cariDiskusi ? vue.cari() : vue.tampilSemuaData();
+		},
+
+		route(destination) {
+			return this.url + destination;
 		},
 	},
 });

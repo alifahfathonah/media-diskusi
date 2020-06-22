@@ -51,6 +51,7 @@ class Diskusi extends CI_Controller
     $this->load->view('templates/footer');
   }
 
+  // fungsi untuk view group_diskusi
   public function tampilSemuaGroup()
   {
     $user = $this->singleUser;
@@ -59,6 +60,20 @@ class Diskusi extends CI_Controller
       $result = [
         'groupDiskusi' => $group,
         'userData' => $user
+      ];
+    }
+
+    echo json_encode($result);
+  }
+
+  // fungsi untuk view diskusi/index
+  public function tampilSemuaData()
+  {
+    $user = $this->singleUser;
+    $data = $this->diskusi->getUserGroupAccess($user['id']);
+    if ($data) {
+      $result = [
+        'data' => $data
       ];
     }
 
