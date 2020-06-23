@@ -26,16 +26,20 @@ class Diskusi extends CI_Controller
     $this->load->view('templates/footer');
   }
 
-  public function forum()
+  public function forum($id_grup)
   {
-    $data['title'] = 'Forum Diskusi';
-    $data['user'] = $this->singleUser;
+    $data = [
+      'title' => 'Forum Diskusi',
+      'user' => $this->singleUser,
+    ];
+
+    $this->session->set_userdata('id_grup', $id_grup);
 
     $this->load->view('templates/header', $data);
     $this->load->view('templates/sidebar', $data);
     $this->load->view('templates/topbar', $data);
     $this->load->view('templates/forum/sidebar_right');
-    $this->load->view('diskusi/forum_diskusi');
+    $this->load->view('diskusi/forum_diskusi', $data);
     $this->load->view('templates/footer');
   }
 
@@ -51,7 +55,7 @@ class Diskusi extends CI_Controller
     $this->load->view('templates/footer');
   }
 
-  // fungsi untuk view group_diskusi
+  // fungsi untuk view diskusi/group_diskusi
   public function tampilSemuaGroup()
   {
     $user = $this->singleUser;
@@ -78,6 +82,23 @@ class Diskusi extends CI_Controller
     }
 
     echo json_encode($result);
+  }
+
+  // fungsi untuk view diskusi/forum_diskusi
+  public function tampilSemuaForum()
+  {
+    $id_grup = $this->session->userdata('id_grup');
+    $forum_diskusi = $this->diskusi->getForumDiskusi($id_grup);
+    if ($forum_diskusi) {
+      $res = [
+        'forum' => $forum_diskusi
+      ];
+    } else {
+      $res = [
+        'forum' => false
+      ];
+    }
+    echo json_encode($res);
   }
 
   public function cariGroup()

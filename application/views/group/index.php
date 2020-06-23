@@ -15,7 +15,7 @@
         <span class="icon text-white-50">
           <i class="fas fa-plus"></i>
         </span>
-        <span class="text text-white">Buat Group</span>
+        <span class="text text-white">Group Baru</span>
       </button>
     </div>
 

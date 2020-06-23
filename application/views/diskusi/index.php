@@ -9,7 +9,7 @@
         <li class="list-group-item list-group-item-action" v-for="group in groupDiskusi">
           <div class="row">
             <div class="col-md-8">
-              <a :href="route('diskusi/forum')" style="text-decoration: none !important;">
+              <a :href="route('diskusi/forum/' + group.id_grup)" style="text-decoration: none !important;">
                 <img :src="gambar(group.group_image)" class="img-thumbnail rounded-circle" height="50px" width="50px">
                 <span class="text-dark font-weight-bold">{{ group.group_name }}</span>
                 <br>
@@ -17,7 +17,7 @@
               </a>
             </div>
             <div class="col-md-4">
-              <a :href="route('diskusi/forum')" class="text-secondary" style="text-decoration: none !important;">
+              <a :href="route('diskusi/forum/' + group.id_grup)" class="text-secondary" style="text-decoration: none !important;">
                 <div class="mt-4 text-success">Lihat percakapan</div>
               </a>
             </div>

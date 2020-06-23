@@ -4,6 +4,7 @@ class Diskusi_model extends CI_Model
 {
 
   private $tableGroup = 'grup';
+  private $tableForumDiskusi = 'forum_diskusi';
   private $tableUserAccessGrup = 'user_access_grup';
 
   public function getGroup()
@@ -76,6 +77,16 @@ class Diskusi_model extends CI_Model
 
     $sql = "SELECT * FROM " . $this->tableGroup . " g JOIN " . $this->tableUserAccessGrup . " uag ON g.id_grup=uag.grup_id WHERE uag.user_id='" . $params['user_id'] . "' AND uag.status='" . $params['status'] . "'";
     $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function getForumDiskusi($id_grup)
+  {
+    $query = $this->db->get_where($this->tableForumDiskusi, ['id_grup' => $id_grup]);
     if ($query->num_rows() > 0) {
       return $query->result();
     } else {

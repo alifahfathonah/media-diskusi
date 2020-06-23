@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="sticky-footer bg-white">
+<footer class="sticky-footer bg-white mt-3">
   <div class="container my-auto">
     <div class="copyright text-center my-auto">
       <span>Copyright &copy; Media Diskusi STIKI <?= date('Y'); ?></span>
@@ -71,8 +71,9 @@
 <script type="module" src="<?= base_url('assets/js/admin/menu.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/group.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/config.js'); ?>"></script>
-<script type="module" src="<?= base_url('assets/js/admin/group_diskusi.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/diskusi.js'); ?>"></script>
+<script type="module" src="<?= base_url('assets/js/admin/forum_diskusi.js'); ?>"></script>
+<script type="module" src="<?= base_url('assets/js/admin/group_diskusi.js'); ?>"></script>
 
 <!-- moment library -->
 <script src="<?= base_url('assets/js/moment/moment.min.js'); ?>"></script>

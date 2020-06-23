@@ -31,7 +31,6 @@ var vue = new Vue({
 					vue.noResult();
 				} else {
 					vue.getData(response.data.data);
-					console.log(vue.groupDiskusi);
 				}
 			});
 		},
