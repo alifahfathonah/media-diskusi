@@ -87,7 +87,7 @@ var vue = new Vue({
 					vue.formValidate = response.data.msg;
 				} else {
 					vue.successMSG = response.data.success;
-					console.log(response.data); // pesan berhasil ditambahkan tidak muncul
+					console.log(response.data); // bug: pesan berhasil ditambahkan tidak muncul
 					vue.clearAll();
 					vue.clearMSG();
 					vue.hideModal();

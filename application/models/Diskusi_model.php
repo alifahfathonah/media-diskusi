@@ -3,6 +3,7 @@
 class Diskusi_model extends CI_Model
 {
 
+  private $tableUser = 'user';
   private $tableGroup = 'grup';
   private $tableForumDiskusi = 'forum_diskusi';
   private $tableUserAccessGrup = 'user_access_grup';
@@ -86,11 +87,32 @@ class Diskusi_model extends CI_Model
 
   public function getForumDiskusi($id_grup)
   {
-    $query = $this->db->get_where($this->tableForumDiskusi, ['id_grup' => $id_grup]);
+    $sql = "SELECT * FROM " . $this->tableForumDiskusi . " WHERE id_grup='" . $id_grup . "' ORDER BY id_forum DESC";
+    $query = $this->db->query($sql);
     if ($query->num_rows() > 0) {
       return $query->result();
     } else {
       return false;
     }
+  }
+
+  public function getForumDiskusiJoinUser($id_grup)
+  {
+    /**
+     * Refrensi Syntax : 
+     * select * from forum_diskusi f join user u on f.id_user=u.id where id_grup='58';
+     */
+    $sql = "SELECT * FROM " . $this->tableForumDiskusi . " f JOIN " . $this->tableUser . " u ON f.id_user=u.id WHERE id_grup='" . $id_grup . "' ORDER BY id_forum DESC";
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function postDiskusi($data)
+  {
+    return $this->db->insert($this->tableForumDiskusi, $data);
   }
 }

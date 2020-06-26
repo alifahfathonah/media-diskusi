@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 22, 2020 at 03:46 AM
+-- Generation Time: Jun 26, 2020 at 11:06 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -34,7 +34,7 @@ CREATE TABLE `comment` (
   `date_comment` int(11) DEFAULT NULL,
   `like_comment` int(11) DEFAULT NULL,
   `delete_comment` int(11) DEFAULT NULL,
-  `id_post` int(11) DEFAULT NULL
+  `id_forum` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -44,15 +44,33 @@ CREATE TABLE `comment` (
 --
 
 CREATE TABLE `forum_diskusi` (
-  `id` int(11) NOT NULL,
+  `id_forum` int(11) NOT NULL,
   `text_content` longtext DEFAULT NULL,
-  `image` varchar(128) DEFAULT NULL,
+  `image_forum` varchar(128) DEFAULT NULL,
   `date_post` int(11) DEFAULT NULL,
   `like_post` int(11) DEFAULT NULL,
   `delete_post` int(11) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
   `id_grup` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `forum_diskusi`
+--
+
+INSERT INTO `forum_diskusi` (`id_forum`, `text_content`, `image_forum`, `date_post`, `like_post`, `delete_post`, `id_user`, `id_grup`) VALUES
+(1, 'Bagaiaman cara mengatasi masalah saat mengupload file gambar pada codeigniter dengan menggunakan library axios? apakah teman-teman ada yang bisa membantu?', 'feedback-2990424_19205.jpg', 2626, 0, 0, 1, 58),
+(2, 'Ketika kita menjalankan sebuah project apakah kita membutuhkan koneksi internet?', 'facebook1.png', 2626, 0, 0, 1, 58),
+(3, 'I used an htaccess in my project that use Codeigniter framework: DirectoryIndex index.php RewriteEngine on RewriteCond $1 !^(index\\.php|assets|robots\\.txt|favicon\\.ico) [NC] RewriteCond … %{REQUEST_FILENAME} !-f [NC] RewriteCond %{REQUEST_FILENAME} !-d [NC] RewriteRule ^(.*)$ ./index.php/$1 [NC,L,QSA] My problem is, when i call a paypal service, Paypal response for me an GET url, like that', 'team-386673_19201.jpg', 2626, 0, 0, 1, 58),
+(4, 'POS is based on PHPPOS, and I have implemented a module that uses the standard XML-RPC library to send sales data to the service. The server system is built on CodeIgniter, and uses the XML-RPC and … , and have rigged it to return a canned response regardless of the input. However, I believe the problem lies in the actual sending of the data. I\'ve even tried disabling the maximum script execution time for PHP, and it still errors out.', 'team-4529717_1920.jpg', 2626, 0, 0, 1, 58),
+(5, 'Login form in Codeigniter problems : I\'m trying to make Login form using codeigniter, but my HTML code for login form doesn\'t work. I\'m still trying to learn Codeigniter and I can\'t get what\'s the problem, why the form doesn\'t load', 'startup-593341_19203.jpg', 2626, 0, 0, 1, 58),
+(6, 'jqGrid and CodeIgniter Problem : I have problem with loading my jqGrid. It just loads two parallel lines, and shows \"Loading...\" above them. This is my controller: function grid() { $var[\'grid\'] = $this->Uom_model->select …', 'feedback-2990424_19206.jpg', 2626, 0, 0, 1, 58),
+(7, 'Postingan terbaru!', 'startup-593341_19204.jpg', 2626, 0, 0, 1, 58),
+(8, 'I have problem with loading my jqGrid. It just loads two parallel lines, and shows \"Loading...\" above them. This is my controller: function grid() { $var[\'grid\'] = $this->Uom_model->select …', 'whatsapp1.png', 2626, 0, 0, 1, 59),
+(9, 'CORS problem with VueJS using axios or vue-resource : I\'m working on a SPA website using VueJS, i have a problem when vue-ressource performs http requests to an external API. here is an example of console output : Access to XMLHttpRequest at \'https … .warmango.dev\' that is not equal to the supplied origin. But when I open the console (with Disable cache ckecked) the problem disappears and I can navigate normally... It is very frustrating, is there a cache problem with VueJS ?', 'Screenshot_from_2020-04-03_03-35-06.png', 2626, 0, 0, 2, 58),
+(10, 'Jika kita ingin menggunakan library pada codeigniter apa yang harus kita lakukan? tolong bantuannya teman-teman!', 'Screenshot_from_2020-04-01_03-01-31.png', 2626, 0, 0, 2, 58),
+(11, 'Untuk semuanya mata kuliah saya hari ini kosong karena saya ada meeting sampai sore!', 'Screenshot_from_2020-06-15_20-05-28.png', 2626, 0, 0, 3, 58),
+(12, 'Testing', 'tie-690084_1920.jpg', 2626, 0, 0, 1, 58);
 
 -- --------------------------------------------------------
 
@@ -143,7 +161,7 @@ CREATE TABLE `share` (
   `date_share` int(11) DEFAULT NULL,
   `like_share` int(11) DEFAULT NULL,
   `delete_share` int(11) DEFAULT NULL,
-  `id_post` int(11) DEFAULT NULL
+  `id_forum_share` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -169,7 +187,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`) VALUES
 (1, 'Admin', 'admin@gmail.com', 'default.png', '$2y$10$P7f9ebCvmcjZbmpt.m7ZreJ4QD4PHHCQiAHaIixl7iZNqfoBIsQDm', 1, 1, 1588355892),
-(2, 'Andri Aryanto Doke', '161111014@mhs.stiki.ac.id', 'default.png', '$2y$10$.Vn3NyfHA.kDJeTUJranF.b6k44HonfSTkKdo8k3NMNVfLbjUpsgm', 2, 1, 1588356539),
+(2, 'Andri Aryanto Doke', '161111014@mhs.stiki.ac.id', 'tie-690084_19202.jpg', '$2y$10$.Vn3NyfHA.kDJeTUJranF.b6k44HonfSTkKdo8k3NMNVfLbjUpsgm', 2, 1, 1588356539),
 (3, 'Doke Dacozta', 'andridoke2@gmail.com', 'Screenshot_from_2020-04-03_03-35-06.png', '$2y$10$Zh4oahMrAMLk65DHIEyRe.pOy0Gs4PX5qqEgj6FXRVsI7ngiwHmjq', 3, 1, 1589461398);
 
 -- --------------------------------------------------------
@@ -300,7 +318,10 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (7, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
 (15, 6, 'Group Management', 'group', 'fas fa-fw fa-layer-group', 1),
 (16, 18, 'Group', 'diskusi/group', 'fas fa-fw fa-users', 1),
-(17, 18, 'Forum Diskusi', 'diskusi', 'fas fa-fw fa-comment', 1);
+(17, 18, 'Forum Diskusi', 'diskusi', 'fas fa-fw fa-comment', 1),
+(18, 6, 'Verifikasi', 'group/verifikasi', 'fas fa-fw fa-user-check', 1),
+(19, 2, 'Pesan', 'user/pesan', 'fas fa-fw fa-envelope', 1),
+(20, 2, 'Notifikasi', 'user/notifikasi', 'fas fa-fw fa-bell', 1);
 
 --
 -- Indexes for dumped tables
@@ -311,13 +332,13 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_post` (`id_post`);
+  ADD KEY `id_forum` (`id_forum`);
 
 --
 -- Indexes for table `forum_diskusi`
 --
 ALTER TABLE `forum_diskusi`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_forum`),
   ADD KEY `id_user` (`id_user`),
   ADD KEY `id_grup` (`id_grup`);
 
@@ -347,7 +368,7 @@ ALTER TABLE `pesan`
 --
 ALTER TABLE `share`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_post` (`id_post`);
+  ADD KEY `id_forum_share` (`id_forum_share`);
 
 --
 -- Indexes for table `user`
@@ -401,7 +422,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `forum_diskusi`
 --
 ALTER TABLE `forum_diskusi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_forum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `grup`
@@ -461,7 +482,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -471,7 +492,7 @@ ALTER TABLE `user_sub_menu`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `forum_diskusi` (`id`);
+  ADD CONSTRAINT `id_forum` FOREIGN KEY (`id_forum`) REFERENCES `forum_diskusi` (`id_forum`);
 
 --
 -- Constraints for table `forum_diskusi`
@@ -502,7 +523,7 @@ ALTER TABLE `pesan`
 -- Constraints for table `share`
 --
 ALTER TABLE `share`
-  ADD CONSTRAINT `share_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `forum_diskusi` (`id`);
+  ADD CONSTRAINT `id_forum_share` FOREIGN KEY (`id_forum_share`) REFERENCES `forum_diskusi` (`id_forum`);
 
 --
 -- Constraints for table `user_access_grup`

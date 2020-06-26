@@ -7,10 +7,17 @@ var vue = new Vue({
 		forumDiskusi: [],
 		search: { cariForumDiskusi: "" },
 		emptyResult: false,
+		forum_diskusi: {
+			text_content: "",
+			image: "",
+		},
+		formValidate: [],
+		avatar: null,
+		selectedFile: null,
 
 		// pagination
 		currentPage: 0,
-		rowCountPage: 5,
+		rowCountPage: 100,
 		totalForumDiskusi: 0,
 		pageRange: 2,
 	},
@@ -24,11 +31,70 @@ var vue = new Vue({
 			axios.get(this.url + "diskusi/tampilSemuaForum").then((response) => {
 				if (response.data.forum == false) {
 					vue.noResult();
-					console.log(response.data.forum);
 				} else {
 					vue.getData(response.data.forum);
 				}
 			});
+		},
+
+		postDiskusi() {
+			this.forum_diskusi.image = this.selectedFile;
+			let formData = vue.formData(vue.forum_diskusi);
+			axios
+				.post(this.url + "diskusi/postDiskusi", formData)
+				.then((response) => {
+					if (response.data.error) {
+						vue.formValidate = response.data.pesan;
+					} else {
+						vue.pesanBerhasil = response.data.berhasil;
+						swal({
+							title: "Forum Diskusi",
+							text: vue.pesanBerhasil,
+							icon: "success",
+							button: "OK",
+						});
+						this.forum_diskusi.text_content = "";
+						this.forum_diskusi.image = "";
+						this.avatar = null;
+						this.selectedFile = null;
+						this.refresh();
+					}
+				});
+		},
+
+		previewImage(e) {
+			this.selectedFile = e.target.files[0];
+			let image = e.target.files[0];
+			let reader = new FileReader();
+			reader.readAsDataURL(image);
+			reader.onload = (e) => {
+				this.avatar = e.target.result;
+			};
+		},
+
+		batal() {
+			this.forum_diskusi.text_content = "";
+			this.forum_diskusi.image = "";
+			this.formValidate = false;
+			this.avatar = null;
+			this.selectedFile = null;
+			this.refresh();
+		},
+
+		formData(obj) {
+			let formData = new FormData();
+			for (let key in obj) {
+				formData.append(key, obj[key]);
+			}
+			return formData;
+		},
+
+		gambarForum(namaFile) {
+			return this.url + "assets/img/forum_diskusi/" + namaFile;
+		},
+
+		gambarUser(namaFile) {
+			return this.url + "assets/img/profile/" + namaFile;
 		},
 
 		noResult() {

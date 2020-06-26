@@ -148,7 +148,7 @@ class Group extends CI_Controller
 
   public function tambahGroup()
   {
-    $config = [
+    $validate = [
       [
         'field' => 'group_name',
         'label' => 'Nama Group',
@@ -161,7 +161,7 @@ class Group extends CI_Controller
       ]
     ];
 
-    $this->form_validation->set_rules($config);
+    $this->form_validation->set_rules($validate);
     if ($this->form_validation->run() == false) {
       $result['error'] = true;
       $result['msg'] = [

@@ -88,10 +88,11 @@ class Diskusi extends CI_Controller
   public function tampilSemuaForum()
   {
     $id_grup = $this->session->userdata('id_grup');
-    $forum_diskusi = $this->diskusi->getForumDiskusi($id_grup);
+    $user = $this->singleUser;
+    $forum_diskusi = $this->diskusi->getForumDiskusiJoinUser($id_grup);
     if ($forum_diskusi) {
       $res = [
-        'forum' => $forum_diskusi
+        'forum' => $forum_diskusi,
       ];
     } else {
       $res = [
@@ -99,6 +100,67 @@ class Diskusi extends CI_Controller
       ];
     }
     echo json_encode($res);
+  }
+
+  public function postDiskusi()
+  {
+    $validate = [
+      [
+        'field' => 'text_content',
+        'label' => 'Text Content',
+        'rules' => 'trim|required'
+      ]
+    ];
+    $this->form_validation->set_rules($validate);
+    if ($this->form_validation->run() == false) {
+      $result = [
+        'error' => true,
+        'pesan' => [
+          'text_content' => form_error('text_content')
+        ]
+      ];
+    } else {
+      $id_grup = $this->session->userdata('id_grup');
+      $id_user = $this->singleUser['id'];
+      $text_content = $this->input->post('text_content');
+      $upload_image = $_FILES['image']['name'];
+
+      $data = [
+        'id_forum' => null,
+        'text_content' => $text_content,
+        'image_forum' => null,
+        'date_post' => date('dd-MM-YYYY'),
+        'like_post' => 0,
+        'delete_post' => 0,
+        'id_user' => $id_user,
+        'id_grup' => $id_grup
+      ];
+
+      if ($upload_image) {
+        $config['allowed_types'] = 'gif|jpg|jpeg|png';
+        $config['max_size'] = '2048';
+        $config['upload_path'] = './assets/img/forum_diskusi/';
+
+        $this->load->library('upload', $config); // bug lihat diconsole ketika lakukan upload untuk tau apa yang salah
+
+        if ($this->upload->do_upload('image')) {
+          // jika berhasil upload
+          $new_image = $this->upload->data('file_name');
+          $data['image_forum'] = $new_image;
+        } else {
+          echo $this->upload->display_errors();
+        }
+      }
+
+      if ($this->diskusi->postDiskusi($data)) {
+        $result = [
+          'error' => false,
+          'berhasil' => 'Postingan diskusi berhasil diupload',
+        ];
+      }
+    }
+
+    echo json_encode($result);
   }
 
   public function cariGroup()
