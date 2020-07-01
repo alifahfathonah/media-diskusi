@@ -58,7 +58,7 @@
               <div class="text-dark">{{ group.jumlah_peserta }} <i class="fas fa-users text-warning"></i></div>
             </div>
             <div class="col-md-2">
-              <div class="dropdown mt-3">
+              <div class="dropdown">
                 <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="fas fa-ellipsis-h"></i>
                 </button>

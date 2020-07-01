@@ -148,18 +148,7 @@ class Group extends CI_Controller
 
   public function tambahGroup()
   {
-    $validate = [
-      [
-        'field' => 'group_name',
-        'label' => 'Nama Group',
-        'rules' => 'trim|required'
-      ],
-      [
-        'field' => 'group_desc',
-        'label' => 'Deskripsi Group',
-        'rules' => 'trim|required'
-      ]
-    ];
+    $validate = $this->validate_form();
 
     $this->form_validation->set_rules($validate);
     if ($this->form_validation->run() == false) {
@@ -183,19 +172,7 @@ class Group extends CI_Controller
       $upload_image = $_FILES['group_image']['name'];
 
       if ($upload_image) {
-        $config['allowed_types'] = 'gif|jpg|jpeg|png';
-        $config['max_size'] = '2048';
-        $config['upload_path'] = './assets/img/group/';
-
-        $this->load->library('upload', $config); // bug lihat diconsole ketika lakukan upload untuk tau apa yang salah
-
-        if ($this->upload->do_upload('group_image')) {
-          // jika berhasil upload
-          $new_image = $this->upload->data('file_name');
-          $data['group_image'] = $new_image;
-        } else {
-          echo $this->upload->display_errors();
-        }
+        $data['group_image'] = $this->upload_image($upload_image);
       } else {
         $data['group_image'] = 'default.png';
       }
@@ -209,9 +186,30 @@ class Group extends CI_Controller
     echo json_encode($result); // pesan berhasil ditambahkan tidak muncul
   }
 
-  public function ubahGroup()
+  private function upload_image($image)
   {
-    $config = [
+    if ($image) {
+      $config['allowed_types'] = 'gif|jpg|jpeg|png';
+      $config['max_size'] = '2048';
+      $config['upload_path'] = './assets/img/group/';
+
+      $this->load->library('upload', $config);
+
+      if ($this->upload->do_upload('group_image')) {
+        // jika berhasil upload
+        $new_image = $this->upload->data('file_name');
+        $image_name = $new_image;
+      } else {
+        echo $this->upload->display_errors();
+      }
+    }
+
+    return $image_name;
+  }
+
+  private function validate_form()
+  {
+    $validate = [
       [
         'field' => 'group_name',
         'label' => 'Nama Group',
@@ -223,8 +221,22 @@ class Group extends CI_Controller
         'rules' => 'trim|required'
       ]
     ];
+    return $validate;
+  }
 
-    $this->form_validation->set_rules($config);
+  public function ubahGroup()
+  {
+    $id = $this->input->post('id_grup');
+
+    $data = [
+      'group_name' => $this->input->post('group_name'),
+      'group_desc' => $this->input->post('group_desc'),
+      'id_user' => $this->input->post('id_user'),
+    ];
+
+    $validate = $this->validate_form();
+
+    $this->form_validation->set_rules($validate);
     if ($this->form_validation->run() == false) {
       $result['error'] = true;
       $result['msg'] = [
@@ -232,13 +244,11 @@ class Group extends CI_Controller
         'group_desc' => form_error('group_desc')
       ];
     } else {
-      $id = $this->input->post('id_grup');
-      $data = [
-        'group_name' => $this->input->post('group_name'),
-        'group_desc' => $this->input->post('group_desc'),
-        'id_user' => $this->input->post('id_user'),
-        'group_image' => 'default.png'
-      ];
+      $upload_image = $_FILES['group_image']['name'];
+
+      if ($upload_image) {
+        $data['group_image'] = $this->upload_image($upload_image);
+      }
 
       if ($this->group->ubahGroup($this->tableGroup, $data, $id)) {
         $result['error'] = false;

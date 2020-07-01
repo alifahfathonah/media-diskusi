@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2020 at 11:06 PM
+-- Generation Time: Jul 01, 2020 at 06:39 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -70,7 +70,9 @@ INSERT INTO `forum_diskusi` (`id_forum`, `text_content`, `image_forum`, `date_po
 (9, 'CORS problem with VueJS using axios or vue-resource : I\'m working on a SPA website using VueJS, i have a problem when vue-ressource performs http requests to an external API. here is an example of console output : Access to XMLHttpRequest at \'https … .warmango.dev\' that is not equal to the supplied origin. But when I open the console (with Disable cache ckecked) the problem disappears and I can navigate normally... It is very frustrating, is there a cache problem with VueJS ?', 'Screenshot_from_2020-04-03_03-35-06.png', 2626, 0, 0, 2, 58),
 (10, 'Jika kita ingin menggunakan library pada codeigniter apa yang harus kita lakukan? tolong bantuannya teman-teman!', 'Screenshot_from_2020-04-01_03-01-31.png', 2626, 0, 0, 2, 58),
 (11, 'Untuk semuanya mata kuliah saya hari ini kosong karena saya ada meeting sampai sore!', 'Screenshot_from_2020-06-15_20-05-28.png', 2626, 0, 0, 3, 58),
-(12, 'Testing', 'tie-690084_1920.jpg', 2626, 0, 0, 1, 58);
+(12, 'Testing', 'tie-690084_1920.jpg', 2626, 0, 0, 1, 58),
+(13, 'Menambahkan library file .jar pada Java Netbeans – Sandroe ...sandrukharisma.wordpress.com › me...\nTranslate this page\nJan 10, 2014 - Pada tulisan ini saya akan coba berbagi bagaimana cara menambahkan library yang ber-ekstensi jar pada project yang ada pada Netbeans.', 'Screenshot_from_2020-06-27_04-03-47.png', 2828, 0, 0, 1, 58),
+(14, 'Diberitahukan kepada seluruh dosen bahwa hari ini pada jam 17.00 akan diadakan rapat, sekian pemberitahuan disampaikan.Terimakasih', 'Screenshot_from_2020-06-15_20-05-281.png', 101, 0, 0, 3, 69);
 
 -- --------------------------------------------------------
 
@@ -93,29 +95,30 @@ CREATE TABLE `grup` (
 --
 
 INSERT INTO `grup` (`id_grup`, `group_name`, `group_desc`, `id_user`, `date_created`, `group_image`, `jumlah_peserta`) VALUES
-(58, 'Test Upload Gambar', 'Test Upload Gambar', 1, 1590391162, 'tie-690084_1920.jpg', 3),
-(59, 'Test Upload Gambar 2', 'Test Upload Gambar 2', 1, 1590391238, 'Screenshot_from_2020-05-08_23-11-54.png', 1),
-(60, 'Dosen Algoritma', 'Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma. Khusus Dosen Algoritma', 1, 1590391319, 'default.png', 1),
-(61, 'Test Upload Gambar 4', 'Test Upload Gambar 4', 1, 1590391369, 'default.png', 0),
-(62, 'Test Upload 5', 'Test Upload 5', 1, 1590400771, 'quote-3.png', 0),
-(63, 'Testing', 'Testing', 1, 1590405359, 'background.jpg', 0),
-(65, 'Group Baru', 'Group Baru', 1, 1590413950, 'team-4529717_1920.jpg', 0),
-(66, 'New Group', 'New Group', 1, 1590414112, 'restaurant-690975_1920.jpg', 0),
-(67, 'Testing lagi', 'Testing lagi', 1, 1590414414, 'feedback-2990424_1920.jpg', 0),
-(68, 'Debug Group', 'Debug Group', 1, 1590414591, 'facebook.png', 0),
-(69, 'Group Dosen', 'Group ini dibuat oleh user dosen.', 3, 1590414786, 'team-386673_1920.jpg', 0),
+(58, 'Pemerograman Dasar 1', 'Kelas Pemerograman Dasar 1', 1, 1590391162, 'tie-690084_19201.jpg', 3),
+(59, 'Artificial Intelligence', 'Kelas Artificial Intelligence', 1, 1590391238, 'Screenshot_from_2020-07-01_06-52-18.png', 1),
+(60, 'Dosen Algoritma', 'Dalam matematika, grup adalah suatu himpunan, beserta satu operasi biner, seperti perkalian atau penjumlahan, yang memenuhi beberapa aksioma yang disebut aksioma grup. Misalnya, himpunan bilangan bulat adalah suatu grup terhadap operasi penjumlahan.', 1, 1590391319, 'whatsapp3.png', 1),
+(61, 'Pemrograman Web Lanjut', 'Pemrograman Web Lanjut', 1, 1590391369, 'facebook3.png', 0),
+(62, 'Web Programming STIKI', 'Grup untuk berdiskusi bagi mahasiswa peminat bidang web programming STIKI Malang', 1, 1590400771, 'feedback-2990424_19201.jpg', 0),
+(63, 'Pemrograman Berorientasi Objek', 'Grup Kelas PBO', 1, 1590405359, 'background.jpg', 0),
+(65, 'Kantor Pusat', 'Kantor Pusat', 1, 1590413950, 'team-4529717_1920.jpg', 0),
+(66, 'UKM', 'Seluruh kegiatan UKM bisa diinformasikan melalui grup ini', 1, 1590414112, 'restaurant-690975_1920.jpg', 0),
+(67, 'BAA', 'Khusus untuk pegawai BAA STIKI Malang', 1, 1590414414, 'feedback-2990424_1920.jpg', 0),
+(68, 'PMB', 'Grup untuk pegawai PMB STIKI', 1, 1590414591, 'facebook.png', 0),
+(69, 'Group Dosen', 'Group ini dibuat oleh user dosen.', 3, 1590414786, 'team-386673_1920.jpg', 3),
 (70, 'Strategi Algoritma', 'Group khusus mata kuliah strategi algoritma', 3, 1590414814, 'restaurant-690975_19201.jpg', 0),
-(71, 'Data Mining', 'Group khusus mata kuliah data mining', 3, 1590415036, 'default.png', 0),
-(72, 'Test Debug', 'Test debug terus sampai bosan', 1, 1590418295, 'whatsapp.png', 0),
-(74, 'Test Debug', 'Udah mulai bosan debug terus tapi error nggak selesai :(', 1, 1590419574, 'startup-593341_1920.jpg', 0),
-(75, 'Test debug lagi', 'Test debug terus', 1, 1590426081, 'whatsapp1.png', 0),
-(76, 'Debug lagi', 'debug lagi, debug lagi,,,, bosan bosan', 1, 1590426226, 'facebook1.png', 0),
-(77, 'Lagi', 'lagi lagi', 1, 1590426341, 'startup-593341_19201.jpg', 0),
-(78, 'Debug lagi', 'lagi debug', 1, 1590426512, 'default.png', 0),
-(79, 'Debug terus', 'terus debug', 1, 1590426567, 'default.png', 0),
-(80, 'lagi lagi debug', 'debug lagi lagi', 1, 1590426631, 'whatsapp2.png', 0),
-(81, 'Percobaan lagi', 'percobaan debug lagi', 1, 1590426933, 'facebook2.png', 0),
-(82, 'Semoga berhasil', 'Semoga berhasil', 1, 1590427143, 'team-4529717_19201.jpg', 0);
+(71, 'Database', 'Group khusus mata kuliah Database untuk semua mahasiswa & semua Semester', 3, 1590415036, 'default.png', 0),
+(72, 'Umum', 'Grup ini untuk semua mahasiswa, dosen dan pegawai STIKI', 1, 1590418295, 'whatsapp.png', 0),
+(74, 'Perpustakaan', 'Khusus untuk pengurus perpustakaan', 1, 1590419574, 'startup-593341_1920.jpg', 0),
+(75, 'Java Programming', 'Khusus bagi mahasiswa pencinta JAVA', 1, 1590426081, 'whatsapp1.png', 0),
+(76, 'JavaScript', 'Khusus bagi mahasiswa yang menyukai & ingin mendalami bahasa pemrograman JavaScript', 1, 1590426226, 'facebook1.png', 0),
+(77, 'Keuangan', 'Khusus bagi pegawai keuangan ', 1, 1590426341, 'startup-593341_19201.jpg', 0),
+(78, 'INBIS', 'Inkubator Bisnis STIKI', 1, 1590426512, 'default.png', 0),
+(79, 'Kantin', 'Grup pegawai kantin STIKI Malang', 1, 1590426567, 'default.png', 0),
+(80, 'Data Mining', 'Kelas Data Mining Semua Semester & Semua Mahasiswa', 1, 1590426631, 'whatsapp2.png', 0),
+(81, 'Bidang Mintat', 'Bidang Minat', 1, 1590426933, 'facebook2.png', 0),
+(82, 'Dosen Pembimbing', 'Dosen Pembimbing', 1, 1590427143, 'team-4529717_19201.jpg', 0),
+(83, 'Internet of Things', 'Kelas IOT untuk semua mahasiswa & semua angkatan', 3, 1593577792, 'Screenshot_from_2020-05-08_23-11-541.png', 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +138,10 @@ CREATE TABLE `notif` (
 
 INSERT INTO `notif` (`id`, `text_notif`, `id_user`) VALUES
 (1, 'Test Upload Gambar 2 telah diverifikasi!', 1),
-(2, 'Dosen Algoritma telah diverifikasi!', 1);
+(2, 'Dosen Algoritma telah diverifikasi!', 1),
+(3, 'Group Dosen telah diverifikasi!', 3),
+(4, 'Group Dosen telah diverifikasi!', 1),
+(5, 'Group Dosen telah diverifikasi!', 2);
 
 -- --------------------------------------------------------
 
@@ -212,7 +218,10 @@ INSERT INTO `user_access_grup` (`id`, `grup_id`, `user_id`, `status`) VALUES
 (68, 58, 3, 'Y'),
 (69, 58, 2, 'Y'),
 (70, 59, 1, 'Y'),
-(71, 60, 1, 'Y');
+(71, 60, 1, 'Y'),
+(72, 69, 3, 'Y'),
+(73, 69, 1, 'Y'),
+(74, 69, 2, 'Y');
 
 -- --------------------------------------------------------
 
@@ -319,9 +328,9 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (15, 6, 'Group Management', 'group', 'fas fa-fw fa-layer-group', 1),
 (16, 18, 'Group', 'diskusi/group', 'fas fa-fw fa-users', 1),
 (17, 18, 'Forum Diskusi', 'diskusi', 'fas fa-fw fa-comment', 1),
-(18, 6, 'Verifikasi', 'group/verifikasi', 'fas fa-fw fa-user-check', 1),
-(19, 2, 'Pesan', 'user/pesan', 'fas fa-fw fa-envelope', 1),
-(20, 2, 'Notifikasi', 'user/notifikasi', 'fas fa-fw fa-bell', 1);
+(18, 6, 'Verifikasi', 'verifikasi', 'fas fa-fw fa-user-check', 1),
+(19, 2, 'Pesan', 'pesan', 'fas fa-fw fa-envelope', 1),
+(20, 2, 'Notifikasi', 'notifikasi', 'fas fa-fw fa-bell', 1);
 
 --
 -- Indexes for dumped tables
@@ -422,19 +431,19 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `forum_diskusi`
 --
 ALTER TABLE `forum_diskusi`
-  MODIFY `id_forum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_forum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `grup`
 --
 ALTER TABLE `grup`
-  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `notif`
 --
 ALTER TABLE `notif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -458,7 +467,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_grup`
 --
 ALTER TABLE `user_access_grup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`

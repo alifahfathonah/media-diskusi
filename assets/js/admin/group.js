@@ -96,6 +96,7 @@ var vue = new Vue({
 		},
 
 		ubahGroup() {
+			vue.groupData.group_image = this.selectedFile;
 			var formData = vue.formData(vue.groupData);
 			axios.post(this.url + "group/ubahGroup", formData).then((response) => {
 				// Arrow function ECMAScript 6
@@ -192,7 +193,6 @@ var vue = new Vue({
 			axios
 				.post(this.url + "group/hapusGroup", formData)
 				.then(function (response) {
-					// function biasa sebelum ECMAScript 6
 					if (!response.data.error) {
 						vue.successMSG = response.data.success;
 						vue.clearAll();

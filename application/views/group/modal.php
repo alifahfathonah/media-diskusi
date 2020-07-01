@@ -57,11 +57,11 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="">Icon Group</label>
-        <div>
-          <label for="image" class="justify-content-center">
-            <input type="file" @change="previewImage" name="group_image" style="display:none" id="image">
-            <img :src="gambarGroup(groupData.group_image)" height="200px" width="200px" class="img-thumbnail">
+        <label for="image">Icon Group</label>
+        <div style="height: 230px; width: 200px;" class="border rounded" @click="$refs.image.click()">
+          <label for="image" class="justify-content-center" @click="">
+            <input type="file" ref="image" @change="previewImage" name="group_image" style="display:none" id="image">
+            <img :src="avatar" height="300px" width="200px" class="img-thumbnail">
           </label>
         </div>
       </div>

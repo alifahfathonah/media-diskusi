@@ -31,6 +31,15 @@
   <div class="w3-container w3-card w3-white w3-round w3-margin" v-for="forum in forumDiskusi">
     <br />
     <img :src="gambarUser(forum.image)" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width: 60px;" />
+    <!-- button hapus ini akan terlihat hanya pada pemiliki postingan -->
+    <div class="dropdown w3-right ml-2">
+      <button class="btn btn-light btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-ellipsis-h"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button class="dropdown-item bg-danger"><i class="fas fa-trash"></i> Hapus</button>
+      </div>
+    </div>
     <span class="w3-right w3-opacity">32 min</span>
     <h4>{{ forum.name }}</h4>
     <br />
