@@ -19,11 +19,11 @@ class Diskusi extends CI_Controller
     $data['title'] = 'Forum Diskusi';
     $data['user'] = $this->singleUser;
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('diskusi/index');
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   public function forum($id_grup)
@@ -35,12 +35,11 @@ class Diskusi extends CI_Controller
 
     $this->session->set_userdata('id_grup', $id_grup);
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
-    $this->load->view('templates/forum/sidebar_right');
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('diskusi/forum_diskusi', $data);
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   public function group()
@@ -48,11 +47,11 @@ class Diskusi extends CI_Controller
     $data['title'] = 'Group';
     $data['user'] = $this->singleUser;
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('diskusi/group_diskusi');
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   // fungsi untuk view diskusi/group_diskusi

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 01, 2020 at 06:39 AM
+-- Generation Time: Jul 03, 2020 at 01:16 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -98,7 +98,7 @@ INSERT INTO `grup` (`id_grup`, `group_name`, `group_desc`, `id_user`, `date_crea
 (58, 'Pemerograman Dasar 1', 'Kelas Pemerograman Dasar 1', 1, 1590391162, 'tie-690084_19201.jpg', 3),
 (59, 'Artificial Intelligence', 'Kelas Artificial Intelligence', 1, 1590391238, 'Screenshot_from_2020-07-01_06-52-18.png', 1),
 (60, 'Dosen Algoritma', 'Dalam matematika, grup adalah suatu himpunan, beserta satu operasi biner, seperti perkalian atau penjumlahan, yang memenuhi beberapa aksioma yang disebut aksioma grup. Misalnya, himpunan bilangan bulat adalah suatu grup terhadap operasi penjumlahan.', 1, 1590391319, 'whatsapp3.png', 1),
-(61, 'Pemrograman Web Lanjut', 'Pemrograman Web Lanjut', 1, 1590391369, 'facebook3.png', 0),
+(61, 'Pemrograman Web Lanjut', 'Pemrograman Web Lanjut', 1, 1590391369, 'facebook3.png', 1),
 (62, 'Web Programming STIKI', 'Grup untuk berdiskusi bagi mahasiswa peminat bidang web programming STIKI Malang', 1, 1590400771, 'feedback-2990424_19201.jpg', 0),
 (63, 'Pemrograman Berorientasi Objek', 'Grup Kelas PBO', 1, 1590405359, 'background.jpg', 0),
 (65, 'Kantor Pusat', 'Kantor Pusat', 1, 1590413950, 'team-4529717_1920.jpg', 0),
@@ -141,7 +141,8 @@ INSERT INTO `notif` (`id`, `text_notif`, `id_user`) VALUES
 (2, 'Dosen Algoritma telah diverifikasi!', 1),
 (3, 'Group Dosen telah diverifikasi!', 3),
 (4, 'Group Dosen telah diverifikasi!', 1),
-(5, 'Group Dosen telah diverifikasi!', 2);
+(5, 'Group Dosen telah diverifikasi!', 2),
+(6, 'Pemrograman Web Lanjut telah diverifikasi!', 1);
 
 -- --------------------------------------------------------
 
@@ -221,7 +222,8 @@ INSERT INTO `user_access_grup` (`id`, `grup_id`, `user_id`, `status`) VALUES
 (71, 60, 1, 'Y'),
 (72, 69, 3, 'Y'),
 (73, 69, 1, 'Y'),
-(74, 69, 2, 'Y');
+(74, 69, 2, 'Y'),
+(75, 61, 1, 'Y');
 
 -- --------------------------------------------------------
 
@@ -295,8 +297,7 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 (4, 'BAK'),
 (5, 'BAA'),
 (11, 'Puket 1'),
-(12, 'Puket 2'),
-(13, 'Pegawait Kantor Pusat');
+(12, 'Puket 2');
 
 -- --------------------------------------------------------
 
@@ -319,7 +320,7 @@ CREATE TABLE `user_sub_menu` (
 
 INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
 (1, 1, 'Dashboard', 'admin', 'fas fa-fw fa-tachometer-alt', 1),
-(2, 2, 'My Profile', 'user', 'fas fa-fw fa-user', 1),
+(2, 2, 'Home', 'user', 'fas fa-fw fa-home', 1),
 (3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1),
 (4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-folder', 1),
 (5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
@@ -330,7 +331,8 @@ INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active
 (17, 18, 'Forum Diskusi', 'diskusi', 'fas fa-fw fa-comment', 1),
 (18, 6, 'Verifikasi', 'verifikasi', 'fas fa-fw fa-user-check', 1),
 (19, 2, 'Pesan', 'pesan', 'fas fa-fw fa-envelope', 1),
-(20, 2, 'Notifikasi', 'notifikasi', 'fas fa-fw fa-bell', 1);
+(20, 2, 'Notifikasi', 'notifikasi', 'fas fa-fw fa-bell', 1),
+(21, 2, 'My Profile', 'user/myprofile', 'fas fa-fw fa-user', 1);
 
 --
 -- Indexes for dumped tables
@@ -431,7 +433,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `forum_diskusi`
 --
 ALTER TABLE `forum_diskusi`
-  MODIFY `id_forum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_forum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `grup`
@@ -443,7 +445,7 @@ ALTER TABLE `grup`
 -- AUTO_INCREMENT for table `notif`
 --
 ALTER TABLE `notif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -461,13 +463,13 @@ ALTER TABLE `share`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_access_grup`
 --
 ALTER TABLE `user_access_grup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -485,13 +487,13 @@ ALTER TABLE `user_menu`
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user_sub_menu`
 --
 ALTER TABLE `user_sub_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables

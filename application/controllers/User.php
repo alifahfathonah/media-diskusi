@@ -17,14 +17,26 @@ class User extends CI_Controller
 
   public function index()
   {
+    $data['title'] = 'Home';
+    $data['user'] = $this->dataSingleUser;
+
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
+    $this->load->view('user/index', $data);
+    $this->load->view('templates/diskusi-template/footer');
+  }
+
+  public function myProfile()
+  {
     $data['title'] = 'My Profile';
     $data['user'] = $this->dataSingleUser;
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
-    $this->load->view('user/index', $data);
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
+    $this->load->view('user/my-profile', $data);
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   public function edit()
@@ -34,11 +46,11 @@ class User extends CI_Controller
 
     $this->form_validation->set_rules('name', 'Full Name', 'required|trim');
     if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar', $data);
-      $this->load->view('templates/topbar', $data);
+      $this->load->view('templates/diskusi-template/header', $data);
+      $this->load->view('templates/diskusi-template/sidebar', $data);
+      $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('user/edit', $data);
-      $this->load->view('templates/footer');
+      $this->load->view('templates/diskusi-template/footer');
     } else {
       $dataEdit = [
         'name' => $this->input->post('name', true),
@@ -86,11 +98,11 @@ class User extends CI_Controller
     $this->form_validation->set_rules('new_password1', 'Password Baru', 'required|trim|min_length[8]|matches[new_password2]');
     $this->form_validation->set_rules('new_password2', 'Konfirmasi Password', 'required|trim|min_length[8]|matches[new_password1]');
     if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar', $data);
-      $this->load->view('templates/topbar', $data);
+      $this->load->view('templates/diskusi-template/header', $data);
+      $this->load->view('templates/diskusi-template/sidebar', $data);
+      $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('user/ubahpassword', $data);
-      $this->load->view('templates/footer');
+      $this->load->view('templates/diskusi-template/footer');
     } else {
       $current_password = $this->input->post('current_password', true);
       $new_password = $this->input->post('new_password1', true);

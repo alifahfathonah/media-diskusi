@@ -28,29 +28,30 @@ class Admin extends CI_Controller
     $data['title'] = 'Dashboard';
     $data['user'] = $this->admin->getUserByEmail($this->tableUser, $this->session->userdata('email'));
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('admin/index', $data);
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   public function role()
   {
-    $data['title'] = 'Role';
-    $data['user'] = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
-
-    $data['role'] = $this->admin->getAllRole($this->tableUserRole);
+    $data = [
+      'title' => 'Role',
+      'user' => $this->dataSingleUser,
+      'role' => $this->admin->getAllRole($this->tableUserRole)
+    ];
 
     $this->form_validation->set_rules('roleTambah', 'Role', 'required|trim', [
       'required' => 'Role harus diisi.'
     ]);
     if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar', $data);
-      $this->load->view('templates/topbar', $data);
+      $this->load->view('templates/diskusi-template/header', $data);
+      $this->load->view('templates/diskusi-template/sidebar', $data);
+      $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('admin/role', $data);
-      $this->load->view('templates/footer');
+      $this->load->view('templates/diskusi-template/footer');
     } else {
       $data = [
         'role' => htmlspecialchars($this->input->post('roleTambah', true))
@@ -95,11 +96,11 @@ class Admin extends CI_Controller
     $this->db->where('id !=', 1);
     $data['menu'] = $this->admin->getAllMenu($this->tableMenu);
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('admin/role_access', $data);
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   public function changeRoleAccess()
@@ -139,10 +140,10 @@ class Admin extends CI_Controller
     $data['allUser'] = $this->admin->getAllUser($this->tableUser);
     $data['role'] = $this->admin->getAllRole($this->tableUserRole);
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('admin/user_access', $data);
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 }

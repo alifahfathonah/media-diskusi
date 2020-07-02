@@ -21,7 +21,7 @@ var vue = new Vue({
 
 		// pagination
 		currentPage: 0,
-		rowCountPage: 8,
+		rowCountPage: 9,
 		totalGroups: 0,
 		pageRange: 2,
 	},

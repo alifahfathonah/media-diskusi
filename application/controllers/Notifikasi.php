@@ -20,10 +20,10 @@ class Notifikasi extends CI_Controller
       'user' => $this->singleUser
     ];
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('notifikasi/index', $data);
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 }

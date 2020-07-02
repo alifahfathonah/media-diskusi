@@ -20,11 +20,11 @@ class Group extends CI_Controller
     $data['title'] = 'Group Management';
     $data['user'] = $this->singleUser;
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('group/index', $data);
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   public function profileGroup()
@@ -32,11 +32,11 @@ class Group extends CI_Controller
     $data['title'] = 'Group Management';
     $data['user'] = $this->singleUser;
 
-    $this->load->view('templates/header', $data);
-    $this->load->view('templates/sidebar', $data);
-    $this->load->view('templates/topbar', $data);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('group/profile_group', $data);
-    $this->load->view('templates/footer');
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   public function getVerifikasi()

@@ -47,11 +47,11 @@ class Menu extends CI_Controller
       'required' => 'Menu harus diisi!'
     ]);
     if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar', $data);
-      $this->load->view('templates/topbar', $data);
+      $this->load->view('templates/diskusi-template/header', $data);
+      $this->load->view('templates/diskusi-template/sidebar', $data);
+      $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('menu/index', $data);
-      $this->load->view('templates/footer');
+      $this->load->view('templates/diskusi-template/footer');
     } else {
       $data = [
         'id' => null,
@@ -105,11 +105,11 @@ class Menu extends CI_Controller
     $this->form_validation->set_rules('url', 'URL', 'required|trim');
     $this->form_validation->set_rules('icon', 'Icon', 'required|trim');
     if ($this->form_validation->run() == false) {
-      $this->load->view('templates/header', $data);
-      $this->load->view('templates/sidebar', $data);
-      $this->load->view('templates/topbar', $data);
+      $this->load->view('templates/diskusi-template/header', $data);
+      $this->load->view('templates/diskusi-template/sidebar', $data);
+      $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('menu/submenu', $data);
-      $this->load->view('templates/footer');
+      $this->load->view('templates/diskusi-template/footer');
     } else {
       $data = [
         'title' => htmlspecialchars($this->input->post('title', true)),
