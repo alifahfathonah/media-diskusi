@@ -74,19 +74,19 @@
       <div id="foot">
         <ul>
           <li>
-            <a href="page-term.html">
+            <a href="page-term.html" class="text-decoration-none text-muted">
               <center>About Us</center>
             </a>
           </li>
           <br />
           <li>
-            <a href="page-privacy.html">
+            <a href="page-privacy.html" class="text-decoration-none text-muted">
               <center>Privacy Policy</center>
             </a>
           </li>
           <br />
           <li>
-            <a href="page-term.html">
+            <a href="page-term.html" class="text-decoration-none text-muted">
               <center>Terms - Conditions</center>
             </a>
           </li>

@@ -83,8 +83,7 @@
       </div>
     </div>
 
-  </div>
-  <?php require 'modal.php'; ?>
-</div>
+    <!-- Modal Group -->
+    <?php require 'modal.php'; ?>
 
-<!-- Modal Group -->
+  </div>

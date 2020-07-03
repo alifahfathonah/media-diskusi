@@ -38,11 +38,12 @@
   <!-- AXIOS -->
   <script src="<?= base_url('assets/js/axios/axios.js'); ?>"></script>
 
-  <!-- w3schools template -->
-  <link rel="stylesheet" href="<?= base_url('assets/css/forum/w3.css'); ?>">
-  <link rel="stylesheet" href="<?= base_url('assets/css/forum/w3-theme-blue-grey.css'); ?>">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <style>
+    #main_header {
+      box-shadow: none !important;
+    }
+  </style>
+
 </head>
 
 <body>

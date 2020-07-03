@@ -23,6 +23,7 @@ class Diskusi extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('diskusi/index');
+    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -39,18 +40,22 @@ class Diskusi extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('diskusi/forum_diskusi', $data);
+    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
   public function group()
   {
-    $data['title'] = 'Group';
-    $data['user'] = $this->singleUser;
+    $data = [
+      'title' => 'Group',
+      'user' => $this->singleUser
+    ];
 
     $this->load->view('templates/diskusi-template/header', $data);
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
-    $this->load->view('diskusi/group_diskusi');
+    $this->load->view('diskusi/group_diskusi2');
+    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -87,8 +92,8 @@ class Diskusi extends CI_Controller
   public function tampilSemuaForum()
   {
     $id_grup = $this->session->userdata('id_grup');
-    $user = $this->singleUser;
     $forum_diskusi = $this->diskusi->getForumDiskusiJoinUser($id_grup);
+
     if ($forum_diskusi) {
       $res = [
         'forum' => $forum_diskusi,

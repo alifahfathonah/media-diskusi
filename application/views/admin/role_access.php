@@ -36,8 +36,7 @@
       </div>
     </div>
 
+    <!-- Modal Tambah Menu -->
     <?php require 'modal.php'; ?>
 
   </div>
-</div>
-<!-- Modal Tambah Menu -->

@@ -8,10 +8,10 @@
       </div>
 
       <div id="logo">
-        <a href="homepage.html">
-          <img src="assets/images/icons/logodark.png" alt="" /></a>
-        <a href="homepage.html">
-          <img src="assets/images/icons/logolight.png" class="logo-inverse" alt="" /></a>
+        <a href="homepage.html" class="text-decoration-none">
+          <img src="<?= base_url('assets/images/icons/logodark.png'); ?>" alt="" /></a>
+        <a href="homepage.html" class="text-decoration-none">
+          <img src="<?= base_url('assets/images/icons/logolight.png'); ?>" class="logo-inverse" alt="" /></a>
       </div>
 
       <!-- Form Search-->
@@ -28,19 +28,19 @@
             <ul class="dropdown-search-list">
               <li class="list-title">Recent Searches</li>
               <li>
-                <a href="#">
-                  <img src="assets/images/group/group-1.png" alt="" /> TI
+                <a href="#" class="text-decoration-none">
+                  <img src="<?= base_url('assets/images/group/group-1.png'); ?>" alt="" /> TI
                   Angkatan 2017
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <img src="assets/images/group/group-1.png" alt="" />
+                <a href="#" class="text-decoration-none">
+                  <img src="<?= base_url('assets/images/group/group-1.png'); ?>" alt="" />
                   Nama Group
                 </a>
               </li>
               <li class="list-footer">
-                <a href="your-history.html"> Searches History </a>
+                <a href="your-history.html" class="text-decoration-none"> Searches History </a>
               </li>
             </ul>
           </div>
@@ -49,13 +49,13 @@
 
       <!-- User Icons -->
       <div class="head_user">
-        <a href="timeline.html" class="opts_icon_link uk-visible@s">
+        <a href="timeline.html" class="opts_icon_link uk-visible@s text-decoration-none">
           <?= $user['name']; ?>
         </a>
         <!-- Nama Pengguna -->
 
         <!-- Message Dropdown -->
-        <a href="#" class="opts_icon" uk-tooltip="title: Messages ; pos: bottom ;offset:7">
+        <a href="#" class="opts_icon text-decoration-none" uk-tooltip="title: Messages ; pos: bottom ;offset:7">
           <img src="<?= base_url('assets/images/icons/chat.svg'); ?>" alt="" />
           <span> 2 </span>
           <!-- Jumlah Total Chat Belum Kebaca atau yang masuk terserah, ini aku misalin 2 -->
@@ -68,7 +68,7 @@
             <!-- Notivication Header -->
             <div class="dropdown-notifications-headline">
               <h4>Messages</h4>
-              <a href="#">
+              <a href="#" class="text-decoration-none">
                 <i class="icon-feather-settings" uk-tooltip="title: Message settings ; pos: left"></i>
               </a>
 
@@ -78,11 +78,11 @@
             <!-- Notiviation List -->
             <ul>
               <li>
-                <a href="#">
+                <a href="#" class="text-decoration-none">
                   <!-- Link Chat dengan Pengguna -->
                   <span class="notification-avatar status-online">
                     <!-- Titik Online Engga nya -->
-                    <img src="assets/images/avatars/avatar-2.jpg" alt="" />
+                    <img src="<?= base_url('assets/images/avatars/avatar-2.jpg'); ?>" alt="" />
                   </span>
                   <div class="notification-text notification-msg-text">
                     <strong> Mahsa Savira </strong>
@@ -97,9 +97,9 @@
               </li>
 
               <li>
-                <a href="#">
+                <a href="#" class="text-decoration-none">
                   <span class="notification-avatar">
-                    <img src="assets/images/avatars/avatar-5.jpg" alt="" />
+                    <img src="<?= base_url('assets/images/avatars/avatar-5.jpg'); ?>" alt="" />
                   </span>
                   <div class="notification-text notification-msg-text">
                     <strong> Monica Tifani </strong>
@@ -115,12 +115,12 @@
           </div>
 
           <div class="dropdown-notifications-footer">
-            <a href="chats.html"> See all in Messages </a>
+            <a href="chats.html" class="text-decoration-none"> See all in Messages </a>
           </div>
         </div>
 
         <!-- Notificiation Icon  -->
-        <a href="#" class="opts_icon" uk-tooltip="title: Notifications ; pos: bottom ;offset:7">
+        <a href="#" class="opts_icon text-decoration-none" uk-tooltip="title: Notifications ; pos: bottom ;offset:7">
           <img src="<?= base_url('assets/images/icons/bell.svg'); ?>" alt="" />
           <span><?= jumlah_notifikasi($user['id']); ?></span>
           <!-- Jumlah Total Notif Belum Kebaca atau yang masuk terserah, ini aku misalin 1 -->
@@ -133,7 +133,7 @@
             <!-- Notivication Header -->
             <div class="dropdown-notifications-headline">
               <h4>Notifications</h4>
-              <a href="#">
+              <a href="#" class="text-decoration-none">
                 <i class="icon-feather-settings" uk-tooltip="title: Notifications settings ; pos: left"></i>
               </a>
             </div>
@@ -141,10 +141,10 @@
             <!-- Notiviation List -->
             <ul>
               <li>
-                <a href="#">
+                <a href="#" class="text-decoration-none">
                   <!-- Link Menuju Notifikasi nya -->
                   <span class="notification-avatar">
-                    <img src="assets/images/avatars/avatar-2.jpg" alt="" />
+                    <img src="<?= base_url('assets/images/avatars/avatar-2.jpg'); ?>" alt="" />
                     <!-- ini harusnya foto profilnya pengguna yg interaksi sma km -->
                   </span>
                   <span class="notification-icon bg-gradient-primary">
@@ -168,14 +168,14 @@
         </div>
 
         <!-- Profile Image -->
-        <a class="opts_account" href="#">
+        <a class="opts_account text-decoration-none" href="#">
           <img src="<?= base_url('assets/img/profile/' . $user['image']); ?>" alt="" /></a>
         <!-- ini harusnya foto profile setiap user yg login -->
 
         <!-- Profile Dropdown-->
         <div uk-dropdown="mode:click ; animation: uk-animation-slide-bottom-small" class="dropdown-notifications rounded">
           <!-- User Name / Avatar -->
-          <a href="timeline.html">
+          <a href="timeline.html" class="text-decoration-none">
             <!-- ini harrusnya link menuju profile -->
 
             <div class="dropdown-user-details">
@@ -193,19 +193,19 @@
           <hr class="m-0" />
           <ul class="dropdown-user-menu">
             <li>
-              <a href="timeline.html">
+              <a href="timeline.html" class="text-decoration-none">
                 <i class="uil-user"></i> Account
               </a>
             </li>
             <!-- ini harrusnya link menuju profile si user -->
             <li>
-              <a href="page-setting.html">
+              <a href="page-setting.html" class="text-decoration-none">
                 <i class="uil-cog"></i> Settings
               </a>
             </li>
             <!-- ini harrusnya link setting si user -->
             <li>
-              <a href="#" id="night-mode" class="btn-night-mode">
+              <a href="#" id="night-mode" class="btn-night-mode text-decoration-none">
                 <i class="uil-moon"></i> Night Mode
                 <span class="btn-night-mode-switch">
                   <span class="uk-switch-button"></span>

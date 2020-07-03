@@ -1,7 +1,7 @@
 <div class="main_content">
   <div class="main_content_inner">
 
-    <div class="row mb-3">
+    <div class="row mb-3 uk-flex uk-flex-between">
       <div class="col-lg-8">
         <!-- Button Tambah -->
         <a href="" class="btn btn-sm btn-primary btn-icon-split" data-toggle="modal" data-target="#newMenuModal">
@@ -63,8 +63,7 @@
       </div>
     </div>
 
-  </div>
-</div>
+    <!-- Modal Tambah Menu -->
+    <?php require 'modal.php'; ?>
 
-<!-- Modal Tambah Menu -->
-<?php require 'modal.php'; ?>
+  </div>

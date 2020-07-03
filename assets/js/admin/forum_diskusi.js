@@ -30,8 +30,10 @@ var vue = new Vue({
 		tampilSemuaForum() {
 			axios.get(this.url + "diskusi/tampilSemuaForum").then((response) => {
 				if (response.data.forum == false) {
+					console.log("gagal");
 					vue.noResult();
 				} else {
+					console.log("berhasil");
 					vue.getData(response.data.forum);
 				}
 			});
