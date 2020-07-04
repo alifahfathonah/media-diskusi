@@ -5,6 +5,7 @@ class Group extends CI_Controller
 
   private $tableUser = 'user';
   private $tableGroup = 'grup';
+  private $tableRole = 'user_role';
 
   private $singleUser;
 
@@ -17,8 +18,12 @@ class Group extends CI_Controller
 
   public function index()
   {
-    $data['title'] = 'Group Management';
-    $data['user'] = $this->singleUser;
+    $role = $this->db->get_where($this->tableRole, ['id' => $this->session->userdata('role_id')])->row_array();
+    $data = [
+      'title' => 'Group',
+      'user' => $this->singleUser,
+      'role' => $role['role']
+    ];
 
     $this->load->view('templates/diskusi-template/header', $data);
     $this->load->view('templates/diskusi-template/sidebar', $data);
@@ -28,10 +33,12 @@ class Group extends CI_Controller
     $this->load->view('templates/diskusi-template/footer');
   }
 
-  public function profileGroup()
+  public function profileGroup($id_grup)
   {
-    $data['title'] = 'Group Management';
+    $data['title'] = 'Group';
     $data['user'] = $this->singleUser;
+
+    $this->session->set_userdata('id_grup', $id_grup);
 
     $this->load->view('templates/diskusi-template/header', $data);
     $this->load->view('templates/diskusi-template/sidebar', $data);
@@ -92,6 +99,26 @@ class Group extends CI_Controller
       $result = [
         'result' => true,
         'pesan' => 'Tolak permintaan berhasil!'
+      ];
+    }
+
+    echo json_encode($result);
+  }
+
+  public function getGroup()
+  {
+    $id_grup = $this->session->userdata('id_grup');
+
+    $group = $this->group->getGroupByIdGroup($id_grup);
+    if ($group) {
+      $result = [
+        'status' => true,
+        'group' => $group
+      ];
+    } else {
+      $result = [
+        'status' => false,
+        'group' => null
       ];
     }
 

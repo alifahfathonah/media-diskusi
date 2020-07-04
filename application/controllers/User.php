@@ -43,7 +43,7 @@ class User extends CI_Controller
 
   public function edit()
   {
-    $data['title'] = 'Edit Profile';
+    $data['title'] = 'My Profile';
     $data['user'] = $this->dataSingleUser;
 
     $this->form_validation->set_rules('name', 'Full Name', 'required|trim');

@@ -197,4 +197,15 @@ class Group_model extends CI_Model
 
     $this->db->insert($this->tableNotif, $data);
   }
+
+  public function getGroupByIdGroup($id_grup)
+  {
+    $query = $this->db->get_where($this->tableGroup, ['id_grup' => $id_grup]);
+
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
 }

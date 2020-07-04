@@ -48,7 +48,7 @@ class Diskusi extends CI_Controller
   {
     $data = [
       'title' => 'Group',
-      'user' => $this->singleUser
+      'user' => $this->singleUser,
     ];
 
     $this->load->view('templates/diskusi-template/header', $data);

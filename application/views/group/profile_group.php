@@ -1,13 +1,13 @@
 <!-- contents -->
-<div class="main_content">
+<div class="main_content" id="profile_group">
 
-  <div class="main_content_inner pt-0">
+  <div class="main_content_inner pt-0" v-for="g in group">
 
     <div class="single-group">
       <div class="group-cover">
 
         <!--Signle group cover -->
-        <img src="<?= base_url('assets/images/group/group-2.jpg'); ?>" alt="">
+        <img :src="gambar(g.group_image)" alt="">
 
       </div>
 
@@ -15,13 +15,13 @@
         <div class="left-side">
           <div class="single-group-image">
             <a href="#">
-              <img src="<?= base_url('assets/images/group/group-1.png'); ?>" alt="">
+              <img :src="gambar(g.group_image)" alt="">
             </a>
           </div>
           <div class="single-group-details-info">
-            <h3> TI Angkatan 2017 </h3>
+            <h3> {{g.group_name}} </h3>
             <p>
-              <p> <i class="uil-thumbs-up"></i> 120 Joined Group </p>
+              <p> <i class="uil-thumbs-up"></i> {{g.jumlah_peserta}} Joined Group </p>
             </p>
           </div>
         </div>
@@ -30,7 +30,7 @@
           <div class="btn-subscribe">
             <a href="#" class="button primary"> <i class="uil-thumbs-up"></i> Join
             </a>
-            <span class="subs-amount"> 120 </span>
+            <span class="subs-amount"> {{g.jumlah_peserta}} </span>
           </div>
         </div>
       </div>
@@ -63,10 +63,10 @@
           <div class="post">
             <div class="post-heading">
               <div class="post-avature">
-                <img src="<?= base_url('assets/images/group/group-1.png'); ?>" alt="">
+                <img :src="gambar(g.group_image)" alt="">
               </div>
               <div class="post-title">
-                <h4> TI Angkatan 2017 </h4>
+                <h4> {{g.group_name}} </h4>
                 <p> 9 <span> hrs </span> <i class="uil-users-alt"></i> </p>
               </div>
               <div class="post-btn-action">
@@ -137,7 +137,7 @@
           <h3> Info </h3>
           <div class="list-group-items">
             <i class="uil-thumbs-up"></i>
-            <h5> <span class="mr-1"> 120 </span> Members Joined <p class="text-success mb-0 ml-2">
+            <h5> <span class="mr-1"> {{g.jumlah_peserta}} </span> Members Joined <p class="text-success mb-0 ml-2">
                 +4 This week </p>
             </h5>
           </div>
@@ -153,7 +153,7 @@
 
           <h3> Description </h3>
 
-          <p> Group Mahasiswa Teknik Informatika Angkatan 2017 </a> </p>
+          <p> {{g.group_desc}} </a> </p>
 
           <a href="#" class="button secondary block my-3"> See All </a>
 

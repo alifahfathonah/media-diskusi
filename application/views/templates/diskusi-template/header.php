@@ -42,6 +42,11 @@
     #main_header {
       box-shadow: none !important;
     }
+
+    /* solusi untuk modal ketika dibuka tidak bisa diklik / warna hitam transparan */
+    .modal-backdrop {
+      display: none;
+    }
   </style>
 
 </head>

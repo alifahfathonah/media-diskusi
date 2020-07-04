@@ -41,6 +41,7 @@ var vue = new Vue({
 		modalHapus: false,
 		modalVerifikasi: false,
 		groups: [],
+		totalGroups: 0,
 		users: [],
 		search: { text: "" },
 		verify: { user_id: "", grup_id: "" },
@@ -56,12 +57,6 @@ var vue = new Vue({
 		groupData: {},
 		formValidate: [],
 		successMSG: "",
-
-		// pagination
-		currentPage: 0,
-		rowCountPage: 5,
-		totalGroups: 0,
-		pageRange: 2,
 	},
 	created() {
 		this.tampilSemuaGroup();
@@ -73,7 +68,8 @@ var vue = new Vue({
 				if (response.data.groups == null) {
 					vue.noResult();
 				} else {
-					vue.getData(response.data.groups);
+					vue.groups = response.data.groups;
+					vue.totalGroups = vue.groups.length;
 				}
 			});
 		},

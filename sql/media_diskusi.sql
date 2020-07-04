@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2020 at 01:16 AM
+-- Generation Time: Jul 04, 2020 at 06:14 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -251,7 +251,8 @@ INSERT INTO `user_access_menu` (`id`, `role_id`, `menu_id`) VALUES
 (25, 3, 6),
 (26, 1, 18),
 (27, 3, 18),
-(28, 2, 18);
+(28, 2, 18),
+(29, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -272,8 +273,7 @@ INSERT INTO `user_menu` (`id`, `menu`) VALUES
 (1, 'Admin'),
 (2, 'User'),
 (3, 'Menu'),
-(6, 'Group'),
-(18, 'Diskusi');
+(6, 'Group');
 
 -- --------------------------------------------------------
 
@@ -321,18 +321,13 @@ CREATE TABLE `user_sub_menu` (
 INSERT INTO `user_sub_menu` (`id`, `menu_id`, `title`, `url`, `icon`, `is_active`) VALUES
 (1, 1, 'Dashboard', 'admin', 'fas fa-fw fa-tachometer-alt', 1),
 (2, 2, 'Home', 'user', 'fas fa-fw fa-home', 1),
-(3, 2, 'Edit Profile', 'user/edit', 'fas fa-fw fa-user-edit', 1),
+(3, 2, 'My Profile', 'user/myprofile', 'fas fa-fw fa-user', 1),
 (4, 3, 'Menu Management', 'menu', 'fas fa-fw fa-folder', 1),
 (5, 3, 'Submenu Management', 'menu/submenu', 'fas fa-fw fa-folder-open', 1),
 (6, 1, 'User Access', 'admin/useraccess', 'fas fa-fw fa-universal-access', 1),
 (7, 1, 'Role', 'admin/role', 'fas fa-fw fa-user-tie', 1),
-(15, 6, 'Group Management', 'group', 'fas fa-fw fa-layer-group', 1),
-(16, 18, 'Group', 'diskusi/group', 'fas fa-fw fa-users', 1),
-(17, 18, 'Forum Diskusi', 'diskusi', 'fas fa-fw fa-comment', 1),
-(18, 6, 'Verifikasi', 'verifikasi', 'fas fa-fw fa-user-check', 1),
-(19, 2, 'Pesan', 'pesan', 'fas fa-fw fa-envelope', 1),
-(20, 2, 'Notifikasi', 'notifikasi', 'fas fa-fw fa-bell', 1),
-(21, 2, 'My Profile', 'user/myprofile', 'fas fa-fw fa-user', 1);
+(15, 6, 'Group', 'group', 'fas fa-fw fa-users', 1),
+(20, 2, 'Notifikasi', 'notifikasi', 'fas fa-fw fa-bell', 1);
 
 --
 -- Indexes for dumped tables
@@ -475,7 +470,7 @@ ALTER TABLE `user_access_grup`
 -- AUTO_INCREMENT for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `user_menu`
