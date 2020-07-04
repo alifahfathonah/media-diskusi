@@ -49,7 +49,7 @@
 
       <!-- User Icons -->
       <div class="head_user">
-        <a href="timeline.html" class="opts_icon_link uk-visible@s text-decoration-none">
+        <a href="<?= base_url('user/myprofile'); ?>" class="opts_icon_link uk-visible@s text-decoration-none">
           <?= $user['name']; ?>
         </a>
         <!-- Nama Pengguna -->
@@ -175,7 +175,7 @@
         <!-- Profile Dropdown-->
         <div uk-dropdown="mode:click ; animation: uk-animation-slide-bottom-small" class="dropdown-notifications rounded">
           <!-- User Name / Avatar -->
-          <a href="timeline.html" class="text-decoration-none">
+          <a href="<?= base_url('user/myprofile'); ?>" class="text-decoration-none">
             <!-- ini harrusnya link menuju profile -->
 
             <div class="dropdown-user-details">
