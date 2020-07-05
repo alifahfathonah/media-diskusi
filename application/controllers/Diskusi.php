@@ -178,22 +178,6 @@ class Diskusi extends CI_Controller
     echo json_encode($result);
   }
 
-  public function gabungGroup()
-  {
-    $id_user = $this->input->post('id_user');
-    $id_grup = $this->input->post('id_grup');
-    $check = $this->diskusi->gabungGroup($id_user, $id_grup);
-
-    if ($check) {
-      $result = [
-        'status' => true,
-        'data' => $this->singleUser
-      ];
-    }
-
-    echo json_encode($result);
-  }
-
   public function keluarGroup()
   {
     $id_user = $this->input->post('id_user');

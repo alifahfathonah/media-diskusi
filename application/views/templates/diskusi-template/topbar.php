@@ -7,12 +7,25 @@
         <span></span>
       </div>
 
-      <div id="logo">
-        <a href="homepage.html" class="text-decoration-none">
-          <img src="<?= base_url('assets/images/icons/logodark.png'); ?>" alt="" /></a>
-        <a href="homepage.html" class="text-decoration-none">
-          <img src="<?= base_url('assets/images/icons/logolight.png'); ?>" class="logo-inverse" alt="" /></a>
-      </div>
+      <?php
+      $role = $this->db->get_where('user_role', ['id' => $this->session->userdata('role_id')])->row_array();
+      ?>
+
+      <?php if ($role['role'] == 'Administrator') : ?>
+        <div id="logo">
+          <a href="<?= base_url('admin'); ?>" class="text-decoration-none">
+            <img src="<?= base_url('assets/images/icons/logodark.png'); ?>" alt="" /></a>
+          <a href="<?= base_url('admin'); ?>" class="text-decoration-none">
+            <img src="<?= base_url('assets/images/icons/logolight.png'); ?>" class="logo-inverse" alt="" /></a>
+        </div>
+      <?php else : ?>
+        <div id="logo">
+          <a href="<?= base_url('user'); ?>" class="text-decoration-none">
+            <img src="<?= base_url('assets/images/icons/logodark.png'); ?>" alt="" /></a>
+          <a href="<?= base_url('user'); ?>" class="text-decoration-none">
+            <img src="<?= base_url('assets/images/icons/logolight.png'); ?>" class="logo-inverse" alt="" /></a>
+        </div>
+      <?php endif; ?>
 
       <!-- Form Search-->
       <div class="head_search">
@@ -140,29 +153,59 @@
 
             <!-- Notiviation List -->
             <ul>
-              <li>
-                <a href="#" class="text-decoration-none">
-                  <!-- Link Menuju Notifikasi nya -->
-                  <span class="notification-avatar">
-                    <img src="<?= base_url('assets/images/avatars/avatar-2.jpg'); ?>" alt="" />
-                    <!-- ini harusnya foto profilnya pengguna yg interaksi sma km -->
-                  </span>
-                  <span class="notification-icon bg-gradient-primary">
-                    <i class="icon-feather-thumbs-up"></i></span>
-                  <span class="notification-text">
-                    <strong> Mahsa Savira </strong> Like Your Comment On
-                    Monica Tifani's Post
-                    <!-- ini harusnya nama pengguna yang berinteraksi sama kamu sama keterangan interaksinya apa -->
-                    <span class="text-primary">
-                      Pengumuman Kelas PCD S
+              <!-- dummy notifikasi -->
+              <?php for ($i = 0; $i <= 5; $i++) : ?>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    <!-- Link Menuju Notifikasi nya -->
+                    <span class="notification-avatar">
+                      <img src="<?= base_url('assets/images/avatars/avatar-2.jpg'); ?>" alt="" />
+                      <!-- ini harusnya foto profilnya pengguna yg interaksi sma km -->
                     </span>
-                    <!-- ini cuplikan post yg kena interaksi -->
-                    <br />
-                    <span class="time-ago"> 1 hours ago </span>
-                    <!-- ini waktunya -->
-                  </span>
-                </a>
-              </li>
+                    <span class="notification-icon bg-gradient-primary">
+                      <i class="icon-feather-thumbs-up"></i></span>
+                    <span class="notification-text">
+                      <strong> Mahsa Savira </strong> Like Your Comment On
+                      Monica Tifani's Post
+                      <!-- ini harusnya nama pengguna yang berinteraksi sama kamu sama keterangan interaksinya apa -->
+                      <span class="text-primary">
+                        Pengumuman Kelas PCD S
+                      </span>
+                      <!-- ini cuplikan post yg kena interaksi -->
+                      <br />
+                      <span class="time-ago"> 1 hours ago </span>
+                      <!-- ini waktunya -->
+                    </span>
+                  </a>
+                </li>
+              <?php endfor; ?>
+              <?php
+              $notifikasi = text_notifikasi($user['id']);
+              foreach ($notifikasi as $n) :
+              ?>
+                <li>
+                  <a href="#" class="text-decoration-none">
+                    <!-- Link Menuju Notifikasi nya -->
+                    <span class="notification-avatar">
+                      <img src="<?= base_url('assets/images/avatars/avatar-2.jpg'); ?>" alt="" />
+                      <!-- ini harusnya foto profilnya pengguna yg interaksi sma km -->
+                    </span>
+                    <span class="notification-icon bg-gradient-primary">
+                      <i class="icon-feather-thumbs-up"></i></span>
+                    <span class="notification-text">
+                      <?= $n['text_notif']; ?>
+                      <!-- ini harusnya nama pengguna yang berinteraksi sama kamu sama keterangan interaksinya apa -->
+                      <span class="text-primary">
+                        Pengumuman Kelas PCD S
+                      </span>
+                      <!-- ini cuplikan post yg kena interaksi -->
+                      <br />
+                      <span class="time-ago"> 1 hours ago </span>
+                      <!-- ini waktunya -->
+                    </span>
+                  </a>
+                </li>
+              <?php endforeach; ?>
             </ul>
           </div>
         </div>

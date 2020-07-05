@@ -14,7 +14,7 @@
       <div class="single-group-details">
         <div class="left-side">
           <div class="single-group-image">
-            <a href="#">
+            <a href="#" class="text-decoration-none">
               <img :src="gambar(g.group_image)" alt="">
             </a>
           </div>
@@ -27,22 +27,30 @@
         </div>
 
         <div class="right-side">
-          <div class="btn-subscribe">
-            <a href="#" class="button primary"> <i class="uil-thumbs-up"></i> Join
-            </a>
-            <span class="subs-amount"> {{g.jumlah_peserta}} </span>
-          </div>
+          <?php if ($role != 'Mahasiswa') : ?>
+            <div class="btn-subscribe">
+              <a href="#" class="button primary text-decoration-none"> <i class="uil-thumbs-up"></i> Create New
+              </a>
+              <span class="subs-amount"> {{g.jumlah_peserta}} </span>
+            </div>
+          <?php else : ?>
+            <div class="btn-subscribe">
+              <a href="#" class="button primary text-decoration-none"> <i class="uil-thumbs-up"></i> Join
+              </a>
+              <span class="subs-amount"> {{g.jumlah_peserta}} </span>
+            </div>
+          <?php endif; ?>
         </div>
       </div>
 
       <div class="nav-single-group" uk-sticky="offset:61;media : @s">
         <nav class="responsive-tab">
           <ul>
-            <li class="uk-active"><a class="active" href="#"> Timeline </a></li>
-            <li><a href="#"> Members </a></li>
-            <li><a href="#"> Photos </a></li>
-            <li><a href="#"> Discussions </a></li>
-            <li><a href="#"> Videos </a></li>
+            <li class="uk-active"><a class="active text-decoration-none" href="#"> Timeline </a></li>
+            <li><a href="#" class="text-decoration-none"> Members </a></li>
+            <li><a href="#" class="text-decoration-none"> Photos </a></li>
+            <li><a href="#" class="text-decoration-none"> Discussions </a></li>
+            <li><a href="#" class="text-decoration-none"> Videos </a></li>
           </ul>
         </nav>
         <form class="nav-single-group-saerchbox">
@@ -73,7 +81,7 @@
                 <span class="icon-more uil-ellipsis-h"></span>
                 <div class="mt-0 p-2" uk-dropdown="pos: bottom-right;mode:hover ">
                   <ul class="uk-nav uk-dropdown-nav">
-                    <li><a href="#"> <i class="uil-share-alt mr-1"></i> Share </a> </li>
+                    <li><a href="#" class="text-decoration-none"> <i class="uil-share-alt mr-1"></i> Share </a> </li>
                   </ul>
                 </div>
               </div>
@@ -110,12 +118,12 @@
                     <p> yah ga asik </p>
                   </div>
                   <div class="uk-text-small">
-                    <a href="#" class="text-danger mr-1"> <i class="uil-heart"></i> Love </a>
-                    <a href="#" class=" mr-1"> Replay </a>
+                    <a href="#" class="text-danger mr-1 text-decoration-none"> <i class="uil-heart"></i> Love </a>
+                    <a href="#" class="mr-1 text-decoration-none"> Replay </a>
                     <span> 9 hrs </span>
                   </div>
                 </div>
-                <a href="#" class="post-comment-opt"></a>
+                <a href="#" class="post-comment-opt text-decoration-none"></a>
               </div>
 
               <div class="post-add-comment">
@@ -148,14 +156,19 @@
               </p>
             </h5>
           </div>
+
+          <?php if ($role != 'Mahasiswa') : ?>
+            <a href="#" class="button soft-primary block my-3 text-decoration-none"> Edit </a>
+          <?php endif; ?>
+
           <hr class="my-3">
 
 
           <h3> Description </h3>
 
-          <p> {{g.group_desc}} </a> </p>
+          <p> {{g.group_desc}} </p>
 
-          <a href="#" class="button secondary block my-3"> See All </a>
+          <a href="#" class="button secondary block my-3 text-decoration-none"> See All </a>
 
           <hr class="mt-3 mb-2">
 
@@ -167,7 +180,7 @@
                 <h3> Members </h3>
               </div>
               <div class="section-header-right">
-                <a href="#" class="see-all text-primary"> See All</a>
+                <a href="#" class="see-all text-primary text-decoration-none"> See All</a>
               </div>
             </div>
 
@@ -179,7 +192,7 @@
                     <img src="<?= base_url('assets/images/avatars/avatar-2.jpg'); ?>" alt="">
                   </div>
                   <div class="list-item-content">
-                    <a href="group-feed.html">
+                    <a href="group-feed.html" class="text-decoration-none">
                       <h5> Mahsa Savira </h5>
                     </a>
                     <p> Mahasiwa Teknik Informatika 2017 </p>
@@ -193,7 +206,7 @@
                     <img src="<?= base_url('assets/images/avatars/avatar-5.jpg'); ?>" alt="">
                   </div>
                   <div class="list-item-content">
-                    <a href="group-feed.html">
+                    <a href="group-feed.html" class="text-decoration-none">
                       <h5> Monica Tifani </h5>
                     </a>
                     <p> Engineering </p>
@@ -202,7 +215,7 @@
               </div>
             </div>
 
-            <a href="#" class="button secondary block my-3"> See All </a>
+            <a href="#" class="button secondary block my-3 text-decoration-none"> See All </a>
           </div>
         </div>
       </div>

@@ -51,33 +51,6 @@ var vue = new Vue({
 			});
 		},
 
-		gabungGroup(idUser, idGrup) {
-			vue.idUserIdGrup.id_user = idUser;
-			vue.idUserIdGrup.id_grup = idGrup;
-			let formData = vue.formData(vue.idUserIdGrup);
-			axios
-				.post(this.url + "diskusi/gabungGroup", formData)
-				.then((response) => {
-					if (response.data.status) {
-						swal({
-							title: "Group",
-							text: "Anda sudah tergabung menjadi peserta group!",
-							icon: "success",
-							button: "OK",
-						});
-					} else {
-						swal({
-							title:
-								// "Permintaan anda sudah dikirim, menunggu verifikasi dari pemiliki group!",
-								"Group",
-							text: "Permintaan sudah dikirim, tunggu verifikasi!",
-							icon: "success",
-							button: "OK",
-						});
-					}
-				});
-		},
-
 		keluarGroup(idUser, idGrup) {
 			vue.idUserIdGrup.id_user = idUser;
 			vue.idUserIdGrup.id_grup = idGrup;

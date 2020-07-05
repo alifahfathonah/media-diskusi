@@ -30,6 +30,7 @@
 
         <ul class="uk-slider-items uk-child-width-1-4@m uk-child-width-1-3@s  pr-lg-1 uk-grid" uk-scrollspy="target: > div; cls: uk-animation-slide-bottom-small; delay: 100">
 
+          <!-- looping data group -->
           <li v-for="group in groups">
             <div class="group-card">
 
@@ -42,7 +43,7 @@
               <div class="group-card-content">
                 <h3> {{group.group_name}} </h3>
                 <p class="info"> <a href="#" class="text-decoration-none"> <span> {{group.jumlah_peserta}} Members </span> </a>
-                  <a href="#" class="text-decoration-none"> <span> 100 Post </span> </a>
+                  <a href="#" class="text-decoration-none"> <span> {{jumlahPost(group.id_grup)}} Post </span> </a>
                 </p>
                 <div class="group-card-member-wrap">
                   <div class="avatar-group uk-width-auto">
@@ -55,7 +56,7 @@
                 </div>
 
                 <div class="group-card-btns">
-                  <a href="#" class="button primary small text-decoration-none"> Join </a>
+                  <button class="button primary small mr-3" @click="join(user.id, group.id_grup)"> Join </button>
                   <a :href="route('group/profileGroup/' + group.id_grup)" class="button secondary small text-decoration-none"> View </a>
                 </div>
 
@@ -69,6 +70,13 @@
         <a class="uk-position-center-left-out uk-position-small uk-hidden-hover slidenav-prev" href="#" uk-slider-item="previous"></a>
         <a class="uk-position-center-right-out uk-position-small uk-hidden-hover slidenav-next" href="#" uk-slider-item="next"></a>
 
+      </div>
+    </div>
+
+    <!-- jika group dalam keadaan kosong -->
+    <div v-if="emptyResult" class="col-lg-12">
+      <div class="alert alert-primary text-center">
+        <h6>No Groups Found!</h6>
       </div>
     </div>
 
@@ -191,6 +199,7 @@
 
         <div class="uk-child-width-1-3@s uk-grid-row-small" uk-grid>
 
+          <!-- looping data group -->
           <div v-for="group in groups">
             <div class="list-items">
               <div class="list-item-media">
@@ -218,6 +227,11 @@
                   </ul>
                 </div>
               </div>
+            </div>
+          </div>
+          <div v-if="emptyResult" class="col-lg-12">
+            <div class="alert alert-primary text-center">
+              <h6>No Groups Found!</h6>
             </div>
           </div>
 

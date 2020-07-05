@@ -31,22 +31,6 @@ class Diskusi_model extends CI_Model
     }
   }
 
-  public function gabungGroup($idUser, $idGrup)
-  {
-    $params = [
-      'grup_id' => $idGrup,
-      'user_id' => $idUser
-    ];
-
-    $result = $this->db->get_where($this->tableUserAccessGrup, $params);
-    if ($result->num_rows() > 0) {
-      return true;
-    } else {
-      $params['status'] = 'T';
-      $this->db->insert($this->tableUserAccessGrup, $params);
-    }
-  }
-
   public function keluarGroup($id_user, $id_grup)
   {
     $params = [

@@ -7,6 +7,7 @@ class Group_model extends CI_Model
   private $tableGroup = 'grup';
   private $tableNotif = 'notif';
   private $tableRole = 'user_role';
+  private $tableForumDiskusi = 'forum_diskusi';
   private $tableUserAccessGrup = 'user_access_grup';
 
   public function getUserByEmail($table, $email)
@@ -201,6 +202,46 @@ class Group_model extends CI_Model
   public function getGroupByIdGroup($id_grup)
   {
     $query = $this->db->get_where($this->tableGroup, ['id_grup' => $id_grup]);
+
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function getAllGroup()
+  {
+    $query = $this->db->get($this->tableGroup);
+
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function join($idUser, $idGrup)
+  {
+    $params = [
+      'grup_id' => $idGrup,
+      'user_id' => $idUser
+    ];
+
+    $result = $this->db->get_where($this->tableUserAccessGrup, $params);
+    if ($result->num_rows() > 0) {
+      return true;
+    } else {
+      // T artinya "Tidak" & jika diterima verifikasi maka akan berubah menjasi Y : Ya
+      $params['status'] = 'T';
+      $this->db->insert($this->tableUserAccessGrup, $params);
+    }
+  }
+
+  public function getJumlahPost($id_grup)
+  {
+    $sql = "SELECT count(text_content) jumlah_post FROM " . $this->tableForumDiskusi . " WHERE id_grup='" . $id_grup . "'";
+    $query = $this->db->query($sql);
 
     if ($query->num_rows() > 0) {
       return $query->result();

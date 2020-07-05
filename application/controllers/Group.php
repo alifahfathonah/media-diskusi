@@ -35,8 +35,12 @@ class Group extends CI_Controller
 
   public function profileGroup($id_grup)
   {
-    $data['title'] = 'Group';
-    $data['user'] = $this->singleUser;
+    $role = $this->db->get_where($this->tableRole, ['id' => $this->session->userdata('role_id')])->row_array();
+    $data = [
+      'title' => 'Group',
+      'user' => $this->singleUser,
+      'role' => $role['role']
+    ];
 
     $this->session->set_userdata('id_grup', $id_grup);
 
@@ -113,12 +117,12 @@ class Group extends CI_Controller
     if ($group) {
       $result = [
         'status' => true,
-        'group' => $group
+        'group' => $group,
       ];
     } else {
       $result = [
         'status' => false,
-        'group' => null
+        'group' => null,
       ];
     }
 
@@ -144,6 +148,57 @@ class Group extends CI_Controller
           $result['groups'] = $groupDibuat;
         }
         break;
+    }
+
+    echo json_encode($result);
+  }
+
+  public function getAllGroup()
+  {
+    $group = $this->group->getAllGroup();
+
+
+    for ($i = 0; $i < sizeof($group); $i++) {
+      $group[$i] = $this->group->getJumlahPost($group[$i]->id_grup);
+    }
+
+    var_dump($group);
+    die;
+
+    if ($group) {
+      $result = [
+        'groups' => $group,
+        'user' => $this->singleUser,
+      ];
+    } else {
+      $result = [
+        'groups' => null,
+        'user' => $this->singleUser,
+        'total_post' => null
+      ];
+    }
+
+    echo json_encode($result);
+  }
+
+  public function join()
+  {
+    $id_user = $this->input->post('id_user');
+    $id_grup = $this->input->post('id_grup');
+    $check = $this->group->join($id_user, $id_grup);
+
+    if ($check) {
+      $result = [
+        'status' => true,
+        'data' => $this->singleUser,
+        'pesan' => 'Anda sudah join Group!'
+      ];
+    } else {
+      $result = [
+        'status' => false,
+        'data' => $this->singleUser,
+        'pesan' => 'Terkirim. Tunggu diverifikasi!'
+      ];
     }
 
     echo json_encode($result);
