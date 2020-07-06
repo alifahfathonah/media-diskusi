@@ -157,14 +157,6 @@ class Group extends CI_Controller
   {
     $group = $this->group->getAllGroup();
 
-
-    for ($i = 0; $i < sizeof($group); $i++) {
-      $group[$i] = $this->group->getJumlahPost($group[$i]->id_grup);
-    }
-
-    var_dump($group);
-    die;
-
     if ($group) {
       $result = [
         'groups' => $group,

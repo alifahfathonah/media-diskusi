@@ -43,7 +43,7 @@
               <div class="group-card-content">
                 <h3> {{group.group_name}} </h3>
                 <p class="info"> <a href="#" class="text-decoration-none"> <span> {{group.jumlah_peserta}} Members </span> </a>
-                  <a href="#" class="text-decoration-none"> <span> {{jumlahPost(group.id_grup)}} Post </span> </a>
+                  <a href="#" class="text-decoration-none"> <span> 100 Post </span> </a>
                 </p>
                 <div class="group-card-member-wrap">
                   <div class="avatar-group uk-width-auto">
