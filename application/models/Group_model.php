@@ -249,4 +249,27 @@ class Group_model extends CI_Model
       return false;
     }
   }
+
+  public function getMyGroup($id_user)
+  {
+    $sql = "SELECT * FROM " . $this->tableGroup . " WHERE id_user='" . $id_user . "'";
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function getUserAccessGroupByUserId($id_user)
+  {
+    $status = 'Y';
+    $sql = "SELECT * FROM " . $this->tableUserAccessGrup . " WHERE user_id='" . $id_user . "' AND status='" . $status . "'";
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
 }

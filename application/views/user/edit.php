@@ -42,7 +42,7 @@
         <div class="form-group row justify-content-end">
           <div class="col-sm-10">
             <button type="submit" class="btn btn-primary">Edit <i class="fas fa-user-edit"></i></button>
-            <a href="<?= base_url('user'); ?>" class="btn btn-secondary float-right"><i class="fas fa-arrow-left"></i> Kembali</a>
+            <a href="<?= base_url('user/myprofile/'); ?>" class="btn btn-secondary float-right"><i class="fas fa-arrow-left"></i> Kembali</a>
           </div>
         </div>
 

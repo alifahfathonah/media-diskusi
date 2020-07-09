@@ -52,61 +52,21 @@ class Group extends CI_Controller
     $this->load->view('templates/diskusi-template/footer');
   }
 
-  public function getVerifikasi()
+  public function verifikasi($id_grup)
   {
-    $id_grup = $this->input->post('id_grup');
-    $data = $this->group->getVerifikasi($id_grup);
+    $data = [
+      'title' => 'Group',
+      'user' => $this->singleUser,
+    ];
 
-    $length = sizeof($data);
-    $user = null;
+    $this->session->set_userdata('id_grup', $id_grup);
 
-    if ($data) {
-      if ($length == 1) {
-        $user[] = $this->group->getUserJoinAccessGrup($data[0]->user_id, $data[0]->grup_id, $data[0]->status);
-      } else {
-        for ($i = 0; $i < sizeof($data); $i++) {
-          $user[] = $this->group->getUserJoinAccessGrup($data[$i]->user_id, $data[$i]->grup_id, $data[$i]->status);
-        }
-      }
-
-      $result = [
-        'user' => $user
-      ];
-    }
-
-    echo json_encode($result);
-  }
-
-  public function terima()
-  {
-    $user_id = $this->input->post('user_id');
-    $grup_id = $this->input->post('grup_id');
-
-    $terima = $this->group->terima($user_id, $grup_id);
-    if ($terima) {
-      $result = [
-        'result' => true,
-        'pesan' => 'Permintaan berhasil diterima!',
-      ];
-    }
-
-    echo json_encode($result);
-  }
-
-  public function tolak()
-  {
-    $user_id = $this->input->post('user_id');
-    $grup_id = $this->input->post('grup_id');
-
-    $tolak = $this->group->tolak($user_id, $grup_id);
-    if ($tolak) {
-      $result = [
-        'result' => true,
-        'pesan' => 'Tolak permintaan berhasil!'
-      ];
-    }
-
-    echo json_encode($result);
+    $this->load->view('templates/diskusi-template/header', $data);
+    $this->load->view('templates/diskusi-template/sidebar', $data);
+    $this->load->view('templates/diskusi-template/topbar', $data);
+    $this->load->view('group/verifikasi', $data);
+    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
+    $this->load->view('templates/diskusi-template/footer');
   }
 
   public function getGroup()
@@ -167,6 +127,48 @@ class Group extends CI_Controller
         'groups' => null,
         'user' => $this->singleUser,
         'total_post' => null
+      ];
+    }
+
+    echo json_encode($result);
+  }
+
+  public function getMyGroup()
+  {
+    $user = $this->singleUser;
+    $id_user = $user['id'];
+    $group = $this->group->getMyGroup($id_user);
+
+    if ($group) {
+      $result = [
+        'groups' => $group,
+        'user' => $this->singleUser
+      ];
+    } else {
+      $result = [
+        'groups' => null,
+        'user' => $this->singleUser
+      ];
+    }
+
+    echo json_encode($result);
+  }
+
+  public function getJoinedGroup()
+  {
+    $id_user = $this->singleUser['id'];
+    $user_access_group = $this->group->getUserAccessGroupByUserId($id_user);
+
+    $groups = null;
+
+    if ($user_access_group) {
+      for ($i = 0; $i < sizeof($user_access_group); $i++) {
+        $groups[] = $this->group->getGroupByIdGroup($user_access_group[$i]->grup_id);
+      }
+
+      $result = [
+        'groups' => $groups,
+        'user' => $this->singleUser
       ];
     }
 

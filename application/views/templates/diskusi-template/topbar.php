@@ -223,7 +223,7 @@
 
             <div class="dropdown-user-details">
               <div class="dropdown-user-avatar">
-                <img src="<?= base_url('assets/img/profile' . $user['image']); ?>" alt="" />
+                <img src="<?= base_url('assets/img/profile/' . $user['image']); ?>" alt="" />
                 <!-- ini harusnya foto profile setiap user yg login -->
               </div>
               <div class="dropdown-user-name">

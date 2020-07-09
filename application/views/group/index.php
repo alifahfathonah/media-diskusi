@@ -8,17 +8,17 @@
     <div class="uk-flex uk-flex-between">
       <nav class="responsive-tab style-1 mb-5">
         <ul>
-          <li class="uk-active"><a href="#" class="text-decoration-none"> My Groups </a></li>
-          <li><a href="#" class="text-decoration-none"> Joined Groups </a></li>
+          <li :class="{'uk-active': allGroups}"><a @click="allGroups=true;joinedGroups=false;myGroups=false;getAllGroup()"> All Groups </a></li>
+          <li :class="{'uk-active': joinedGroups}"><a @click="allGroups=false;joinedGroups=true;myGroups=false;getJoinedGroup()"> Joined Groups </a></li>
+          <?php if ($role != 'Mahasiswa') : ?>
+            <li :class="{'uk-active': myGroups}"><a @click="allGroups=false;joinedGroups=false;myGroups=true;getMyGroup()"> My Groups </a></li>
+          <?php endif; ?>
         </ul>
       </nav>
 
       <?php if ($role != 'Mahasiswa') : ?>
         <a href="#" class="button primary small circle uk-visible@s text-decoration-none mr-2">
           <i class="uil-plus"> </i> Create New Group
-        </a>
-        <a href="#" class="button primary small circle uk-visible@s text-decoration-none">
-          <i class="uil-plus"> </i> Verifikasi New User
         </a>
       <?php endif; ?>
 

@@ -7,7 +7,7 @@
         <!-- profile cover -->
         <img src="<?= base_url('assets/images/background/bg-01.jpg'); ?>" alt=""> <!-- harusnya ini background si profil user -->
 
-        <a href="#"> <i class="uil-camera"></i> Edit </a> <!-- harusnya ini link buat edit profil-->
+        <a href="<?= base_url('user/edit/'); ?>" class="text-decoration-none"> <i class="uil-camera"></i> Edit </a> <!-- harusnya ini link buat edit profil-->
 
       </div>
 
@@ -19,7 +19,7 @@
         <div class="profile-details-info">
           <h1> <?= $user['name']; ?> </h1>
 
-          <p> <?= $user['email']; ?> <a href="<?= base_url('user/edit') ?>"> Edit </a></p>
+          <p> <?= $user['email']; ?> <a href="<?= base_url('user/edit') ?>" class="text-decoration-none"> Edit </a></p>
           <!-- <p> Mahasiswa Teknik Informatika Angkatan 2017 <a href="#"> Edit </a></p> harusnya ini link buat edit deskripsi -->
         </div>
 
@@ -225,7 +225,7 @@
             <h5> Interested On <span> : Networking, Web Design </span> </h5>
           </div>
 
-          <a href="#" class="button soft-primary block my-3"> Edit </a>
+          <a href="<?= base_url('user/edit'); ?>" class="button soft-primary block my-3 text-decoration-none"> Edit </a>
 
           <hr class="mt-3 mb-0">
 

@@ -13,6 +13,9 @@ var vue = new Vue({
 		totalGroups: 0,
 		user: [],
 		emptyResult: false,
+		allGroups: false,
+		joinedGroups: false,
+		myGroups: false,
 		joinGrup: {
 			id_user: "",
 			id_grup: "",
@@ -28,8 +31,49 @@ var vue = new Vue({
 				if (response.data.groups == null) {
 					vue.emptyResult = true;
 				} else {
+					vue.allGroups = true;
+					vue.joinedGroup = false;
+					vue.myGroups = false;
 					vue.groups = response.data.groups;
 					vue.user = response.data.user;
+					vue.totalGroups = vue.groups.length;
+					console.log(vue.groups);
+				}
+			});
+		},
+
+		getMyGroup() {
+			axios.get(this.url + "group/getMyGroup").then((response) => {
+				if (response.data.groups == null) {
+					vue.emptyResult = true;
+				} else {
+					vue.allGroups = false;
+					vue.joinedGroups = false;
+					vue.myGroups = true;
+					vue.groups = response.data.groups;
+					vue.user = response.data.user;
+					vue.totalGroups = vue.groups.length;
+				}
+			});
+		},
+
+		getJoinedGroup() {
+			axios.get(this.url + "group/getJoinedGroup").then((response) => {
+				if (response.data.groups == null) {
+					vue.emptyResult = true;
+				} else {
+					vue.allGroups = false;
+					vue.joinedGroups = true;
+					vue.myGroups = false;
+					vue.user = response.data.user;
+
+					// bersihkan data sebelumnya lalu masukan data baru
+					vue.groups = [];
+					for (let i = 0; i < response.data.groups.length; i++) {
+						for (let j = 0; j < response.data.groups[i].length; j++) {
+							vue.groups.push(response.data.groups[i][j]);
+						}
+					}
 					vue.totalGroups = vue.groups.length;
 				}
 			});

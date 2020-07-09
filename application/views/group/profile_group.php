@@ -29,7 +29,7 @@
         <div class="right-side">
           <?php if ($role != 'Mahasiswa') : ?>
             <div class="btn-subscribe">
-              <a href="#" class="button primary text-decoration-none"> <i class="uil-thumbs-up"></i> Create New
+              <a :href="route('group/verifikasi/' + g.id_grup)" class="button primary text-decoration-none"> <i class="uil-thumbs-up"></i> Verifikasi New User
               </a>
               <span class="subs-amount"> {{g.jumlah_peserta}} </span>
             </div>
