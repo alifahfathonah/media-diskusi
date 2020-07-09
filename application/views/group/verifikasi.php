@@ -9,7 +9,7 @@
       <div v-for="verifikasi in usersVerifikasi">
         <div class="friend-card" v-for="v in verifikasi">
           <div class="uk-width-auto">
-            <img :src="gambarUser(v.image)" alt="">
+            <img :src="gambarUser(v.image)" alt="user">
             <span class="online-dot"></span>
           </div>
           <div class="uk-width-expand">

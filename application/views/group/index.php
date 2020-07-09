@@ -188,8 +188,11 @@
 
     <nav class="responsive-tab style-4 mb-3">
       <ul>
-        <li class="uk-active"><a href="#" class="text-decoration-none"> All Groups <span> {{totalGroups}} </span> </a></li>
-        <li><a href="#" class="text-decoration-none"> Joined <span> 26 </span> </a></li>
+        <li :class="{'uk-active': allGroups}"><a @click="allGroups=true;joinedGroups=false;myGroups=false;getAllGroup()"> All Groups <span v-if="allGroups"> {{totalGroups}} </span> </a></li>
+        <li :class="{'uk-active': joinedGroups}"><a @click="allGroups=false;joinedGroups=true;myGroups=false;getJoinedGroup()"> Joined <span v-if="joinedGroups"> {{totalGroups}} </span> </a></li>
+        <?php if ($role != 'Mahasiswa') : ?>
+          <li :class="{'uk-active': myGroups}"><a @click="allGroups=false;joinedGroups=false;myGroups=true;getMyGroup()"> My Groups <span v-if="myGroups"> {{totalGroups}} </span> </a></li>
+        <?php endif; ?>
       </ul>
     </nav>
 

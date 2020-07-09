@@ -5,6 +5,8 @@ class Verifikasi_model extends CI_Model
 
   private $tableUserAccessGrup = 'user_access_grup';
   private $tableUser = 'user';
+  private $tableGroup = 'grup';
+  private $tableNotif = 'notif';
 
   public function getVerifikasi($id_grup)
   {

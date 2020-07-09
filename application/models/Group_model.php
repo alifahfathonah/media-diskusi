@@ -210,9 +210,10 @@ class Group_model extends CI_Model
     }
   }
 
-  public function getAllGroup()
+  public function getAllGroup($id_user)
   {
-    $query = $this->db->get($this->tableGroup);
+    $sql = "SELECT * FROM " . $this->tableGroup . " WHERE id_user != '" . $id_user . "'";
+    $query = $this->db->query($sql);
 
     if ($query->num_rows() > 0) {
       return $query->result();

@@ -115,7 +115,8 @@ class Group extends CI_Controller
 
   public function getAllGroup()
   {
-    $group = $this->group->getAllGroup();
+    $id_user = $this->singleUser['id'];
+    $group = $this->group->getAllGroup($id_user);
 
     if ($group) {
       $result = [
