@@ -49,7 +49,7 @@ var vue = new Vue({
 						vue.formValidate = response.data.pesan;
 					} else {
 						vue.pesanBerhasil = response.data.berhasil;
-						swal({
+						Swal.fire({
 							title: "Forum Diskusi",
 							text: vue.pesanBerhasil,
 							icon: "success",

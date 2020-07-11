@@ -13,6 +13,7 @@ class Group extends CI_Controller
   {
     parent::__construct();
     $this->load->model('Group_model', 'group');
+    $this->load->model('Verifikasi_model', 'verifikasi');
     $this->singleUser = $this->db->get_where($this->tableUser, ['email' => $this->session->userdata('email')])->row_array();
   }
 
@@ -136,8 +137,7 @@ class Group extends CI_Controller
 
   public function getMyGroup()
   {
-    $user = $this->singleUser;
-    $id_user = $user['id'];
+    $id_user = $this->singleUser['id'];
     $group = $this->group->getMyGroup($id_user);
 
     if ($group) {
@@ -180,19 +180,19 @@ class Group extends CI_Controller
   {
     $id_user = $this->input->post('id_user');
     $id_grup = $this->input->post('id_grup');
-    $check = $this->group->join($id_user, $id_grup);
+    $join = $this->group->join($id_user, $id_grup);
 
-    if ($check) {
-      $result = [
-        'status' => true,
-        'data' => $this->singleUser,
-        'pesan' => 'Anda sudah join Group!'
-      ];
-    } else {
+    if ($join) {
       $result = [
         'status' => false,
         'data' => $this->singleUser,
         'pesan' => 'Terkirim. Tunggu diverifikasi!'
+      ];
+    } else {
+      $result = [
+        'status' => true,
+        'data' => $this->singleUser,
+        'pesan' => 'Anda sudah join Group!'
       ];
     }
 
@@ -257,12 +257,23 @@ class Group extends CI_Controller
       }
 
       if ($this->group->tambahGroup($data)) {
+        $this->autoJoinDanVerifikasi();
         $result['error'] = false;
         $result['success'] = 'ditambahkan!';
       }
     }
 
-    echo json_encode($result); // pesan berhasil ditambahkan tidak muncul
+    echo json_encode($result);
+  }
+
+  private function autoJoinDanVerifikasi()
+  {
+    $idGrup = $this->group->idGrupTerakhir();
+    $idGrupTerakhir = (int) $idGrup->id_terakhir + 1;
+    if ($this->group->join($this->singleUser['id'], $idGrupTerakhir)) { // auto join untuk pembuat group
+      // auto verifikasi untuk pembuat group
+      $this->verifikasi->accept($this->singleUser['id'], $idGrupTerakhir);
+    }
   }
 
   private function upload_image($image)

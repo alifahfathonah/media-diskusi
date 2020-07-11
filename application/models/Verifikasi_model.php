@@ -12,7 +12,7 @@ class Verifikasi_model extends CI_Model
   {
     $params = [
       'grup_id' => $id_grup,
-      'status' => 'T'
+      'status' => 'Tunggu'
     ];
     $query = $this->db->get_where($this->tableUserAccessGrup, $params);
     if ($query->num_rows() > 0) {
@@ -42,7 +42,7 @@ class Verifikasi_model extends CI_Model
     $data = [
       'grup_id' => $grup_id,
       'user_id' => $user_id,
-      'status' => 'Y'
+      'status' => 'Ya'
     ];
 
     $params = [
@@ -52,8 +52,7 @@ class Verifikasi_model extends CI_Model
 
     $this->updateJumlahPesertaGroup($params['grup_id']);
 
-    $pesan_text = 'telah diverifikasi!';
-    $this->notifikasi($params['user_id'], $params['grup_id'], $pesan_text);
+    $this->notifikasi($params['user_id'], $params['grup_id'], 'telah diterima join!');
 
     $this->db->update($this->tableUserAccessGrup, $data, $params);
     if ($this->db->affected_rows() > 0) {
@@ -65,11 +64,20 @@ class Verifikasi_model extends CI_Model
 
   public function remove($user_id, $grup_id)
   {
+    $data = [
+      'grup_id' => $grup_id,
+      'user_id' => $user_id,
+      'status' => 'Tidak'
+    ];
+
     $params = [
       'grup_id' => $grup_id,
       'user_id' => $user_id
     ];
-    $this->db->delete($this->tableUserAccessGrup, $params);
+
+    $this->notifikasi($params['user_id'], $params['grup_id'], 'telah ditolak join!');
+
+    $this->db->update($this->tableUserAccessGrup, $data, $params);
     if ($this->db->affected_rows() > 0) {
       return true;
     } else {

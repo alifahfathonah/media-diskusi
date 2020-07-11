@@ -101,46 +101,6 @@ class Group_model extends CI_Model
     }
   }
 
-  public function terima($user_id, $grup_id)
-  {
-    $data = [
-      'grup_id' => $grup_id,
-      'user_id' => $user_id,
-      'status' => 'Y'
-    ];
-
-    $params = [
-      'grup_id' => $grup_id,
-      'user_id' => $user_id
-    ];
-
-    $this->updateJumlahPesertaGroup($params['grup_id']);
-
-    $pesan_text = 'telah diverifikasi!';
-    $this->notifikasi($params['user_id'], $params['grup_id'], $pesan_text);
-
-    $this->db->update($this->tableUserAccessGrup, $data, $params);
-    if ($this->db->affected_rows() > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  public function tolak($user_id, $grup_id)
-  {
-    $params = [
-      'grup_id' => $grup_id,
-      'user_id' => $user_id
-    ];
-    $this->db->delete($this->tableUserAccessGrup, $params);
-    if ($this->db->affected_rows() > 0) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   public function tambahGroup($data)
   {
     return $this->db->insert($this->tableGroup, $data);
@@ -231,11 +191,10 @@ class Group_model extends CI_Model
 
     $result = $this->db->get_where($this->tableUserAccessGrup, $params);
     if ($result->num_rows() > 0) {
-      return true;
+      return false;
     } else {
-      // T artinya "Tidak" & jika diterima verifikasi maka akan berubah menjasi Y : Ya
-      $params['status'] = 'T';
-      $this->db->insert($this->tableUserAccessGrup, $params);
+      $params['status'] = 'Tunggu';
+      return $this->db->insert($this->tableUserAccessGrup, $params);
     }
   }
 
@@ -264,11 +223,22 @@ class Group_model extends CI_Model
 
   public function getUserAccessGroupByUserId($id_user)
   {
-    $status = 'Y';
+    $status = 'Ya';
     $sql = "SELECT * FROM " . $this->tableUserAccessGrup . " WHERE user_id='" . $id_user . "' AND status='" . $status . "'";
     $query = $this->db->query($sql);
     if ($query->num_rows() > 0) {
       return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function idGrupTerakhir()
+  {
+    $sql = "SELECT MAX(id_grup) id_terakhir FROM grup";
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      return $query->row();
     } else {
       return false;
     }

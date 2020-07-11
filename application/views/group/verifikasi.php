@@ -24,8 +24,8 @@
 
     </div>
 
-    <div class="col-lg-12" v-if="emptyResult">
-      <div class="alert alert-danger text-center font-weight-bold">Tidak ada user baru!</div>
+    <div class="col-lg-12 text-center" v-if="emptyResult">
+      <h2 class="font-weight-bold">no new users <span class="text-primary">joined</span></h2>
     </div>
 
     <div class="uk-flex uk-flex-center my-4">

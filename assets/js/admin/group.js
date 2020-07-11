@@ -30,14 +30,16 @@ var vue = new Vue({
 				// Arrow function ECMAScript 6
 				if (response.data.groups == null) {
 					vue.emptyResult = true;
+					vue.groups = null;
+					vue.totalGroups = 0;
 				} else {
 					vue.allGroups = true;
-					vue.joinedGroup = false;
 					vue.myGroups = false;
+					vue.joinedGroup = false;
+					vue.emptyResult = false;
 					vue.groups = response.data.groups;
 					vue.user = response.data.user;
 					vue.totalGroups = vue.groups.length;
-					console.log(vue.groups);
 				}
 			});
 		},
@@ -46,10 +48,13 @@ var vue = new Vue({
 			axios.get(this.url + "group/getMyGroup").then((response) => {
 				if (response.data.groups == null) {
 					vue.emptyResult = true;
+					vue.groups = null;
+					vue.totalGroups = 0;
 				} else {
 					vue.allGroups = false;
-					vue.joinedGroups = false;
 					vue.myGroups = true;
+					vue.joinedGroups = false;
+					vue.emptyResult = false;
 					vue.groups = response.data.groups;
 					vue.user = response.data.user;
 					vue.totalGroups = vue.groups.length;
@@ -61,14 +66,16 @@ var vue = new Vue({
 			axios.get(this.url + "group/getJoinedGroup").then((response) => {
 				if (response.data.groups == null) {
 					vue.emptyResult = true;
+					vue.groups = null;
+					vue.totalGroups = 0;
 				} else {
 					vue.allGroups = false;
-					vue.joinedGroups = true;
 					vue.myGroups = false;
+					vue.joinedGroups = true;
+					vue.emptyResult = false;
 					vue.user = response.data.user;
 
-					// bersihkan data sebelumnya lalu masukan data baru
-					vue.groups = [];
+					vue.groups = []; // bersihkan data sebelumnya lalu masukan data baru
 					for (let i = 0; i < response.data.groups.length; i++) {
 						for (let j = 0; j < response.data.groups[i].length; j++) {
 							vue.groups.push(response.data.groups[i][j]);
@@ -137,52 +144,18 @@ var vue = new Vue({
 
 			axios.post(this.url + "group/join", formData).then((response) => {
 				if (response.data.status) {
-					swal({
+					console.log(response.data.pesan);
+					Swal.fire({
+						icon: "success",
 						title: "Group",
-						// contoh pesan : anda sudah join!
 						text: response.data.pesan,
-						icon: "warning",
-						button: "OK",
 					});
 				} else {
-					swal({
-						title: "Group",
-						// contoh pesan : Terkirim. Tunggu diverifikasi!
-						text: response.data.pesan,
+					console.log(response.data.pesan);
+					Swal.fire({
 						icon: "success",
-						button: "OK",
-					});
-				}
-			});
-		},
-
-		terima(idUser, idGrup) {
-			vue.verify.user_id = idUser;
-			vue.verify.grup_id = idGrup;
-			let formData = vue.formData(vue.verify);
-			axios.post(this.url + "group/terima", formData).then((response) => {
-				if (response.data.result) {
-					swal({
 						title: "Group",
 						text: response.data.pesan,
-						icon: "success",
-						button: "OK",
-					});
-				}
-			});
-		},
-
-		tolak(idUser, idGrup) {
-			vue.verify.user_id = idUser;
-			vue.verify.grup_id = idGrup;
-			let formData = vue.formData(vue.verify);
-			axios.post(this.url + "group/tolak", formData).then((response) => {
-				if (response.data.result) {
-					swal({
-						title: "Group",
-						text: response.data.pesan,
-						icon: "success",
-						button: "OK",
 					});
 				}
 			});

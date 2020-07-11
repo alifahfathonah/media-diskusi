@@ -19,9 +19,10 @@ var vue = new Vue({
 			axios.get(this.url + "verifikasi/getVerifikasi").then((response) => {
 				if (response.data.user == null) {
 					vue.emptyResult = true;
+					vue.usersVerifikasi = null;
 				} else {
+					vue.emptyResult = false;
 					vue.usersVerifikasi = response.data.user;
-					console.log(vue.usersVerifikasi);
 				}
 			});
 		},
@@ -32,7 +33,8 @@ var vue = new Vue({
 			let formData = vue.formData(vue.verify);
 			axios.post(this.url + "verifikasi/accept", formData).then((response) => {
 				if (response.data.result) {
-					swal({
+					this.getVerifikasi();
+					Swal.fire({
 						title: "Group",
 						text: response.data.pesan,
 						icon: "success",
@@ -48,7 +50,8 @@ var vue = new Vue({
 			let formData = vue.formData(vue.verify);
 			axios.post(this.url + "verifikasi/remove", formData).then((response) => {
 				if (response.data.result) {
-					swal({
+					this.getVerifikasi();
+					Swal.fire({
 						title: "Group",
 						text: response.data.pesan,
 						icon: "success",

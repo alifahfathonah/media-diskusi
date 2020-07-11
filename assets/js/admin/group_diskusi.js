@@ -59,14 +59,14 @@ var vue = new Vue({
 				.post(this.url + "diskusi/keluarGroup", formData)
 				.then((response) => {
 					if (response.data.status) {
-						swal({
+						Swal.fire({
 							title: "Group",
 							text: response.data.pesan,
 							icon: "warning",
 							button: "OK",
 						});
 					} else {
-						swal({
+						Swal.fire({
 							title: "Group",
 							text: response.data.pesan,
 							icon: "warning",

@@ -56,7 +56,8 @@
                 </div>
 
                 <div class="group-card-btns">
-                  <button class="button primary small mr-3" @click="join(user.id, group.id_grup)"> Join </button>
+                  <a v-if="allGroups" class="button primary small mr-3" @click="join(user.id, group.id_grup)"> Join </a>
+                  <a v-if="joinedGroups" class="button danger small"> Leave </a>
                   <a :href="route('group/profileGroup/' + group.id_grup)" class="button secondary small text-decoration-none"> View </a>
                 </div>
 
@@ -74,10 +75,10 @@
     </div>
 
     <!-- jika group dalam keadaan kosong -->
-    <div v-if="emptyResult" class="col-lg-12">
-      <div class="alert alert-primary text-center">
-        <h6>No Groups Found!</h6>
-      </div>
+    <div v-if="emptyResult" class="col-lg-12 text-center">
+      <h2 class="font-weight-bold" v-if="joinedGroups">You have never <span class="text-primary">joined</span> any group!</h2>
+      <h2 class="font-weight-bold" v-if="allGroups">There are no groups <span class="text-primary">available</span> yet</h2>
+      <h2 class="font-weight-bold" v-if="myGroups">You have never <span class="text-primary">created</span> a group</h2>
     </div>
 
     <div class="section-header pb-0">
@@ -232,10 +233,12 @@
               </div>
             </div>
           </div>
-          <div v-if="emptyResult" class="col-lg-12">
-            <div class="alert alert-primary text-center">
-              <h6>No Groups Found!</h6>
-            </div>
+
+          <!-- jika group dalam keadaan kosong maka tampilkan pesan berdasarkan tab-nya -->
+          <div v-if="emptyResult" class="col-lg-12 text-center">
+            <h2 class="font-weight-bold" v-if="joinedGroups">You have never <span class="text-primary">joined</span> any group!</h2>
+            <h2 class="font-weight-bold" v-if="allGroups">There are no groups <span class="text-primary">available</span> yet</h2>
+            <h2 class="font-weight-bold" v-if="myGroups">You have never <span class="text-primary">created</span> a group</h2>
           </div>
 
           <div class="uk-flex uk-flex-center my-4">

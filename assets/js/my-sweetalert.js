@@ -2,11 +2,10 @@ const flashMessageRole = $(".flash-message-role").data("message");
 
 // FLASH MESSAGE
 if (flashMessageRole) {
-	swal({
+	Swal.fire({
 		title: "Data Role berhasil",
 		text: flashMessageRole,
 		icon: "success",
-		button: "OK",
 	});
 }
 
@@ -15,14 +14,16 @@ $(".tombol-hapus").on("click", function (e) {
 	e.preventDefault();
 	const href = $(this).attr("href");
 
-	swal({
+	Swal.fire({
 		title: "Apakah anda yakin?",
 		text: "Anda akan menghapus data tersebut!",
 		icon: "warning",
-		buttons: true,
-		dangerMode: true,
-	}).then((willDelete) => {
-		if (willDelete) {
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Yes",
+	}).then((result) => {
+		if (result.value) {
 			document.location.href = href;
 		}
 	});
