@@ -227,15 +227,30 @@ class Group extends CI_Controller
 
   public function tambahGroup()
   {
+
+    $data = [
+      'title' => 'Group',
+      'user' => $this->singleUser,
+    ];
+
     $validate = $this->validate_form();
 
     $this->form_validation->set_rules($validate);
+
     if ($this->form_validation->run() == false) {
-      $result['error'] = true;
-      $result['msg'] = [
-        'group_name' => form_error('group_name'),
-        'group_desc' => form_error('group_desc'),
-      ];
+
+      $this->load->view('templates/diskusi-template/header', $data);
+      $this->load->view('templates/diskusi-template/sidebar', $data);
+      $this->load->view('templates/diskusi-template/topbar', $data);
+      $this->load->view('group/create_group', $data);
+      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
+      $this->load->view('templates/diskusi-template/footer');
+
+      // $result['error'] = true;
+      // $result['msg'] = [
+      //   'group_name' => form_error('group_name'),
+      //   'group_desc' => form_error('group_desc'),
+      // ];
     } else {
       $id_user = $this->singleUser['id'];
 
@@ -263,7 +278,7 @@ class Group extends CI_Controller
       }
     }
 
-    echo json_encode($result);
+    // echo json_encode($result);
   }
 
   private function autoJoinDanVerifikasi()
