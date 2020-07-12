@@ -17,7 +17,7 @@
       </nav>
 
       <?php if ($role != 'Mahasiswa') : ?>
-        <a href="#" class="button primary small circle uk-visible@s text-decoration-none mr-2">
+        <a href="<?= base_url('group/tambahGroup'); ?>" class="button primary small circle uk-visible@s text-decoration-none mr-2">
           <i class="uil-plus"> </i> Create New Group
         </a>
       <?php endif; ?>
