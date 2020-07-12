@@ -1,5 +1,4 @@
-<div class="main_content">
-  <!-- </div> -->
+<div class="main_content" id="my_profile">
   <div class="main_content_inner pt-0">
     <div class="profile">
       <div class="profile-cover">
@@ -7,19 +6,19 @@
         <!-- profile cover -->
         <img src="<?= base_url('assets/images/background/bg-01.jpg'); ?>" alt=""> <!-- harusnya ini background si profil user -->
 
-        <a href="<?= base_url('user/edit/'); ?>" class="text-decoration-none"> <i class="uil-camera"></i> Edit </a> <!-- harusnya ini link buat edit profil-->
+        <a :href="route('user/edit')" class="text-decoration-none"> <i class="uil-camera"></i> Edit </a> <!-- harusnya ini link buat edit profil-->
 
       </div>
 
       <div class="profile-details">
         <div class="profile-image">
-          <img src="<?= base_url('assets/img/profile/' . $user['image']); ?>" alt="">
+          <img :src="gambarUser(user.image)" alt="">
           <a href="#"> </a>
         </div>
         <div class="profile-details-info">
-          <h1> <?= $user['name']; ?> </h1>
+          <h1> {{user.name}} </h1>
 
-          <p> <?= $user['email']; ?> <a href="<?= base_url('user/edit') ?>" class="text-decoration-none"> Edit </a></p>
+          <p> {{user.email}} <a :href="route('user/edit')" class="text-decoration-none"> Edit </a></p>
           <!-- <p> Mahasiswa Teknik Informatika Angkatan 2017 <a href="#"> Edit </a></p> harusnya ini link buat edit deskripsi -->
         </div>
 
@@ -36,7 +35,7 @@
           <div class="post-new" uk-toggle="target: body ; cls: post-focus">
             <div class="post-new-media">
               <div class="post-new-media-user">
-                <img src="<?= base_url('assets/img/profile/' . $user['image']); ?>" alt=""> <!-- ini harusnya foto profile setiap user yg login -->
+                <img :src="gambarUser(user.image)" alt=""> <!-- ini harusnya foto profile setiap user yg login -->
               </div>
               <div class="post-new-media-input">
                 <input type="text" class="uk-input" placeholder="What's Happening?"> <!-- input klik sini tar muncul pop up -->
@@ -59,7 +58,7 @@
 
               <div class="post-new-media">
                 <div class="post-new-media-user">
-                  <img src="<?= base_url('assets/img/profile/' . $user['image']); ?>" alt="">
+                  <img :src="gambarUser(user.image)" alt="">
                 </div>
                 <div class="post-new-media-input">
                   <input type="text" class="uk-input" placeholder="What's Happening <?= $user['name']; ?> ?"> <!-- placeholder input nya kalo bisa sih ambil nama user, kalo bisa aja kak -->

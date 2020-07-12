@@ -36,7 +36,7 @@ class User extends CI_Controller
     $this->load->view('templates/diskusi-template/header', $data);
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
-    $this->load->view('user/my-profile', $data);
+    $this->load->view('user/my_profile', $data);
     $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
@@ -129,5 +129,23 @@ class User extends CI_Controller
         }
       }
     }
+  }
+
+  public function getUser()
+  {
+    $user = $this->user->getUser($this->session->userdata('email'));
+    if ($user) {
+      $result = [
+        'status' => true,
+        'user' => $user
+      ];
+    } else {
+      $result = [
+        'status' => false,
+        'user' => null
+      ];
+    }
+
+    echo json_encode($result);
   }
 }

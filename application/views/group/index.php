@@ -58,7 +58,7 @@
                 <div class="group-card-btns">
                   <a v-if="allGroups" class="button primary small mr-3" @click="join(user.id, group.id_grup)"> Join </a>
                   <a v-if="joinedGroups" class="button danger small"> Leave </a>
-                  <a :href="route('group/profileGroup/' + group.id_grup)" class="button secondary small text-decoration-none"> View </a>
+                  <a :href="route('group/profileGroup/' + group.id_grup)" class="button success small text-decoration-none"> View </a>
                 </div>
 
               </div>

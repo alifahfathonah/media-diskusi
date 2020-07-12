@@ -19,6 +19,7 @@ var vue = new Vue({
 					vue.emptyResult = true;
 				} else {
 					vue.group = response.data.group;
+					console.log(vue.group.jumlah_peserta);
 				}
 			});
 		},

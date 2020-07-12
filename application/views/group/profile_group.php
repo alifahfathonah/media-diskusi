@@ -46,10 +46,9 @@
       <div class="nav-single-group" uk-sticky="offset:61;media : @s">
         <nav class="responsive-tab">
           <ul>
-            <li class="uk-active"><a class="active text-decoration-none" href="#"> Timeline </a></li>
+            <li class="uk-active"><a class="active text-decoration-none" href="#"> Discussions </a></li>
             <li><a href="#" class="text-decoration-none"> Members </a></li>
             <li><a href="#" class="text-decoration-none"> Photos </a></li>
-            <li><a href="#" class="text-decoration-none"> Discussions </a></li>
             <li><a href="#" class="text-decoration-none"> Videos </a></li>
           </ul>
         </nav>
