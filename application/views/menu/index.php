@@ -67,3 +67,4 @@
     <?php require 'modal.php'; ?>
 
   </div>
+</div>

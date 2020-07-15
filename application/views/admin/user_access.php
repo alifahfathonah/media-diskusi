@@ -40,6 +40,7 @@
     </div>
 
   </div>
+</div>
 
-  <!-- Modal Tambah Menu -->
-  <?php require 'modal.php'; ?>
+<!-- Modal Tambah Menu -->
+<?php require 'modal.php'; ?>

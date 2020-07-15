@@ -32,3 +32,4 @@
       <a href="#" class="button secondary small px-11 circle"> View More </a>
     </div>
   </div>
+</div>

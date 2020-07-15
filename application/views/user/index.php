@@ -3,6 +3,7 @@
   <div class="main_content_inner">
     <div class="uk-grid-large" uk-grid>
       <div class="uk-width-2-3@m fead-area">
+
         <div class="post-newer">
           <div class="post-new" uk-toggle="target: body ; cls: post-focus">
             <div class="post-new-media">
@@ -511,3 +512,4 @@
       </div>
     </div>
   </div>
+</div>

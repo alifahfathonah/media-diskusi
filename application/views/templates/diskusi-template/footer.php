@@ -44,9 +44,6 @@
 <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 
 <!-- dari template lama -->
-<!-- Vuetify -->
-<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 
 <!-- pagination -->
 <script src="<?= base_url('assets/js/pagination.js'); ?>"></script>
@@ -65,10 +62,9 @@
 <script src="<?= base_url('assets/js/my-sweetalert.js'); ?>"></script>
 
 <!-- 
-  config -> semua file yang menggunakan base url
-
-  type="module" : berguna untuk menjalakan syntax import & export pada file
-  jika tidak menggunakan type="module" maka file tidak dapat diexport dan import
+  # config -> semua file yang menggunakan base url
+  # type="module" : berguna untuk menjalakan syntax import & export pada file
+  # jika tidak menggunakan type="module" maka file tidak dapat diexport dan import 
 -->
 <script type="module" src="<?= base_url('assets/js/admin/role.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/menu.js'); ?>"></script>
@@ -82,6 +78,7 @@
 <script type="module" src="<?= base_url('assets/js/admin/profile_group.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/verifikasi.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/my_profile.js'); ?>"></script>
+<script type="module" src="<?= base_url('assets/js/admin/create_group.js'); ?>"></script>
 
 <!-- moment library -->
 <script src="<?= base_url('assets/js/moment/moment.min.js'); ?>"></script>

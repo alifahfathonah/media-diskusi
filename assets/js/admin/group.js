@@ -86,19 +86,6 @@ var vue = new Vue({
 			});
 		},
 
-		tambahGroup() {
-			this.groupBaru.group_image = this.selectedFile; // upload gambar
-			var formData = vue.formData(vue.groupBaru);
-			axios.post(this.url + "group/tambahGroup", formData).then((response) => {
-				// Arrow function ECMAScript 6
-				if (response.data.error) {
-					vue.formValidate = response.data.msg;
-				} else {
-					vue.successMSG = response.data.success;
-				}
-			});
-		},
-
 		ubahGroup() {
 			vue.groupData.group_image = this.selectedFile;
 			var formData = vue.formData(vue.groupData);

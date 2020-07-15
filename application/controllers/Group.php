@@ -225,73 +225,62 @@ class Group extends CI_Controller
     echo json_encode($result);
   }
 
-  public function tambahGroup()
+  public function createGroup()
   {
-
     $data = [
       'title' => 'Group',
-      'user' => $this->singleUser,
+      'user' => $this->singleUser
     ];
 
     $validate = $this->validate_form();
-
     $this->form_validation->set_rules($validate);
 
     if ($this->form_validation->run() == false) {
-
       $this->load->view('templates/diskusi-template/header', $data);
       $this->load->view('templates/diskusi-template/sidebar', $data);
       $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('group/create_group', $data);
       $this->load->view('templates/diskusi-template/chat_sidebar', $data);
       $this->load->view('templates/diskusi-template/footer');
-
-      // $result['error'] = true;
-      // $result['msg'] = [
-      //   'group_name' => form_error('group_name'),
-      //   'group_desc' => form_error('group_desc'),
-      // ];
     } else {
       $id_user = $this->singleUser['id'];
 
-      $data = [
+      $group = [
         'id_grup' => null,
         'group_name' => $this->input->post('group_name'),
         'group_desc' => $this->input->post('group_desc'),
         'id_user' => $id_user,
         'date_created' => strtotime('now'), // masih belum sesuai dengan yang diinginkan
-        'jumlah_peserta' => 0
+        'jumlah_peserta' => 0,
+        'group_category' => $this->input->post('group_category')
       ];
 
       $upload_image = $_FILES['group_image']['name'];
 
       if ($upload_image) {
-        $data['group_image'] = $this->upload_image($upload_image);
+        $group['group_image'] = $this->upload_image($upload_image);
       } else {
-        $data['group_image'] = 'default.png';
+        $group['group_image'] = 'default.png';
       }
 
-      if ($this->group->tambahGroup($data)) {
+      if ($this->group->tambahGroup($group)) {
         $this->autoJoinDanVerifikasi();
-        $result['error'] = false;
-        $result['success'] = 'ditambahkan!';
+        $this->session->set_flashdata('message', 'Group has been created successfully!');
+        redirect('group');
       }
     }
-
-    // echo json_encode($result);
   }
 
   private function autoJoinDanVerifikasi()
   {
     $idGrup = $this->group->idGrupTerakhir();
-    $idGrupTerakhir = (int) $idGrup->id_terakhir + 1;
+    $idGrupTerakhir = (int) $idGrup->id_terakhir;
     if ($this->group->join($this->singleUser['id'], $idGrupTerakhir)) { // auto join untuk pembuat group
-      // auto verifikasi untuk pembuat group
-      $this->verifikasi->accept($this->singleUser['id'], $idGrupTerakhir);
+      $this->verifikasi->accept($this->singleUser['id'], $idGrupTerakhir); // auto verifikasi untuk pembuat group
     }
   }
 
-  private function upload_image($image)
+  private function upload_image($image, $old_image = null)
   {
     if ($image) {
       $config['allowed_types'] = 'gif|jpg|jpeg|png';
@@ -301,6 +290,10 @@ class Group extends CI_Controller
       $this->load->library('upload', $config);
 
       if ($this->upload->do_upload('group_image')) {
+
+        if ($old_image != 'default.png') {
+          unlink(FCPATH . 'assets/img/group/' . $old_image);
+        }
         // jika berhasil upload
         $new_image = $this->upload->data('file_name');
         $image_name = $new_image;
@@ -324,44 +317,55 @@ class Group extends CI_Controller
         'field' => 'group_desc',
         'label' => 'Deskripsi Group',
         'rules' => 'trim|required'
+      ],
+      [
+        'field' => 'group_category',
+        'label' => 'Category Group',
+        'rules' => 'trim|required'
       ]
     ];
     return $validate;
   }
 
-  public function ubahGroup()
+  public function updateGroup($id)
   {
-    $id = $this->input->post('id_grup');
-
     $data = [
-      'group_name' => $this->input->post('group_name'),
-      'group_desc' => $this->input->post('group_desc'),
-      'id_user' => $this->input->post('id_user'),
+      'title' => 'Group',
+      'user' => $this->singleUser,
+      'group' => $this->group->getGroupByIdGroup($id),
+      'category' => [
+        'Networking', 'Design', 'Programming', 'Game',
+        'Music Digital', 'Artificial Intelligence', 'Data Science'
+      ]
     ];
 
     $validate = $this->validate_form();
-
     $this->form_validation->set_rules($validate);
     if ($this->form_validation->run() == false) {
-      $result['error'] = true;
-      $result['msg'] = [
-        'group_name' => form_error('group_name'),
-        'group_desc' => form_error('group_desc')
-      ];
+      $this->load->view('templates/diskusi-template/header', $data);
+      $this->load->view('templates/diskusi-template/sidebar', $data);
+      $this->load->view('templates/diskusi-template/topbar', $data);
+      $this->load->view('group/edit_group', $data);
+      $this->load->view('templates/diskusi-template/footer');
     } else {
+      $group = [
+        'group_name' => $this->input->post('group_name'),
+        'group_desc' => $this->input->post('group_desc'),
+        'group_category' => $this->input->post('group_category')
+      ];
+
       $upload_image = $_FILES['group_image']['name'];
+      $old_image = $data['group'][0]->group_image;
 
       if ($upload_image) {
-        $data['group_image'] = $this->upload_image($upload_image);
+        $group['group_image'] = $this->upload_image($upload_image, $old_image);
       }
 
-      if ($this->group->ubahGroup($this->tableGroup, $data, $id)) {
-        $result['error'] = false;
-        $result['success'] = 'diubah!';
+      if ($this->group->ubahGroup($this->tableGroup, $group, $id)) {
+        $this->session->set_flashdata('message', 'Group has been update successfully!');
+        redirect('group');
       }
     }
-
-    echo json_encode($result);
   }
 
   public function hapusGroup()

@@ -61,11 +61,68 @@
 
     </div>
 
-
     <div class="section-small">
       <div uk-grid>
 
         <div class="uk-width-2-3@m fead-area">
+
+          <!-- input post -->
+          <div class="post-newer mt-4">
+            <div class="post-new" uk-toggle="target: body ; cls: post-focus">
+              <div class="post-new-media">
+                <div class="post-new-media-user">
+                  <img src="<?= base_url('assets/images/avatars/avatar-1.jfif'); ?>" alt="" />
+                  <!-- ini harusnya foto profile setiap user yg login -->
+                </div>
+                <div class="post-new-media-input">
+                  <input type="text" class="uk-input" placeholder="What's Happening?" />
+                  <!-- input klik sini tar muncul pop up -->
+                </div>
+              </div>
+              <hr />
+            </div>
+
+            <div class="post-pop">
+              <div class="post-new-overyly" uk-toggle="target: body ; cls: post-focus"></div>
+
+              <div class="post-new uk-animation-slide-top-small">
+                <div class="post-new-header">
+                  <h4>Create New Post</h4>
+                  <!-- Close Button-->
+                  <span class="post-new-btn-close" uk-toggle="target: body ; cls: post-focus" uk-tooltip="title:Close; pos: left "></span>
+                </div>
+
+                <div class="post-new-media">
+                  <div class="post-new-media-user">
+                    <img src="<?= base_url('assets/images/avatars/avatar-1.jfif'); ?>" alt="" />
+                  </div>
+                  <div class="post-new-media-input">
+                    <input type="text" class="uk-input" placeholder="What's Happening Melanaumi ?" />
+                    <!-- placeholder input nya kalo bisa sih ambil nama user, kalo bisa aja kak -->
+                  </div>
+                </div>
+
+                <div class="post-new-tab-nav">
+                  <!-- ini tu sebenernya ak kasi buat misal nanti bisa upload foto, file, dll, tp kalo gausa ya di off in aja atau dihapus aja -->
+                  <a href="#" uk-tooltip="title:Close">
+                    <i class="uil-image"></i>
+                  </a>
+                  <a href="#"> <i class="uil-user-plus"></i> </a>
+                  <a href="#"> <i class="uil-video"></i> </a>
+                  <a href="#"> <i class="uil-record-audio"></i> </a>
+                  <a href="#"> <i class="uil-file-alt"></i> </a>
+                  <a href="#"> <i class="uil-emoji"></i> </a>
+                  <a href="#"> <i class="uil-gift"></i> </a>
+                </div>
+
+                <div class="uk-flex uk-flex-between">
+                  <!-- ini class buat button submit -->
+                  <a href="#" class="button primary px-6"> Share </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ./input post -->
 
           <div class="post">
             <div class="post-heading">
@@ -157,7 +214,7 @@
           </div>
 
           <?php if ($role != 'Mahasiswa') : ?>
-            <a href="#" class="button soft-primary block my-3 text-decoration-none"> Edit </a>
+            <a :href="route('group/updateGroup/' + g.id_grup)" class="button soft-primary block my-3 text-decoration-none"> Edit </a>
           <?php endif; ?>
 
           <hr class="my-3">
@@ -220,3 +277,4 @@
       </div>
     </div>
   </div>
+</div>

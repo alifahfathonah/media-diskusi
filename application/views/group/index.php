@@ -3,6 +3,15 @@
 
   <div class="main_content_inner">
 
+    <!-- falsh message ketika group berhasil dicreate -->
+    <?php if ($this->session->flashdata('message')) : ?>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= $this->session->flashdata('message'); ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <?php endif; ?>
 
     <h1> Groups </h1>
     <div class="uk-flex uk-flex-between">
@@ -17,7 +26,7 @@
       </nav>
 
       <?php if ($role != 'Mahasiswa') : ?>
-        <a href="<?= base_url('group/tambahGroup'); ?>" class="button primary small circle uk-visible@s text-decoration-none mr-2">
+        <a href="<?= base_url('group/createGroup'); ?>" class="button primary small circle uk-visible@s text-decoration-none mr-2">
           <i class="uil-plus"> </i> Create New Group
         </a>
       <?php endif; ?>
@@ -56,9 +65,9 @@
                 </div>
 
                 <div class="group-card-btns">
-                  <a v-if="allGroups" class="button primary small mr-3" @click="join(user.id, group.id_grup)"> Join </a>
-                  <a v-if="joinedGroups" class="button danger small"> Leave </a>
-                  <a :href="route('group/profileGroup/' + group.id_grup)" class="button success small text-decoration-none"> View </a>
+                  <a v-if="allGroups" class="button primary small" @click="join(user.id, group.id_grup)"> Join </a>
+                  <a v-if="joinedGroups" class="button secondary small"> Leave </a>
+                  <a :href="route('group/profileGroup/' + group.id_grup)" v-if="joinedGroups || myGroups" class="button primary small text-decoration-none"> View </a>
                 </div>
 
               </div>
@@ -249,3 +258,4 @@
     </div>
 
   </div>
+</div>
