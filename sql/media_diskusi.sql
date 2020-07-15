@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 04, 2020 at 06:14 AM
+-- Generation Time: Jul 15, 2020 at 09:25 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -54,26 +54,6 @@ CREATE TABLE `forum_diskusi` (
   `id_grup` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `forum_diskusi`
---
-
-INSERT INTO `forum_diskusi` (`id_forum`, `text_content`, `image_forum`, `date_post`, `like_post`, `delete_post`, `id_user`, `id_grup`) VALUES
-(1, 'Bagaiaman cara mengatasi masalah saat mengupload file gambar pada codeigniter dengan menggunakan library axios? apakah teman-teman ada yang bisa membantu?', 'feedback-2990424_19205.jpg', 2626, 0, 0, 1, 58),
-(2, 'Ketika kita menjalankan sebuah project apakah kita membutuhkan koneksi internet?', 'facebook1.png', 2626, 0, 0, 1, 58),
-(3, 'I used an htaccess in my project that use Codeigniter framework: DirectoryIndex index.php RewriteEngine on RewriteCond $1 !^(index\\.php|assets|robots\\.txt|favicon\\.ico) [NC] RewriteCond … %{REQUEST_FILENAME} !-f [NC] RewriteCond %{REQUEST_FILENAME} !-d [NC] RewriteRule ^(.*)$ ./index.php/$1 [NC,L,QSA] My problem is, when i call a paypal service, Paypal response for me an GET url, like that', 'team-386673_19201.jpg', 2626, 0, 0, 1, 58),
-(4, 'POS is based on PHPPOS, and I have implemented a module that uses the standard XML-RPC library to send sales data to the service. The server system is built on CodeIgniter, and uses the XML-RPC and … , and have rigged it to return a canned response regardless of the input. However, I believe the problem lies in the actual sending of the data. I\'ve even tried disabling the maximum script execution time for PHP, and it still errors out.', 'team-4529717_1920.jpg', 2626, 0, 0, 1, 58),
-(5, 'Login form in Codeigniter problems : I\'m trying to make Login form using codeigniter, but my HTML code for login form doesn\'t work. I\'m still trying to learn Codeigniter and I can\'t get what\'s the problem, why the form doesn\'t load', 'startup-593341_19203.jpg', 2626, 0, 0, 1, 58),
-(6, 'jqGrid and CodeIgniter Problem : I have problem with loading my jqGrid. It just loads two parallel lines, and shows \"Loading...\" above them. This is my controller: function grid() { $var[\'grid\'] = $this->Uom_model->select …', 'feedback-2990424_19206.jpg', 2626, 0, 0, 1, 58),
-(7, 'Postingan terbaru!', 'startup-593341_19204.jpg', 2626, 0, 0, 1, 58),
-(8, 'I have problem with loading my jqGrid. It just loads two parallel lines, and shows \"Loading...\" above them. This is my controller: function grid() { $var[\'grid\'] = $this->Uom_model->select …', 'whatsapp1.png', 2626, 0, 0, 1, 59),
-(9, 'CORS problem with VueJS using axios or vue-resource : I\'m working on a SPA website using VueJS, i have a problem when vue-ressource performs http requests to an external API. here is an example of console output : Access to XMLHttpRequest at \'https … .warmango.dev\' that is not equal to the supplied origin. But when I open the console (with Disable cache ckecked) the problem disappears and I can navigate normally... It is very frustrating, is there a cache problem with VueJS ?', 'Screenshot_from_2020-04-03_03-35-06.png', 2626, 0, 0, 2, 58),
-(10, 'Jika kita ingin menggunakan library pada codeigniter apa yang harus kita lakukan? tolong bantuannya teman-teman!', 'Screenshot_from_2020-04-01_03-01-31.png', 2626, 0, 0, 2, 58),
-(11, 'Untuk semuanya mata kuliah saya hari ini kosong karena saya ada meeting sampai sore!', 'Screenshot_from_2020-06-15_20-05-28.png', 2626, 0, 0, 3, 58),
-(12, 'Testing', 'tie-690084_1920.jpg', 2626, 0, 0, 1, 58),
-(13, 'Menambahkan library file .jar pada Java Netbeans – Sandroe ...sandrukharisma.wordpress.com › me...\nTranslate this page\nJan 10, 2014 - Pada tulisan ini saya akan coba berbagi bagaimana cara menambahkan library yang ber-ekstensi jar pada project yang ada pada Netbeans.', 'Screenshot_from_2020-06-27_04-03-47.png', 2828, 0, 0, 1, 58),
-(14, 'Diberitahukan kepada seluruh dosen bahwa hari ini pada jam 17.00 akan diadakan rapat, sekian pemberitahuan disampaikan.Terimakasih', 'Screenshot_from_2020-06-15_20-05-281.png', 101, 0, 0, 3, 69);
-
 -- --------------------------------------------------------
 
 --
@@ -87,38 +67,16 @@ CREATE TABLE `grup` (
   `id_user` int(11) DEFAULT NULL,
   `date_created` int(11) DEFAULT NULL,
   `group_image` varchar(128) DEFAULT NULL,
-  `jumlah_peserta` int(11) DEFAULT NULL
+  `jumlah_peserta` int(11) DEFAULT NULL,
+  `group_category` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `grup`
 --
 
-INSERT INTO `grup` (`id_grup`, `group_name`, `group_desc`, `id_user`, `date_created`, `group_image`, `jumlah_peserta`) VALUES
-(58, 'Pemerograman Dasar 1', 'Kelas Pemerograman Dasar 1', 1, 1590391162, 'tie-690084_19201.jpg', 3),
-(59, 'Artificial Intelligence', 'Kelas Artificial Intelligence', 1, 1590391238, 'Screenshot_from_2020-07-01_06-52-18.png', 1),
-(60, 'Dosen Algoritma', 'Dalam matematika, grup adalah suatu himpunan, beserta satu operasi biner, seperti perkalian atau penjumlahan, yang memenuhi beberapa aksioma yang disebut aksioma grup. Misalnya, himpunan bilangan bulat adalah suatu grup terhadap operasi penjumlahan.', 1, 1590391319, 'whatsapp3.png', 1),
-(61, 'Pemrograman Web Lanjut', 'Pemrograman Web Lanjut', 1, 1590391369, 'facebook3.png', 1),
-(62, 'Web Programming STIKI', 'Grup untuk berdiskusi bagi mahasiswa peminat bidang web programming STIKI Malang', 1, 1590400771, 'feedback-2990424_19201.jpg', 0),
-(63, 'Pemrograman Berorientasi Objek', 'Grup Kelas PBO', 1, 1590405359, 'background.jpg', 0),
-(65, 'Kantor Pusat', 'Kantor Pusat', 1, 1590413950, 'team-4529717_1920.jpg', 0),
-(66, 'UKM', 'Seluruh kegiatan UKM bisa diinformasikan melalui grup ini', 1, 1590414112, 'restaurant-690975_1920.jpg', 0),
-(67, 'BAA', 'Khusus untuk pegawai BAA STIKI Malang', 1, 1590414414, 'feedback-2990424_1920.jpg', 0),
-(68, 'PMB', 'Grup untuk pegawai PMB STIKI', 1, 1590414591, 'facebook.png', 0),
-(69, 'Group Dosen', 'Group ini dibuat oleh user dosen.', 3, 1590414786, 'team-386673_1920.jpg', 3),
-(70, 'Strategi Algoritma', 'Group khusus mata kuliah strategi algoritma', 3, 1590414814, 'restaurant-690975_19201.jpg', 0),
-(71, 'Database', 'Group khusus mata kuliah Database untuk semua mahasiswa & semua Semester', 3, 1590415036, 'default.png', 0),
-(72, 'Umum', 'Grup ini untuk semua mahasiswa, dosen dan pegawai STIKI', 1, 1590418295, 'whatsapp.png', 0),
-(74, 'Perpustakaan', 'Khusus untuk pengurus perpustakaan', 1, 1590419574, 'startup-593341_1920.jpg', 0),
-(75, 'Java Programming', 'Khusus bagi mahasiswa pencinta JAVA', 1, 1590426081, 'whatsapp1.png', 0),
-(76, 'JavaScript', 'Khusus bagi mahasiswa yang menyukai & ingin mendalami bahasa pemrograman JavaScript', 1, 1590426226, 'facebook1.png', 0),
-(77, 'Keuangan', 'Khusus bagi pegawai keuangan ', 1, 1590426341, 'startup-593341_19201.jpg', 0),
-(78, 'INBIS', 'Inkubator Bisnis STIKI', 1, 1590426512, 'default.png', 0),
-(79, 'Kantin', 'Grup pegawai kantin STIKI Malang', 1, 1590426567, 'default.png', 0),
-(80, 'Data Mining', 'Kelas Data Mining Semua Semester & Semua Mahasiswa', 1, 1590426631, 'whatsapp2.png', 0),
-(81, 'Bidang Mintat', 'Bidang Minat', 1, 1590426933, 'facebook2.png', 0),
-(82, 'Dosen Pembimbing', 'Dosen Pembimbing', 1, 1590427143, 'team-4529717_19201.jpg', 0),
-(83, 'Internet of Things', 'Kelas IOT untuk semua mahasiswa & semua angkatan', 3, 1593577792, 'Screenshot_from_2020-05-08_23-11-541.png', 0);
+INSERT INTO `grup` (`id_grup`, `group_name`, `group_desc`, `id_user`, `date_created`, `group_image`, `jumlah_peserta`, `group_category`) VALUES
+(1, 'Pemrograman Dasar 1', 'Kelas Pemrograman Dasar 1 tahun 2020', 1, 1594797423, 'tie-690084_1920.jpg', 1, 'Programming');
 
 -- --------------------------------------------------------
 
@@ -137,12 +95,7 @@ CREATE TABLE `notif` (
 --
 
 INSERT INTO `notif` (`id`, `text_notif`, `id_user`) VALUES
-(1, 'Test Upload Gambar 2 telah diverifikasi!', 1),
-(2, 'Dosen Algoritma telah diverifikasi!', 1),
-(3, 'Group Dosen telah diverifikasi!', 3),
-(4, 'Group Dosen telah diverifikasi!', 1),
-(5, 'Group Dosen telah diverifikasi!', 2),
-(6, 'Pemrograman Web Lanjut telah diverifikasi!', 1);
+(1, 'Pemrograman Dasar 1 telah diterima join!', 1);
 
 -- --------------------------------------------------------
 
@@ -207,7 +160,7 @@ CREATE TABLE `user_access_grup` (
   `id` int(11) NOT NULL,
   `grup_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `status` char(1) DEFAULT NULL
+  `status` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -215,15 +168,7 @@ CREATE TABLE `user_access_grup` (
 --
 
 INSERT INTO `user_access_grup` (`id`, `grup_id`, `user_id`, `status`) VALUES
-(67, 58, 1, 'Y'),
-(68, 58, 3, 'Y'),
-(69, 58, 2, 'Y'),
-(70, 59, 1, 'Y'),
-(71, 60, 1, 'Y'),
-(72, 69, 3, 'Y'),
-(73, 69, 1, 'Y'),
-(74, 69, 2, 'Y'),
-(75, 61, 1, 'Y');
+(1, 1, 1, 'Ya');
 
 -- --------------------------------------------------------
 
@@ -294,10 +239,7 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 (1, 'Administrator'),
 (2, 'Mahasiswa'),
 (3, 'Dosen'),
-(4, 'BAK'),
-(5, 'BAA'),
-(11, 'Puket 1'),
-(12, 'Puket 2');
+(4, 'BAK');
 
 -- --------------------------------------------------------
 
@@ -428,19 +370,19 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `forum_diskusi`
 --
 ALTER TABLE `forum_diskusi`
-  MODIFY `id_forum` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_forum` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `grup`
 --
 ALTER TABLE `grup`
-  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `id_grup` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `notif`
 --
 ALTER TABLE `notif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pesan`
@@ -464,7 +406,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user_access_grup`
 --
 ALTER TABLE `user_access_grup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -535,7 +477,6 @@ ALTER TABLE `share`
 -- Constraints for table `user_access_grup`
 --
 ALTER TABLE `user_access_grup`
-  ADD CONSTRAINT `grup_id` FOREIGN KEY (`grup_id`) REFERENCES `grup` (`id_grup`),
   ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 COMMIT;
 
