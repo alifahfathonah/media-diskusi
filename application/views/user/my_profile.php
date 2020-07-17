@@ -93,7 +93,7 @@
                 <p> 5 <span> hrs </span> <i class="uil-users-alt"></i> </p>
               </div>
               <div class="post-btn-action">
-                <span class="icon-more uil-ellipsis-h"></span>
+                <span class="uil-ellipsis-h"></span>
                 <div class="mt-0 p-2" uk-dropdown="pos: bottom-right;mode:hover ">
                   <ul class="uk-nav uk-dropdown-nav">
                     <!-- nah pas bagian ini tu kalo post nya punya user yg login ad tambahan edit sma delete sma disable -->
@@ -163,7 +163,6 @@
                     <span> 1 hrs </span> <!-- waktu comments -->
                   </div>
                 </div>
-                <a href="#" class="post-comment-opt"></a>
               </div>
 
               <div class="post-comments-single">
@@ -182,7 +181,6 @@
                     <span> 1 hrs </span>
                   </div>
                 </div>
-                <a href="#" class="post-comment-opt"></a>
               </div>
 
               <a href="#" class="view-more-comment"> View 8 more Comments</a>
