@@ -53,6 +53,112 @@ class Group extends CI_Controller
     $this->load->view('templates/diskusi-template/footer');
   }
 
+  public function posting()
+  {
+    $validate = [
+      [
+        'field' => 'text_content',
+        'label' => 'Text Content',
+        'rules' => 'trim|required'
+      ],
+    ];
+    $this->form_validation->set_rules($validate);
+    if ($this->form_validation->run() == false) {
+      $result = [
+        'error' => true,
+        'pesan' => [
+          'text_content' => form_error('text_content'),
+        ]
+      ];
+    } else {
+      $id_grup = $this->session->userdata('id_grup');
+      $id_user = $this->singleUser['id'];
+      $text_content = $this->input->post('text_content');
+      $upload_image = $_FILES['image']['name'];
+
+      $result['test'] = 'Test Debug';
+
+      $data = [
+        'id_forum' => null,
+        'text_content' => $text_content,
+        'image_forum' => null,
+        'date_post' => time(),
+        'like_post' => 0,
+        'delete_post' => 0,
+        'id_user' => $id_user,
+        'id_grup' => $id_grup
+      ];
+
+      if ($upload_image) {
+        $data['image_forum'] = $this->uploadImagePostingan($upload_image);
+
+        if ($this->group->posting($data)) {
+          $result = [
+            'error' => false,
+            'pesan' => 'Postingan diskusi berhasil diupload',
+          ];
+        }
+      } else {
+        $data['image_forum'] = null;
+
+        if ($this->group->posting($data)) {
+          $result = [
+            'error' => false,
+            'pesan' => 'Postingan diskusi berhasil diupload',
+          ];
+        }
+      }
+    }
+
+    echo json_encode($result);
+  }
+
+  public function createGroup()
+  {
+    $data = [
+      'title' => 'Group',
+      'user' => $this->singleUser
+    ];
+
+    $validate = $this->validate_form();
+    $this->form_validation->set_rules($validate);
+
+    if ($this->form_validation->run() == false) {
+      $this->load->view('templates/diskusi-template/header', $data);
+      $this->load->view('templates/diskusi-template/sidebar', $data);
+      $this->load->view('templates/diskusi-template/topbar', $data);
+      $this->load->view('group/create_group', $data);
+      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
+      $this->load->view('templates/diskusi-template/footer');
+    } else {
+      $id_user = $this->singleUser['id'];
+
+      $group = [
+        'id_grup' => null,
+        'group_name' => $this->input->post('group_name'),
+        'group_desc' => $this->input->post('group_desc'),
+        'id_user' => $id_user,
+        'date_created' => strtotime('now'), // masih belum sesuai dengan yang diinginkan
+        'jumlah_peserta' => 0,
+        'group_category' => $this->input->post('group_category')
+      ];
+
+      $upload_image = $_FILES['group_image']['name'];
+
+      if ($upload_image) {
+        $group['group_image'] = $this->upload_image($upload_image);
+      } else {
+        $group['group_image'] = 'default.png';
+      }
+
+      if ($this->group->tambahGroup($group)) {
+        $this->autoJoinDanVerifikasi();
+        $this->session->set_flashdata('message', 'Group has been created successfully!');
+        redirect('group');
+      }
+    }
+  }
+
   public function verifikasi($id_grup)
   {
     $data = [
@@ -74,20 +180,42 @@ class Group extends CI_Controller
   {
     $id_grup = $this->session->userdata('id_grup');
 
+    $user = $this->singleUser;
     $group = $this->group->getGroupByIdGroup($id_grup);
     if ($group) {
       $result = [
         'status' => true,
         'group' => $group,
+        'user' => $user
       ];
     } else {
       $result = [
         'status' => false,
         'group' => null,
+        'user' => null
       ];
     }
 
     echo json_encode($result);
+  }
+
+  public function getPostingan()
+  {
+    $id_grup = $this->session->userdata('id_grup');
+    $postingan = $this->group->getPostingDiskusiJoinUser($id_grup);
+
+    if ($postingan) {
+      $res = [
+        'status' => true,
+        'postingan' => $postingan,
+      ];
+    } else {
+      $res = [
+        'status' => false,
+        'postingan' => null
+      ];
+    }
+    echo json_encode($res);
   }
 
   public function tampilSemuaGroup()
@@ -225,52 +353,6 @@ class Group extends CI_Controller
     echo json_encode($result);
   }
 
-  public function createGroup()
-  {
-    $data = [
-      'title' => 'Group',
-      'user' => $this->singleUser
-    ];
-
-    $validate = $this->validate_form();
-    $this->form_validation->set_rules($validate);
-
-    if ($this->form_validation->run() == false) {
-      $this->load->view('templates/diskusi-template/header', $data);
-      $this->load->view('templates/diskusi-template/sidebar', $data);
-      $this->load->view('templates/diskusi-template/topbar', $data);
-      $this->load->view('group/create_group', $data);
-      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
-      $this->load->view('templates/diskusi-template/footer');
-    } else {
-      $id_user = $this->singleUser['id'];
-
-      $group = [
-        'id_grup' => null,
-        'group_name' => $this->input->post('group_name'),
-        'group_desc' => $this->input->post('group_desc'),
-        'id_user' => $id_user,
-        'date_created' => strtotime('now'), // masih belum sesuai dengan yang diinginkan
-        'jumlah_peserta' => 0,
-        'group_category' => $this->input->post('group_category')
-      ];
-
-      $upload_image = $_FILES['group_image']['name'];
-
-      if ($upload_image) {
-        $group['group_image'] = $this->upload_image($upload_image);
-      } else {
-        $group['group_image'] = 'default.png';
-      }
-
-      if ($this->group->tambahGroup($group)) {
-        $this->autoJoinDanVerifikasi();
-        $this->session->set_flashdata('message', 'Group has been created successfully!');
-        redirect('group');
-      }
-    }
-  }
-
   private function autoJoinDanVerifikasi()
   {
     $idGrup = $this->group->idGrupTerakhir();
@@ -293,6 +375,30 @@ class Group extends CI_Controller
 
         if ($old_image != 'default.png') {
           unlink(FCPATH . 'assets/img/group/' . $old_image);
+        }
+        // jika berhasil upload
+        $new_image = $this->upload->data('file_name');
+        $image_name = $new_image;
+      } else {
+        echo $this->upload->display_errors();
+      }
+    }
+
+    return $image_name;
+  }
+
+  private function uploadImagePostingan($image, $old_image = null)
+  {
+    if ($image) {
+      $config['allowed_types'] = 'gif|jpg|jpeg|png';
+      $config['max_size'] = '2048';
+      $config['upload_path'] = './assets/img/forum_diskusi/';
+
+      $this->load->library('upload', $config);
+
+      if ($this->upload->do_upload('image')) {
+        if ($old_image != 'default.png') {
+          unlink(FCPATH . 'assets/img/forum_diskusi/' . $old_image);
         }
         // jika berhasil upload
         $new_image = $this->upload->data('file_name');

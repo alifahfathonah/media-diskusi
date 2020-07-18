@@ -78,7 +78,6 @@
 <script type="module" src="<?= base_url('assets/js/admin/profile_group.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/verifikasi.js'); ?>"></script>
 <script type="module" src="<?= base_url('assets/js/admin/my_profile.js'); ?>"></script>
-<script type="module" src="<?= base_url('assets/js/admin/create_group.js'); ?>"></script>
 
 <!-- moment library -->
 <script src="<?= base_url('assets/js/moment/moment.min.js'); ?>"></script>

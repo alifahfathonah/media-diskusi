@@ -133,7 +133,7 @@ var vue = new Vue({
 				if (response.data.status) {
 					console.log(response.data.pesan);
 					Swal.fire({
-						icon: "success",
+						icon: "warning",
 						title: "Group",
 						text: response.data.pesan,
 					});

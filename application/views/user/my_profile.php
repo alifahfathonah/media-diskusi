@@ -32,17 +32,6 @@
 
         <div class="uk-width-2-3@m fead-area">
 
-          <div class="post-new" uk-toggle="target: body ; cls: post-focus">
-            <div class="post-new-media">
-              <div class="post-new-media-user">
-                <img :src="gambarUser(user.image)" alt=""> <!-- ini harusnya foto profile setiap user yg login -->
-              </div>
-              <div class="post-new-media-input">
-                <input type="text" class="uk-input" placeholder="What's Happening?"> <!-- input klik sini tar muncul pop up -->
-              </div>
-            </div>
-            <hr>
-          </div>
 
           <div class="post-pop">
             <div class="post-new-overyly" uk-toggle="target: body ; cls: post-focus"></div>

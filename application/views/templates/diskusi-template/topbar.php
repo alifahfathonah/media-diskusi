@@ -146,7 +146,7 @@
             <!-- Notivication Header -->
             <div class="dropdown-notifications-headline">
               <h4>Notifications</h4>
-              <a href="#" class="text-decoration-none">
+              <a href="<?= base_url('notifikasi'); ?>" class="text-decoration-none">
                 <i class="icon-feather-settings" uk-tooltip="title: Notifications settings ; pos: left"></i>
               </a>
             </div>

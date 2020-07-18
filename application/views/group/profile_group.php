@@ -1,3 +1,34 @@
+<style>
+  input[type="file"] {
+    display: inline-block;
+    opacity: 0;
+    position: absolute;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 67px;
+    width: 85%;
+    z-index: 99;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .custom-file-upload {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: url(http://www.a-yachtcharter.com/search-fleet/webaccess/assets/img/uploadIcon.png) #fff center center no-repeat;
+    width: 100%;
+    border: 1px dashed #000 !important;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    text-align: center;
+  }
+</style>
+
 <!-- contents -->
 <div class="main_content" id="profile_group">
 
@@ -7,7 +38,7 @@
       <div class="group-cover">
 
         <!--Signle group cover -->
-        <img :src="gambar(g.group_image)" alt="">
+        <img :src="gambarGroup(g.group_image)" alt="">
 
       </div>
 
@@ -15,7 +46,7 @@
         <div class="left-side">
           <div class="single-group-image">
             <a href="#" class="text-decoration-none">
-              <img :src="gambar(g.group_image)" alt="">
+              <img :src="gambarGroup(g.group_image)" alt="">
             </a>
           </div>
           <div class="single-group-details-info">
@@ -71,7 +102,7 @@
             <div class="post-new" uk-toggle="target: body ; cls: post-focus">
               <div class="post-new-media">
                 <div class="post-new-media-user">
-                  <img src="<?= base_url('assets/images/avatars/avatar-1.jfif'); ?>" alt="" />
+                  <img :src="gambarUser(user.image)" alt="" />
                   <!-- ini harusnya foto profile setiap user yg login -->
                 </div>
                 <div class="post-new-media-input">
@@ -93,44 +124,46 @@
                 </div>
 
                 <div class="post-new-media">
-                  <div class="post-new-media-user">
-                    <img src="<?= base_url('assets/images/avatars/avatar-1.jfif'); ?>" alt="" />
-                  </div>
                   <div class="post-new-media-input">
-                    <input type="text" class="uk-input" placeholder="What's Happening Melanaumi ?" />
+                    <!-- <input type="text" class="uk-input" placeholder="What's Happening <?= $user['name']; ?> ?" /> -->
                     <!-- placeholder input nya kalo bisa sih ambil nama user, kalo bisa aja kak -->
+                    <!-- <textarea name="text_content" id="text_content" cols="57" rows="57" v-model="postDiskusi.text_content" class="uk-input" :class="{'is-invalid': formValidate.text_content}" placeholder="What's Happening <?= $user['name']; ?>?" autofocus></textarea> -->
+                    <!-- <small class="text-danger has-text-danger" v-html="formValidate.text_content"></small> -->
+                    <div class="form-group">
+                      <textarea name="text_content" id="text_content" cols="57" rows="5" class="form-control" :class="{'is-invalid': formValidate.text_content}" v-model="postDiskusi.text_content" placeholder="What's Happening <?= $user['name']; ?>?" autofocus></textarea>
+                      <small class="text-danger has-text-danger" v-html="formValidate.text_content"></small>
+                    </div>
                   </div>
                 </div>
-
-                <div class="post-new-tab-nav">
-                  <!-- ini tu sebenernya ak kasi buat misal nanti bisa upload foto, file, dll, tp kalo gausa ya di off in aja atau dihapus aja -->
-                  <a href="#" uk-tooltip="title:Close">
-                    <i class="uil-image"></i>
-                  </a>
-                  <a href="#"> <i class="uil-user-plus"></i> </a>
-                  <a href="#"> <i class="uil-video"></i> </a>
-                  <a href="#"> <i class="uil-record-audio"></i> </a>
-                  <a href="#"> <i class="uil-file-alt"></i> </a>
-                  <a href="#"> <i class="uil-emoji"></i> </a>
-                  <a href="#"> <i class="uil-gift"></i> </a>
+                <hr>
+                <div class="post-new-media">
+                  <label for="file-upload" class="custom-file-upload">
+                    <div class="post-new-media-input">
+                      <div style="height: 150px; width: 150px;" class="border rounded mx-auto" @click="$refs.image.click()">
+                        <input type="file" name="image" id="image" class="uk-input" ref="image" @change="previewImage">
+                        <img :src="avatar" height="200px" width="200px" class="img-thumbnail">
+                      </div>
+                    </div>
+                  </label>
                 </div>
 
                 <div class="uk-flex uk-flex-between">
                   <!-- ini class buat button submit -->
-                  <a href="#" class="button primary px-6"> Share </a>
+                  <a class="button danger px-6" @click="cancelPost" uk-toggle="target: body ; cls: post-focus"> Cancel </a>
+                  <a class="button primary px-6" @click="posting"> Post </a>
                 </div>
               </div>
             </div>
           </div>
           <!-- ./input post -->
 
-          <div class="post">
+          <div class="post" v-for="post in postingan">
             <div class="post-heading">
               <div class="post-avature">
-                <img :src="gambar(g.group_image)" alt="">
+                <img :src="gambarUser(post.image)" alt="">
               </div>
               <div class="post-title">
-                <h4> {{g.group_name}} </h4>
+                <h4> {{post.name}} </h4>
                 <p> 9 <span> hrs </span> <i class="uil-users-alt"></i> </p>
               </div>
               <div class="post-btn-action">
@@ -144,8 +177,12 @@
             </div>
 
             <div class="post-description">
+              <div class="fullsizeimg text-center">
+                <img :src="gambarPostingan(post.image_forum)" alt="" />
+                <!-- ini kalo misal post poto ya, kalo gamau di coment aja atau fihapus -->
+              </div>
 
-              <p> PENGUMUMAN bagi seluruh mahasiswa TI Angkatan 2017 - 2019 bahwa SE Ditiadakan </p>
+              <p> {{post.text_content}} </p>
               <div class="post-state-details">
                 <div>
                   <img src="<?= base_url('assets/images/icons/reactions_love.png'); ?>" alt="">
@@ -191,6 +228,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="col-lg-12 text-center" v-if="emptyResultPostingan">
+            <h2 class="font-weight-bold">there are no <span class="text-primary">discussion posts</span></h2>
           </div>
 
         </div>

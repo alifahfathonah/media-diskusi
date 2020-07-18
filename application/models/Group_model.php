@@ -243,4 +243,24 @@ class Group_model extends CI_Model
       return false;
     }
   }
+
+  public function posting($data)
+  {
+    return $this->db->insert($this->tableForumDiskusi, $data);
+  }
+
+  public function getPostingDiskusiJoinUser($id_grup)
+  {
+    /**
+     * Refrensi Syntax : 
+     * select * from forum_diskusi f join user u on f.id_user=u.id where id_grup='58';
+     */
+    $sql = "SELECT * FROM " . $this->tableForumDiskusi . " f JOIN " . $this->tableUser . " u ON f.id_user=u.id WHERE id_grup='" . $id_grup . "' ORDER BY id_forum DESC";
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
 }
