@@ -93,6 +93,15 @@
     </div>
 
     <div class="section-small">
+
+      <!-- falsh message ketika postingan berhasil! -->
+      <div class="alert alert-success alert-dismissible fade show" role="alert" v-if="postingBerhasil">
+        {{pesanPostingBerhasil}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
       <div uk-grid>
 
         <div class="uk-width-2-3@m fead-area">
@@ -125,10 +134,6 @@
 
                 <div class="post-new-media">
                   <div class="post-new-media-input">
-                    <!-- <input type="text" class="uk-input" placeholder="What's Happening <?= $user['name']; ?> ?" /> -->
-                    <!-- placeholder input nya kalo bisa sih ambil nama user, kalo bisa aja kak -->
-                    <!-- <textarea name="text_content" id="text_content" cols="57" rows="57" v-model="postDiskusi.text_content" class="uk-input" :class="{'is-invalid': formValidate.text_content}" placeholder="What's Happening <?= $user['name']; ?>?" autofocus></textarea> -->
-                    <!-- <small class="text-danger has-text-danger" v-html="formValidate.text_content"></small> -->
                     <div class="form-group">
                       <textarea name="text_content" id="text_content" cols="57" rows="5" class="form-control" :class="{'is-invalid': formValidate.text_content}" v-model="postDiskusi.text_content" placeholder="What's Happening <?= $user['name']; ?>?" autofocus></textarea>
                       <small class="text-danger has-text-danger" v-html="formValidate.text_content"></small>
@@ -195,7 +200,7 @@
 
             <div class="post-state">
               <div class="post-state-btns"> <i class="uil-thumbs-up"></i> 126<span> Liked </span></div>
-              <div class="post-state-btns"> <i class="uil-heart"></i> 18 <span> Coments</span></div>
+              <div class="post-state-btns"> <i class="uil-chat"></i> 18 <span> Coments</span></div>
               <div class="post-state-btns"> <i class="uil-share-alt"></i> 193 <span> Shared </span></div>
             </div>
 
@@ -281,31 +286,16 @@
             </div>
 
             <div class="uk-child-width-1-1@m uk-grid-collapse" uk-grid>
-
-              <div>
+              <div v-for="member in members">
                 <div class="list-items">
                   <div class="list-item-media">
-                    <img src="<?= base_url('assets/images/avatars/avatar-2.jpg'); ?>" alt="">
+                    <img :src="gambarUser(member.image)" alt="">
                   </div>
                   <div class="list-item-content">
                     <a href="group-feed.html" class="text-decoration-none">
-                      <h5> Mahsa Savira </h5>
+                      <h5> {{member.name}} </h5>
                     </a>
-                    <p> Mahasiwa Teknik Informatika 2017 </p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div class="list-items">
-                  <div class="list-item-media">
-                    <img src="<?= base_url('assets/images/avatars/avatar-5.jpg'); ?>" alt="">
-                  </div>
-                  <div class="list-item-content">
-                    <a href="group-feed.html" class="text-decoration-none">
-                      <h5> Monica Tifani </h5>
-                    </a>
-                    <p> Engineering </p>
+                    <p> {{member.email}} </p>
                   </div>
                 </div>
               </div>

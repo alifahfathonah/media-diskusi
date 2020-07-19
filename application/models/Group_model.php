@@ -263,4 +263,28 @@ class Group_model extends CI_Model
       return false;
     }
   }
+
+  public function getUserAccessGroupByIdGroupAndStatus($id_grup, $status)
+  {
+    $params = [
+      'grup_id' => $id_grup,
+      'status' => $status
+    ];
+    $query = $this->db->get_where($this->tableUserAccessGrup, $params);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function getUserById($idUser)
+  {
+    $query = $this->db->get_where($this->tableUser, ['id' => $idUser]);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
 }

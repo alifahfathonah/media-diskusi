@@ -76,8 +76,6 @@ class Group extends CI_Controller
       $text_content = $this->input->post('text_content');
       $upload_image = $_FILES['image']['name'];
 
-      $result['test'] = 'Test Debug';
-
       $data = [
         'id_forum' => null,
         'text_content' => $text_content,
@@ -193,6 +191,30 @@ class Group extends CI_Controller
         'status' => false,
         'group' => null,
         'user' => null
+      ];
+    }
+
+    echo json_encode($result);
+  }
+
+  public function getMembersGroup()
+  {
+    $id_grup = $this->session->userdata('id_grup');
+
+    $user_access_grup = $this->group->getUserAccessGroupByIdGroupAndStatus($id_grup, 'Ya');
+    if ($user_access_grup) {
+      for ($i = 0; $i < sizeof($user_access_grup); $i++) {
+        $members[] = $this->group->getUserById($user_access_grup[$i]->user_id);
+      }
+
+      $result = [
+        'status' => true,
+        'members' => $members
+      ];
+    } else {
+      $result = [
+        'status' => false,
+        'members' => null
       ];
     }
 

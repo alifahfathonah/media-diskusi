@@ -7,7 +7,9 @@ var vue = new Vue({
 		group: {},
 		user: {},
 		postingan: [],
+		members: [],
 		emptyResult: false,
+		emptyResultMembers: false,
 		emptyResultPostingan: false,
 		formValidate: [],
 		avatar: null,
@@ -16,6 +18,9 @@ var vue = new Vue({
 			text_content: "",
 			image: "",
 		},
+		postingBerhasil: false,
+		pesanPostingBerhasil: "",
+		pesanPostingGagal: "",
 	},
 
 	created() {
@@ -31,22 +36,17 @@ var vue = new Vue({
 			axios.post(this.url + "group/posting", formData).then((response) => {
 				if (response.data.error) {
 					vue.formValidate = response.data.pesan;
-					console.log(response.data.pesan);
-					console.log(response.data.test);
+					vue.postingBerhasil = false;
+					vue.pesanPostingBerhasil = "";
+					vue.pesanPostingGagal = response.data.pesan;
 				} else {
-					// vue.pesanBerhasil = response.data.berhasil;
-					console.log(response.data.pesan);
-					console.log(response.data.test);
-					Swal.fire({
-						title: "Forum Diskusi",
-						text: response.data.pesan,
-						icon: "success",
-						button: "OK",
-					});
+					vue.postingBerhasil = true;
+					vue.pesanPostingBerhasil = "Diskusi berhasil diposting!";
 					vue.postDiskusi.text_content = "";
 					vue.postDiskusi.image = "";
 					vue.avatar = null;
 					vue.selectedFile = null;
+					this.getGroup();
 				}
 			});
 		},
@@ -55,8 +55,10 @@ var vue = new Vue({
 			axios.get(this.url + "group/getPostingan").then((response) => {
 				if (response.data.status) {
 					vue.postingan = response.data.postingan;
+					vue.emptyResultPostingan = false;
 				} else {
 					vue.emptyResultPostingan = true;
+					vue.postingan = null;
 				}
 			});
 		},
@@ -77,16 +79,39 @@ var vue = new Vue({
 			this.formValidate = false;
 			this.avatar = null;
 			this.selectedFile = null;
+			this.pesanPostingGagal = "";
+			this.postingBerhasil = false;
+			this.pesanPostingBerhasil = "";
 		},
 
 		getGroup() {
 			axios.get(this.url + "group/getGroup").then((response) => {
 				if (!response.data.status) {
 					vue.emptyResult = true;
+					vue.group = null;
+					vue.user = null;
 				} else {
 					vue.group = response.data.group;
 					vue.user = response.data.user;
+					vue.emptyResult = false;
 					this.getPostingan();
+					this.getMembersGroup();
+				}
+			});
+		},
+
+		getMembersGroup() {
+			axios.get(this.url + "group/getMembersGroup").then((response) => {
+				if (response.data.status) {
+					for (let i = 0; i < response.data.members.length; i++) {
+						for (let j = 0; j < response.data.members[i].length; j++) {
+							vue.members.push(response.data.members[i][j]);
+						}
+					}
+					vue.emptyResultMembers = false;
+				} else {
+					vue.members = null;
+					vue.emptyResultMembers = true;
 				}
 			});
 		},
