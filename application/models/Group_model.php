@@ -7,6 +7,7 @@ class Group_model extends CI_Model
   private $tableGroup = 'grup';
   private $tableNotif = 'notif';
   private $tableRole = 'user_role';
+  private $tableComment = 'comment';
   private $tableForumDiskusi = 'forum_diskusi';
   private $tableUserAccessGrup = 'user_access_grup';
 
@@ -271,6 +272,26 @@ class Group_model extends CI_Model
       'status' => $status
     ];
     $query = $this->db->get_where($this->tableUserAccessGrup, $params);
+    if ($query->num_rows() > 0) {
+      return $query->result();
+    } else {
+      return false;
+    }
+  }
+
+  public function addComment($data)
+  {
+    return $this->db->insert($this->tableComment, $data);
+  }
+
+  public function getComment($id_forum)
+  {
+    /**
+     * Refrensi Syntax : 
+     * select * from comment c join user u on c.id_user=u.id where id_forum='28';
+     */
+    $sql = "SELECT * FROM " . $this->tableComment . " c JOIN " . $this->tableUser . " u ON c.id_user=u.id WHERE id_forum='" . $id_forum . "' ORDER BY c.id ASC";
+    $query = $this->db->query($sql);
     if ($query->num_rows() > 0) {
       return $query->result();
     } else {

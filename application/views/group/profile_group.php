@@ -206,33 +206,44 @@
 
             <!-- post comments -->
             <div class="post-comments">
-              <div class="post-comments-single">
-                <div class="post-comment-avatar">
-                  <img src="<?= base_url('assets/images/avatars/avatar-5.jpg'); ?>" alt="">
-                </div>
-                <div class="post-comment-text">
-                  <div class="post-comment-text-inner">
-                    <h6> Monica Tifani </h6>
-                    <p> yah ga asik </p>
+              <div v-for="comments in comment">
+                <div v-for="c in comments">
+                  <div class="post-comments-single" v-if="c.id_forum == post.id_forum">
+                    <div class="post-comment-avatar">
+                      <img :src="gambarUser(c.image)" alt="">
+                    </div>
+                    <div class="post-comment-text">
+                      <div class="post-comment-text-inner">
+                        <h6> {{c.name}} </h6>
+                        <p> {{c.text_comment}} </p>
+                      </div>
+                      <div class="uk-text-small">
+                        <a href="#" class="text-danger mr-1 text-decoration-none"> <i class="uil-heart"></i> Love </a>
+                        <a href="#" class="mr-1 text-decoration-none"> Replay </a>
+                        <span> 9 hrs </span>
+                      </div>
+                    </div>
+                    <!-- <a href="#" class="post-comment-opt text-decoration-none"></a> -->
                   </div>
-                  <div class="uk-text-small">
-                    <a href="#" class="text-danger mr-1 text-decoration-none"> <i class="uil-heart"></i> Love </a>
-                    <a href="#" class="mr-1 text-decoration-none"> Replay </a>
-                    <span> 9 hrs </span>
-                  </div>
                 </div>
-                <a href="#" class="post-comment-opt text-decoration-none"></a>
               </div>
 
-              <div class="post-add-comment">
-                <div class="post-add-comment-avature">
-                  <img src="<?= base_url('assets/images/avatars/avatar-1.jfif'); ?>" alt="">
+              <form action="<?= base_url('group/comment'); ?>" method="POST">
+                <div class="post-add-comment">
+                  <div class="post-add-comment-avature">
+                    <img :src="gambarUser(user.image)" alt="">
+                  </div>
+                  <div class="post-add-comment-text-area">
+                    <input type="hidden" name="id_grup" id="id_grup" :value="post.id_grup">
+                    <input type="hidden" name="id_forum" id="id_forum" :value="post.id_forum">
+                    <input type="text" name="text_comment" id="text_comment" placeholder="Write Your Comment Here ...">
+                  </div>
+                  <button class="btn btn-primary btn-sm ml-2 px-3" type="submit"><i class="fas fa-paper-plane"></i></button>
                 </div>
-                <div class="post-add-comment-text-area">
-                  <input type="text" placeholder="Write Your Comment Here ...">
-                </div>
-              </div>
+              </form>
             </div>
+            <!-- ./post comment -->
+
           </div>
           <div class="col-lg-12 text-center" v-if="emptyResultPostingan">
             <h2 class="font-weight-bold">there are no <span class="text-primary">discussion posts</span></h2>
@@ -246,7 +257,7 @@
           <h3> Info </h3>
           <div class="list-group-items">
             <i class="uil-thumbs-up"></i>
-            <h5> <span class="mr-1"> {{g.jumlah_peserta}} </span> Members Joined <p class="text-success mb-0 ml-2">
+            <h5> <span class="mr-1"> {{ g.jumlah_peserta }} </span> Members Joined <p class="text-success mb-0 ml-2">
                 +4 This week </p>
             </h5>
           </div>

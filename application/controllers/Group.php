@@ -44,6 +44,7 @@ class Group extends CI_Controller
     ];
 
     $this->session->set_userdata('id_grup', $id_grup);
+    $this->session->set_userdata('id_user', $this->singleUser['id']);
 
     $this->load->view('templates/diskusi-template/header', $data);
     $this->load->view('templates/diskusi-template/sidebar', $data);
@@ -109,6 +110,46 @@ class Group extends CI_Controller
     }
 
     echo json_encode($result);
+  }
+
+  public function comment()
+  {
+    $this->form_validation->set_rules('text_comment', 'Comment must be not null', 'required|trim');
+    if ($this->form_validation->run() == false) {
+      redirect('group/profileGroup/' . $this->input->post('id_grup'));
+    } else {
+      $data = [
+        'id' => null,
+        'text_comment' => $this->input->post('text_comment'),
+        'date_comment' => date('Y-m-d'),
+        'like_comment' => 0,
+        'delete_comment' => 0,
+        'id_forum' => $this->input->post('id_forum'),
+        'id_user' => $this->session->userdata('id_user')
+      ];
+
+      if ($this->group->addComment($data)) {
+        redirect('group/profileGroup/' . $this->input->post('id_grup'));
+      }
+    }
+  }
+
+  public function getComment($id_forum)
+  {
+    $comment = $this->group->getCommentByIdDiskusi($id_forum);
+    if ($comment) {
+      $result = [
+        'status' => true,
+        'comment' => $comment
+      ];
+    } else {
+      $result = [
+        'status' => false,
+        'comment' => null
+      ];
+    }
+
+    return $result;
   }
 
   public function createGroup()
@@ -226,15 +267,21 @@ class Group extends CI_Controller
     $id_grup = $this->session->userdata('id_grup');
     $postingan = $this->group->getPostingDiskusiJoinUser($id_grup);
 
+    for ($i = 0; $i < sizeof($postingan); $i++) {
+      $comment[] = $this->group->getComment($postingan[$i]->id_forum);
+    }
+
     if ($postingan) {
       $res = [
         'status' => true,
         'postingan' => $postingan,
+        'comment' => $comment
       ];
     } else {
       $res = [
         'status' => false,
-        'postingan' => null
+        'postingan' => null,
+        'comment' => null
       ];
     }
     echo json_encode($res);

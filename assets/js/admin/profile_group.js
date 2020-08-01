@@ -7,10 +7,12 @@ var vue = new Vue({
 		group: {},
 		user: {},
 		postingan: [],
+		comment: [],
 		members: [],
 		emptyResult: false,
 		emptyResultMembers: false,
 		emptyResultPostingan: false,
+		emptyResultComment: false,
 		formValidate: [],
 		avatar: null,
 		selectedFile: null,
@@ -18,6 +20,9 @@ var vue = new Vue({
 			text_content: "",
 			image: "",
 		},
+		idForum: [],
+		formValidateComment: [],
+		commentBerhasil: false,
 		postingBerhasil: false,
 		pesanPostingBerhasil: "",
 		pesanPostingGagal: "",
@@ -55,10 +60,15 @@ var vue = new Vue({
 			axios.get(this.url + "group/getPostingan").then((response) => {
 				if (response.data.status) {
 					vue.postingan = response.data.postingan;
+					vue.comment = response.data.comment;
 					vue.emptyResultPostingan = false;
+					vue.emptyResultComment = false;
+					console.log(vue.comment);
 				} else {
 					vue.emptyResultPostingan = true;
+					vue.emptyResultComment = true;
 					vue.postingan = null;
+					vue.comment = null;
 				}
 			});
 		},
