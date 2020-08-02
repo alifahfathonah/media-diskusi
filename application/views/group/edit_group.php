@@ -4,7 +4,7 @@
 
   <div class="main_content_inner">
 
-    <h1> Create New Group </h1>
+    <h1> Edit Group "<?= $group[0]->group_name; ?>" </h1>
 
     <div class="uk-position-relative" uk-grid>
 
