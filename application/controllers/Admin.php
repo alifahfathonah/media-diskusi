@@ -32,6 +32,7 @@ class Admin extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('admin/index', $data);
+    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -51,6 +52,7 @@ class Admin extends CI_Controller
       $this->load->view('templates/diskusi-template/sidebar', $data);
       $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('admin/role', $data);
+      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
       $this->load->view('templates/diskusi-template/footer');
     } else {
       $data = [
@@ -100,6 +102,7 @@ class Admin extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('admin/role_access', $data);
+    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -144,6 +147,7 @@ class Admin extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('admin/user_access', $data);
+    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 }
