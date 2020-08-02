@@ -24,7 +24,6 @@ class User extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('user/index', $data);
-    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -37,7 +36,6 @@ class User extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('user/my_profile', $data);
-    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -52,7 +50,6 @@ class User extends CI_Controller
       $this->load->view('templates/diskusi-template/sidebar', $data);
       $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('user/edit', $data);
-      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
       $this->load->view('templates/diskusi-template/footer');
     } else {
       $dataEdit = [
@@ -105,7 +102,6 @@ class User extends CI_Controller
       $this->load->view('templates/diskusi-template/sidebar', $data);
       $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('user/ubahpassword', $data);
-      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
       $this->load->view('templates/diskusi-template/footer');
     } else {
       $current_password = $this->input->post('current_password', true);

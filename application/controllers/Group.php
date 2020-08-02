@@ -30,7 +30,6 @@ class Group extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('group/index', $data);
-    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -50,7 +49,6 @@ class Group extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('group/profile_group', $data);
-    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -167,7 +165,6 @@ class Group extends CI_Controller
       $this->load->view('templates/diskusi-template/sidebar', $data);
       $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('group/create_group', $data);
-      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
       $this->load->view('templates/diskusi-template/footer');
     } else {
       $id_user = $this->singleUser['id'];
@@ -211,7 +208,6 @@ class Group extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('group/verifikasi', $data);
-    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
