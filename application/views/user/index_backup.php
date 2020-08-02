@@ -96,8 +96,25 @@
             </div>
 
             <div class="post-state-details">
+              <div>
+                <img src="assets/images/icons/reactions_love.png" alt="" />
+                <p>134</p>
+                <!-- ini kalo mau nge love klik di icon ini -->
+              </div>
               <p>24 Comments</p>
               <!-- ini total komen-->
+            </div>
+          </div>
+
+          <div class="post-state">
+            <div class="post-state-btns">
+              <i class="uil-thumbs-up"></i> 134 <span> Liked </span>
+            </div>
+            <div class="post-state-btns">
+              <i class="uil-comment"></i> 24 <span> Coments </span>
+            </div>
+            <div class="post-state-btns">
+              <i class="uil-share-alt"></i> 23 <span> Shared </span>
             </div>
           </div>
 
@@ -117,6 +134,9 @@
                   <!-- isi komen -->
                 </div>
                 <div class="uk-text-small">
+                  <a href="#" class="text-danger mr-1">
+                    <i class="uil-heart"></i> Love
+                  </a>
                   <a href="#" class="mr-1"> Replay </a>
                   <span> 1h </span>
                 </div>
@@ -201,7 +221,23 @@
             </div>
 
             <div class="post-state-details">
+              <div>
+                <img src="assets/images/icons/reactions_love.png" alt="" />
+                <p>1323</p>
+              </div>
               <p><span class="mr-2"></span> 212 Comments</p>
+            </div>
+          </div>
+
+          <div class="post-state">
+            <div class="post-state-btns">
+              <i class="uil-thumbs-up"></i> 1323 <span> Liked </span>
+            </div>
+            <div class="post-state-btns">
+              <i class="uil-heart"></i> 212 <span> Coments</span>
+            </div>
+            <div class="post-state-btns">
+              <i class="uil-share-alt"></i> 1932 <span> Shared </span>
             </div>
           </div>
 
@@ -219,6 +255,9 @@
                   <p>eww banyak ya</p>
                 </div>
                 <div class="uk-text-small">
+                  <a href="#" class="text-danger mr-1">
+                    <i class="uil-heart"></i> Love
+                  </a>
                   <a href="#" class="mr-1"> Replay </a>
                   <span> 1 hrs </span>
                   <!-- waktu comments -->
@@ -288,7 +327,23 @@
               bahwa SE Ditiadakan
             </p>
             <div class="post-state-details">
+              <div>
+                <img src="assets/images/icons/reactions_love.png" alt="" />
+                <p>13</p>
+              </div>
               <p>24 Comments</p>
+            </div>
+          </div>
+
+          <div class="post-state">
+            <div class="post-state-btns">
+              <i class="uil-thumbs-up"></i> 126<span> Liked </span>
+            </div>
+            <div class="post-state-btns">
+              <i class="uil-heart"></i> 18 <span> Coments</span>
+            </div>
+            <div class="post-state-btns">
+              <i class="uil-share-alt"></i> 193 <span> Shared </span>
             </div>
           </div>
 
@@ -304,6 +359,9 @@
                   <p>yah ga asik</p>
                 </div>
                 <div class="uk-text-small">
+                  <a href="#" class="text-danger mr-1">
+                    <i class="uil-heart"></i> Love
+                  </a>
                   <a href="#" class="mr-1"> Replay </a>
                   <span> 9 hrs </span>
                 </div>
@@ -350,12 +408,28 @@
             </div>
 
             <div class="post-state-details">
+              <div>
+                <img src="assets/images/icons/reactions_love.png" alt="" />
+                <p>13</p>
+              </div>
               <p>
                 <span class="mr-2">
                   <i class="uil-eye"></i> 3890 Views
                 </span>
                 232 Comments
               </p>
+            </div>
+          </div>
+
+          <div class="post-state">
+            <div class="post-state-btns">
+              <i class="uil-thumbs-up"></i> 13 <span> Liked </span>
+            </div>
+            <div class="post-state-btns">
+              <i class="uil-heart"></i> 232 <span> Coments </span>
+            </div>
+            <div class="post-state-btns">
+              <i class="uil-share-alt"></i> 113 <span> Shared </span>
             </div>
           </div>
 
