@@ -51,7 +51,6 @@ class Menu extends CI_Controller
       $this->load->view('templates/diskusi-template/sidebar', $data);
       $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('menu/index', $data);
-      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
       $this->load->view('templates/diskusi-template/footer');
     } else {
       $data = [
@@ -110,7 +109,6 @@ class Menu extends CI_Controller
       $this->load->view('templates/diskusi-template/sidebar', $data);
       $this->load->view('templates/diskusi-template/topbar', $data);
       $this->load->view('menu/submenu', $data);
-      $this->load->view('templates/diskusi-template/chat_sidebar', $data);
       $this->load->view('templates/diskusi-template/footer');
     } else {
       $data = [

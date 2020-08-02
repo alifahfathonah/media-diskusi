@@ -23,7 +23,6 @@ class Diskusi extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('diskusi/index');
-    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -40,7 +39,6 @@ class Diskusi extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('diskusi/forum_diskusi', $data);
-    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
@@ -55,7 +53,6 @@ class Diskusi extends CI_Controller
     $this->load->view('templates/diskusi-template/sidebar', $data);
     $this->load->view('templates/diskusi-template/topbar', $data);
     $this->load->view('diskusi/group_diskusi2');
-    $this->load->view('templates/diskusi-template/chat_sidebar', $data);
     $this->load->view('templates/diskusi-template/footer');
   }
 
