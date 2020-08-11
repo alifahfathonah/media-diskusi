@@ -3,7 +3,7 @@
 class User extends CI_Controller
 {
 
-  private $dataSingleUser;
+  private $singleUser;
 
   private $tableUser = 'user';
 
@@ -12,13 +12,13 @@ class User extends CI_Controller
     parent::__construct();
     is_logged_in();
     $this->load->model('User_model', 'user');
-    $this->dataSingleUser = $this->user->getUserByEmail($this->tableUser, $this->session->userdata('email'));
+    $this->singleUser = $this->user->getUserByEmail($this->tableUser, $this->session->userdata('email'));
   }
 
   public function index()
   {
     $data['title'] = 'Home';
-    $data['user'] = $this->dataSingleUser;
+    $data['user'] = $this->singleUser;
 
     $this->load->view('templates/diskusi-template/header', $data);
     $this->load->view('templates/diskusi-template/sidebar', $data);
@@ -31,7 +31,7 @@ class User extends CI_Controller
   public function myProfile()
   {
     $data['title'] = 'My Profile';
-    $data['user'] = $this->dataSingleUser;
+    $data['user'] = $this->singleUser;
 
     $this->load->view('templates/diskusi-template/header', $data);
     $this->load->view('templates/diskusi-template/sidebar', $data);
@@ -44,7 +44,7 @@ class User extends CI_Controller
   public function edit()
   {
     $data['title'] = 'My Profile';
-    $data['user'] = $this->dataSingleUser;
+    $data['user'] = $this->singleUser;
 
     $this->form_validation->set_rules('name', 'Full Name', 'required|trim');
     if ($this->form_validation->run() == false) {
@@ -95,7 +95,7 @@ class User extends CI_Controller
   public function ubahPassword()
   {
     $data['title'] = 'Ubah Password';
-    $data['user'] = $this->dataSingleUser;
+    $data['user'] = $this->singleUser;
 
     $this->form_validation->set_rules('current_password', 'Password Sekarang', 'required|trim');
     $this->form_validation->set_rules('new_password1', 'Password Baru', 'required|trim|min_length[8]|matches[new_password2]');
@@ -143,6 +143,32 @@ class User extends CI_Controller
       $result = [
         'status' => false,
         'user' => null
+      ];
+    }
+
+    echo json_encode($result);
+  }
+
+  public function getMyPost()
+  {
+    $id_user = $this->singleUser['id'];
+    $post = $this->user->getMyPost($id_user);
+
+    for ($i = 0; $i < sizeof($post); $i++) {
+      $comment[] = $this->user->getComment($post[$i]->id_forum);
+    }
+
+    if ($post) {
+      $result = [
+        'status' => true,
+        'post' => $post,
+        'comment' => $comment
+      ];
+    } else {
+      $result = [
+        'status' => false,
+        'post' => null,
+        'comment' => null
       ];
     }
 

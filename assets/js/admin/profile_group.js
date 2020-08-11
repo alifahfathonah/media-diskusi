@@ -63,7 +63,6 @@ var vue = new Vue({
 					vue.comment = response.data.comment;
 					vue.emptyResultPostingan = false;
 					vue.emptyResultComment = false;
-					console.log(vue.comment);
 				} else {
 					vue.emptyResultPostingan = true;
 					vue.emptyResultComment = true;

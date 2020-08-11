@@ -223,7 +223,6 @@
                         <span> 9 hrs </span>
                       </div>
                     </div>
-                    <!-- <a href="#" class="post-comment-opt text-decoration-none"></a> -->
                   </div>
                 </div>
               </div>
