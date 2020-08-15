@@ -6,6 +6,7 @@ class Group extends CI_Controller
   private $tableUser = 'user';
   private $tableGroup = 'grup';
   private $tableRole = 'user_role';
+  private $tableComment = 'comment';
 
   private $singleUser;
 
@@ -150,6 +151,20 @@ class Group extends CI_Controller
     }
 
     return $result;
+  }
+
+  public function hapusPostingan($id_forum)
+  {
+    if ($this->group->hapusComment($id_forum)) {
+      if ($this->group->hapusPost($id_forum)) {
+        $msg['error'] = false;
+        $msg['success'] = 'Postingan berhasil dihapus!';
+      } else {
+        $msg['error'] = true;
+      }
+
+      echo json_encode($msg);
+    }
   }
 
   public function createGroup()

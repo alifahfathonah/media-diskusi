@@ -299,6 +299,26 @@ class Group_model extends CI_Model
     }
   }
 
+  public function hapusPost($id)
+  {
+    $this->db->delete($this->tableForumDiskusi, ['id_forum' => $id]);
+    if ($this->db->affected_rows() > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function hapusComment($id)
+  {
+    $this->db->delete($this->tableComment, ['id_forum' => $id]);
+    if ($this->db->affected_rows() > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public function getUserById($idUser)
   {
     $query = $this->db->get_where($this->tableUser, ['id' => $idUser]);

@@ -176,7 +176,7 @@
                 <div class="mt-0 p-2" uk-dropdown="pos: bottom-right;mode:hover ">
                   <ul class="uk-nav uk-dropdown-nav">
                     <li><a href="#" class="text-decoration-none"> <i class="uil-share-alt mr-1"></i> Share </a> </li>
-                    <li><a href="#" class="text-decoration-none"> <i class="uil-trash-alt mr-1"></i> Delete </a> </li>
+                    <li><a :href="'<?= base_url('group/hapusPostingan/') ?>' + post.id_forum" class="text-decoration-none"> <i class="uil-trash-alt mr-1"></i> Delete </a> </li>
                   </ul>
                 </div>
               </div>
